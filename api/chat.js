@@ -12,7 +12,7 @@ export const config = { runtime: "nodejs" };
 function getKeys() {
   var raw = process.env.GEMINI_API_KEYS || process.env.GEMINI_API_KEY || "";
   return raw
-    .split(",")
+    .split(/[,;\n]+/)
     .map(function (s) { return s.trim(); })
     .filter(Boolean);
 }
