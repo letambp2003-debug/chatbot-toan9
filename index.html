@@ -358,8 +358,8 @@
 
     <label for="model-select">Mô hình</label>
     <select id="model-select">
-      <option value="gemini-3.8-flash">gemini-3.8-flash (mới nhất, khuyến nghị)</option>
-      <option value="gemini-3.6-flash">gemini-3.6-flash (tốc độ cao, ổn định)</option>
+      <option value="gemini-3.6-flash" selected>gemini-3.6-flash (ổn định, tốc độ cao - khuyến nghị)</option>
+      <option value="gemini-3.8-flash">gemini-3.8-flash (bản mới nhất)</option>
       <option value="gemini-3.1-pro-preview">gemini-3.1-pro-preview (mạnh hơn, có thể chậm hơn)</option>
     </select>
 
@@ -521,7 +521,7 @@
   // Trình duyệt học sinh KHÔNG gọi thẳng Gemini và không cần biết khoá API —
   // máy chủ trung gian tự giữ khoá và tự xoay vòng nhiều khoá (nếu quản trị viên cấu hình nhiều khoá).
   function callGemini(userText, imagePart) {
-    var model = localStorage.getItem("gsToan9_model") || "gemini-3.8-flash";
+    var model = localStorage.getItem("gsToan9_model") || "gemini-3.6-flash";
 
     var parts = [{ text: userText }];
     if (imagePart) parts.push(imagePart);
@@ -607,7 +607,7 @@
 
   // ---------- Cài đặt ----------
   function openSettings() {
-    els.modelSelect.value = localStorage.getItem("gsToan9_model") || "gemini-3.8-flash";
+    els.modelSelect.value = localStorage.getItem("gsToan9_model") || "gemini-3.6-flash";
     els.overlay.className = "show";
   }
   function closeSettings() {

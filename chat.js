@@ -46,47 +46,57 @@ export default async function handler(req, res) {
     res.status(400).json({ error: "Thiếu dữ liệu gửi lên (systemPrompt hoặc contents)." });
     return;
   }
-  if (!model || !ALLOWED_MODEL.test(model)) {
-    model = "gemini-3.8-flash";
-  }
+  var requestedModel = model && ALLOWED_MODEL.test(model) ? model : "gemini-3.6-flash";
+  var fallbackModels = [requestedModel];
+  if (requestedModel !== "gemini-3.6-flash") fallbackModels.push("gemini-3.6-flash");
+  if (requestedModel !== "gemini-3.8-flash") fallbackModels.push("gemini-3.8-flash");
 
   var lastErr = null;
 
-  for (var attempt = 0; attempt < keys.length; attempt++) {
-    var idx = (keyIdx + attempt) % keys.length;
-    var key = keys[idx];
-    try {
-      var upstream = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + key,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            system_instruction: { parts: [{ text: systemPrompt }] },
-            contents: contents,
-            generationConfig: { temperature: 0.6, maxOutputTokens: 900 },
-          }),
-        }
-      );
+  for (var mIdx = 0; mIdx < fallbackModels.length; mIdx++) {
+    var curModel = fallbackModels[mIdx];
+    for (var attempt = 0; attempt < keys.length; attempt++) {
+      var idx = (keyIdx + attempt) % keys.length;
+      var key = keys[idx];
+      try {
+        var upstream = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/" + curModel + ":generateContent?key=" + key,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              system_instruction: { parts: [{ text: systemPrompt }] },
+              contents: contents,
+              generationConfig: { temperature: 0.6, maxOutputTokens: 900 },
+            }),
+          }
+        );
 
-      var data = await upstream.json().catch(function () { return {}; });
+        var data = await upstream.json().catch(function () { return {}; });
 
-      if (!upstream.ok) {
-        var msg = (data.error && data.error.message) || ("Lỗi HTTP " + upstream.status);
-        var isQuota = upstream.status === 429 || /RESOURCE_EXHAUSTED|quota/i.test(msg);
-        if (isQuota && attempt + 1 < keys.length) {
-          lastErr = msg;
-          continue; // thử khoá kế tiếp
+        if (!upstream.ok) {
+          var msg = (data.error && data.error.message) || ("Lỗi HTTP " + upstream.status);
+          var isHighDemand = upstream.status === 503 || /high demand|overloaded|UNAVAILABLE|temporary/i.test(msg);
+          var isQuota = upstream.status === 429 || /RESOURCE_EXHAUSTED|quota/i.test(msg);
+
+          if (isHighDemand || isQuota) {
+            lastErr = msg;
+            if (isHighDemand) {
+              // Model đang bị quá tải, lập tức thử model kế tiếp
+              break;
+            }
+            continue; // Thử key kế tiếp
+          }
+          res.status(upstream.status).json({ error: msg });
+          return;
         }
-        res.status(upstream.status).json({ error: msg });
+
+        keyIdx = (idx + 1) % keys.length; // lần gọi tới bắt đầu từ khoá kế tiếp, chia đều tải
+        res.status(200).json(data);
         return;
+      } catch (e) {
+        lastErr = (e && e.message) || String(e);
       }
-
-      keyIdx = (idx + 1) % keys.length; // lần gọi tới bắt đầu từ khoá kế tiếp, chia đều tải
-      res.status(200).json(data);
-      return;
-    } catch (e) {
-      lastErr = (e && e.message) || String(e);
     }
   }
 
