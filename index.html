@@ -670,6 +670,34 @@
       .replace(/'/g, "&#039;");
   }
 
+  var KATEX_MACROS = {
+    "\\overparen": "\\overgroup{#1}",
+    "\\wideparen": "\\overgroup{#1}",
+    "\\overarc": "\\overgroup{#1}",
+    "\\arc": "\\overgroup{#1}",
+    "\\ang": "\\angle",
+    "\\sd": "\\text{sđ}",
+    "\\sđ": "\\text{sđ}",
+    "\\degree": "^\\circ",
+    "\\deg": "^\\circ",
+    "\\tg": "\\operatorname{tg}",
+    "\\cotg": "\\operatorname{cotg}"
+  };
+
+  function cleanMathExpr(expr) {
+    if (!expr) return "";
+    var s = expr;
+    // Sửa trường hợp thiếu ngoặc nhọn ở cung tròn: \overparenAB -> \overparen{AB}, \overparen AB -> \overparen{AB}
+    s = s.replace(/\\(overparen|wideparen|overarc|overgroup|arc)([A-Z]{2,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
+    s = s.replace(/\\(overparen|wideparen|overarc|overgroup|arc)\s+([A-Za-z]{1,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
+    // Sửa trường hợp thiếu ngoặc nhọn ở góc: \widehatABC -> \widehat{ABC}, \widehat ABC -> \widehat{ABC}
+    s = s.replace(/\\(widehat|widecheck)([A-Z]{2,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
+    s = s.replace(/\\(widehat|widecheck)\s+([A-Za-z]{1,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
+    // Xử lý trường hợp bị escape 2 lần (\\overparen -> \overparen)
+    s = s.replace(/\\\\([a-zA-Z]+)/g, "\\$1");
+    return s;
+  }
+
   function formatContent(text) {
     if (!text) return "";
 
@@ -705,9 +733,11 @@
       if (!item) return "";
       if (typeof katex !== "undefined" && katex.renderToString) {
         try {
-          return katex.renderToString(item.expr, {
+          var cleaned = cleanMathExpr(item.expr);
+          return katex.renderToString(cleaned, {
             displayMode: item.display,
             throwOnError: false,
+            macros: KATEX_MACROS,
           });
         } catch (e) {
           return item.display ? "$$" + escapeHtml(item.expr) + "$$" : "$" + escapeHtml(item.expr) + "$";
@@ -766,7 +796,7 @@
         tc +
         "\n\n===== HẾT PHẦN TÍNH CÁCH — BẮT ĐẦU PHẦN KIẾN THỨC (kt.md) =====\n\n" +
         kt +
-        "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n2) GỢI Ý MỞ RỘNG CÁC TRƯỜNG HỢP TƯƠNG TỰ: Luôn chỉ ra thêm các trường hợp đặc biệt, bẫy thường gặp hoặc các biến thể bài tập tương tự (hệ số âm dễ sai dấu, có mẫu số, nghiệm đặc biệt vô số nghiệm/vô nghiệm, bài toán thực tế,...).\n3) YÊU CẦU HỌC SINH RÈN LUYỆN: Luôn giao nhiệm vụ cụ thể yêu cầu học sinh lấy giấy nháp làm ngay ít nhất 1 bài và gửi lời giải hoặc chụp ảnh để cô nhận xét từng bước.\n4) CÔNG THỨC TOÁN: Mọi ký hiệu toán học, biến số, phương trình, bất phương trình bắt buộc đặt trong $...$ hoặc $$...$$ để hiển thị qua KaTeX.\nTừ giờ hãy nhập vai đúng như đã mô tả và trò chuyện với học sinh bằng tiếng Việt. =====";
+        "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n2) GỢI Ý MỞ RỘNG CÁC TRƯỜNG HỢP TƯƠNG TỰ: Luôn chỉ ra thêm các trường hợp đặc biệt, bẫy thường gặp hoặc các biến thể bài tập tương tự (hệ số âm dễ sai dấu, có mẫu số, nghiệm đặc biệt vô số nghiệm/vô nghiệm, bài toán thực tế,...).\n3) YÊU CẦU HỌC SINH RÈN LUYỆN: Luôn giao nhiệm vụ cụ thể yêu cầu học sinh lấy giấy nháp làm ngay ít nhất 1 bài và gửi lời giải hoặc chụp ảnh để cô nhận xét từng bước.\n4) CÔNG THỨC TOÁN: Mọi ký hiệu toán học, biến số, phương trình, bất phương trình bắt buộc đặt trong $...$ hoặc $$...$$ để hiển thị qua KaTeX. Trong hình học: góc viết \\widehat{ABC}; cung tròn viết \\overparen{AB} hoặc \\overgroup{AB} (bắt buộc có cặp ngoặc nhọn {...}); số đo cung viết \\text{sđ}\\overparen{AB}.\nTừ giờ hãy nhập vai đúng như đã mô tả và trò chuyện với học sinh bằng tiếng Việt. =====";
       state.loadingKnowledge = false;
     });
   }

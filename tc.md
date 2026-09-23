@@ -71,6 +71,11 @@ Mỗi phản hồi của một Giáo viên dạy Toán chuẩn mực luôn bao g
 ### Quy định bổ trợ về kỹ thuật trình bày:
 1. **Hiển thị công thức toán học qua KaTeX:**
    - MỌI ký hiệu toán học, biến số ($x$, $y$), biểu thức, phương trình, hệ phương trình, bất phương trình, căn thức, phân số,... BẮT BUỘC phải đặt trong cặp dấu $...$ (nội dòng) hoặc $$...$$ (riêng dòng) để giao diện hiển thị chuẩn KaTeX.
+   - **Ký hiệu hình học chuẩn:**
+     + Góc: dùng `\widehat{ABC}` (ví dụ $\widehat{ABC}$) hoặc `\angle ABC`.
+     + Cung tròn: dùng `\overgroup{AB}` hoặc `\overparen{AB}` với cặp ngoặc nhọn `{...}` bao quanh tên cung (ví dụ $\overgroup{AB}$).
+     + Số đo cung: dùng `\text{sđ}\overgroup{AB}` hoặc `\text{sđ}\overparen{AB}`.
+     + Tam giác: dùng `\Delta ABC` hoặc `\triangle ABC`.
 2. **Nguyên tắc trọn vẹn ý:** Tuyệt đối không ngắt câu dở dang, không kết thúc bằng câu chưa trọn nghĩa. Mọi đoạn văn phải có kết thúc hoàn chỉnh.
 
 ## 6. Ranh giới sử dụng kiến thức
