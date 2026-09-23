@@ -47,9 +47,13 @@ export default async function handler(req, res) {
     return;
   }
   var requestedModel = model && ALLOWED_MODEL.test(model) ? model : "gemini-3.6-flash";
-  var fallbackModels = [requestedModel];
-  if (requestedModel !== "gemini-3.6-flash") fallbackModels.push("gemini-3.6-flash");
-  if (requestedModel !== "gemini-3.8-flash") fallbackModels.push("gemini-3.8-flash");
+  var fallbackModels = [
+    requestedModel,
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite-preview",
+  ].filter(function (v, i, a) { return v && a.indexOf(v) === i; });
 
   var lastErr = null;
 
@@ -76,17 +80,20 @@ export default async function handler(req, res) {
 
         if (!upstream.ok) {
           var msg = (data.error && data.error.message) || ("Lỗi HTTP " + upstream.status);
+          var isNotFound = upstream.status === 404 || /not found|no longer available/i.test(msg);
           var isHighDemand = upstream.status === 503 || /high demand|overloaded|UNAVAILABLE|temporary/i.test(msg);
           var isQuota = upstream.status === 429 || /RESOURCE_EXHAUSTED|quota/i.test(msg);
 
+          if (isNotFound) {
+            lastErr = msg;
+            break; // model này không còn hỗ trợ, chuyển ngay sang model kế tiếp
+          }
+
           if (isHighDemand || isQuota) {
             lastErr = msg;
-            if (isHighDemand) {
-              // Model đang bị quá tải, lập tức thử model kế tiếp
-              break;
-            }
-            continue; // Thử key kế tiếp
+            continue; // Thử khoá kế tiếp cho model này
           }
+
           res.status(upstream.status).json({ error: msg });
           return;
         }

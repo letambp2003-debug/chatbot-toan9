@@ -594,12 +594,19 @@
   // ---------- Gọi AI qua máy chủ trung gian (api/chat.js) ----------
   // Trình duyệt học sinh KHÔNG gọi thẳng Gemini và không cần biết khoá API —
   // máy chủ trung gian tự giữ khoá và tự xoay vòng nhiều khoá (nếu quản trị viên cấu hình nhiều khoá).
-  function callGemini(userText, imagePart) {
-    var model = localStorage.getItem("gsToan9_model") || "gemini-3.6-flash";
+  function callGemini(userText, imagePart, retryCount) {
+    retryCount = retryCount || 0;
+    var model = localStorage.getItem("gsToan9_model");
+    if (!model || model === "gemini-3.8-flash") {
+      model = "gemini-3.6-flash";
+      localStorage.setItem("gsToan9_model", "gemini-3.6-flash");
+    }
 
     var parts = [{ text: userText }];
     if (imagePart) parts.push(imagePart);
-    state.history.push({ role: "user", parts: parts });
+    if (retryCount === 0) {
+      state.history.push({ role: "user", parts: parts });
+    }
 
     var body = {
       systemPrompt: state.systemPrompt,
@@ -630,6 +637,13 @@
         }
         state.history.push({ role: "model", parts: [{ text: reply }] });
         return reply;
+      })
+      .catch(function (err) {
+        if (retryCount < 2 && /high demand|overloaded|HTTP 502|HTTP 503/i.test(err.message)) {
+          return new Promise(function (resolve) { setTimeout(resolve, 800); })
+            .then(function () { return callGemini(userText, imagePart, retryCount + 1); });
+        }
+        throw err;
       });
   }
 
