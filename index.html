@@ -4,6 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Gia sư Toán 9 · Kết nối tri thức với cuộc sống</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <style>
   :root {
     --brand: #2e75b6;
@@ -96,12 +99,11 @@
     gap: 12px;
   }
   .msg {
-    max-width: 82%;
+    max-width: 84%;
     padding: 11px 14px;
     border-radius: var(--radius);
-    line-height: 1.5;
+    line-height: 1.6;
     font-size: 14.5px;
-    white-space: pre-wrap;
     word-wrap: break-word;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
@@ -111,11 +113,20 @@
     border: 1px solid var(--border);
     border-bottom-left-radius: 4px;
   }
+  .msg.bot p { margin: 0 0 8px 0; }
+  .msg.bot p:last-child { margin-bottom: 0; }
+  .msg.bot ul, .msg.bot ol { margin: 6px 0 8px 20px; padding: 0; }
+  .msg.bot li { margin-bottom: 4px; }
+  .msg.bot li:last-child { margin-bottom: 0; }
+  .msg.bot strong { color: var(--brand-dark); font-weight: 600; }
+  .msg.bot .katex-display { margin: 10px 0; overflow-x: auto; overflow-y: hidden; }
+  .msg.bot .katex { font-size: 1.06em; }
   .msg.user {
     align-self: flex-end;
     background: var(--bubble-user);
     color: #fff;
     border-bottom-right-radius: 4px;
+    white-space: pre-wrap;
   }
   .msg.system {
     align-self: center;
@@ -124,6 +135,7 @@
     font-size: 12.5px;
     text-align: center;
     max-width: 90%;
+    white-space: pre-wrap;
   }
   .typing {
     align-self: flex-start;
@@ -469,10 +481,72 @@
     els.statusBar.className = "";
   }
 
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatContent(text) {
+    if (!text) return "";
+
+    var mathBlocks = [];
+
+    // 1. Tách display math: $$...$$ hoặc \[...\]
+    var protectedText = String(text).replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\])/g, function (match) {
+      var placeholder = "%%%MATH_BLOCK_" + mathBlocks.length + "%%%";
+      var expr = match.slice(2, -2).trim();
+      mathBlocks.push({ expr: expr, display: true });
+      return placeholder;
+    });
+
+    // 2. Tách inline math: $...$ hoặc \(...\)
+    protectedText = protectedText.replace(/(\$([^\$\n]+?)\$|\\\(([^\n]+?)\\\))/g, function (match, p1, p2, p3) {
+      var placeholder = "%%%MATH_BLOCK_" + mathBlocks.length + "%%%";
+      var expr = ((p2 !== undefined ? p2 : p3) || "").trim();
+      mathBlocks.push({ expr: expr, display: false });
+      return placeholder;
+    });
+
+    // 3. Parse Markdown bằng Marked nếu có
+    var html = "";
+    if (typeof marked !== "undefined" && marked.parse) {
+      html = marked.parse(protectedText, { breaks: true, gfm: true });
+    } else {
+      html = escapeHtml(protectedText).replace(/\n/g, "<br>");
+    }
+
+    // 4. Render KaTeX vào các placeholder
+    html = html.replace(/%%%MATH_BLOCK_(\d+)%%%/g, function (_, idx) {
+      var item = mathBlocks[Number(idx)];
+      if (!item) return "";
+      if (typeof katex !== "undefined" && katex.renderToString) {
+        try {
+          return katex.renderToString(item.expr, {
+            displayMode: item.display,
+            throwOnError: false,
+          });
+        } catch (e) {
+          return item.display ? "$$" + escapeHtml(item.expr) + "$$" : "$" + escapeHtml(item.expr) + "$";
+        }
+      }
+      return item.display ? "$$" + escapeHtml(item.expr) + "$$" : "$" + escapeHtml(item.expr) + "$";
+    });
+
+    return html;
+  }
+
   function addMessage(role, text) {
     var div = document.createElement("div");
     div.className = "msg " + role;
-    div.textContent = text;
+    if (role === "bot") {
+      div.innerHTML = formatContent(text);
+    } else {
+      div.textContent = text;
+    }
     els.chat.appendChild(div);
     els.chat.scrollTop = els.chat.scrollHeight;
     return div;
@@ -512,7 +586,7 @@
         tc +
         "\n\n===== HẾT PHẦN TÍNH CÁCH — BẮT ĐẦU PHẦN KIẾN THỨC (kt.md) =====\n\n" +
         kt +
-        "\n\n===== HẾT TÀI LIỆU. Từ giờ hãy nhập vai đúng như đã mô tả ở trên và trò chuyện với học sinh bằng tiếng Việt. =====";
+        "\n\n===== HẾT TÀI LIỆU. QUY TẮC HIỂN THỊ CÔNG THỨC TOÁN HỌC (BẮT BUỘC): Mọi công thức, biểu thức, phương trình, bất phương trình, biến số, căn thức, phân số,... BẮT BUỘC phải đặt trong cặp dấu $...$ (nội dòng, ví dụ: $x$, $-2x < 4 \\Rightarrow x > -2$, $\\Delta = b^2 - 4ac$) hoặc $$...$$ (riêng dòng) để giao diện hiển thị ở chế độ KaTeX đẹp mắt cho học sinh. Từ giờ hãy nhập vai đúng như đã mô tả ở trên và trò chuyện với học sinh bằng tiếng Việt. =====";
       state.loadingKnowledge = false;
     });
   }
