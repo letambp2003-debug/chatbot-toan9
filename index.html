@@ -2,106 +2,666 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
-<title>GIA SƯ TOÁN 9 · BỘ SÁCH GIÁO KHOA THỐNG NHẤT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>TRƯỜNG THCS PHƯỚC GIANG (Phân hiệu 2) — Lớp học Toán 9 · GVBM: Huỳnh Thị Ngọc Châu</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <style>
   :root {
-    --brand: #2e75b6;
-    --brand-dark: #1f4e79;
-    --bg: #f4f7fb;
-    --bubble-user: #2e75b6;
-    --bubble-bot: #ffffff;
-    --text: #1c2733;
-    --muted: #6b7785;
-    --border: #dfe6ee;
-    --radius: 16px;
+    --primary: #1877f2;
+    --primary-dark: #0d5cb6;
+    --sidebar-bg: #0e2a58;
+    --sidebar-hover: rgba(255, 255, 255, 0.08);
+    --sidebar-active: linear-gradient(90deg, #1877f2, #2596be);
+    --bg-page: #f0f4f9;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --header-h: 70px;
+    --sidebar-w: 240px;
   }
-  * { box-sizing: border-box; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   html, body {
-    margin: 0; padding: 0;
     height: 100%;
     width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg-page);
+    color: var(--text-main);
     overflow: hidden;
     -webkit-text-size-adjust: 100%;
-    touch-action: manipulation;
   }
-  #app {
+
+  #app-root {
     display: flex;
-    flex-direction: column;
     height: 100%;
     height: 100dvh;
-    max-width: 760px;
-    margin: 0 auto;
-    background: var(--bg);
-    position: relative;
+    width: 100vw;
     overflow: hidden;
+    position: relative;
   }
-  header {
-    background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+
+  /* ===================== SIDEBAR ===================== */
+  #sidebar {
+    width: var(--sidebar-w);
+    background: linear-gradient(180deg, #0f2b59 0%, #163a72 100%);
     color: #fff;
-    padding: 12px 16px;
-    padding-top: max(12px, env(safe-area-inset-top));
-    padding-left: max(14px, env(safe-area-inset-left));
-    padding-right: max(14px, env(safe-area-inset-right));
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    z-index: 5;
+    flex-direction: column;
     flex-shrink: 0;
+    z-index: 30;
+    box-shadow: 2px 0 16px rgba(10, 25, 50, 0.25);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  header .title {
+
+  .sidebar-header {
+    padding: 18px 16px 14px;
     display: flex;
     align-items: center;
     gap: 12px;
-    min-width: 0;
-    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  header .title .avatar {
-    width: 42px; height: 42px; border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
+  .school-logo-emblem {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 60%, #e2e8f0 100%);
+    box-shadow: 0 0 0 2px #38bdf8, 0 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
-  header .title > div {
-    min-width: 0;
-  }
-  header .title h1 {
-    font-size: 18px;
-    margin: 0;
-    font-weight: 700;
+  .sidebar-school-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    line-height: 1.25;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    color: #ffffff;
+  }
+  .sidebar-school-sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: #93c5fd;
+    margin-top: 2px;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-decoration: none;
+  }
+  .nav-btn:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+  }
+  .nav-btn.active {
+    background: var(--sidebar-active);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(24, 119, 242, 0.45);
+    font-weight: 700;
+  }
+  .nav-btn .icon {
+    font-size: 18px;
+    width: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-btn.btn-ai-highlight {
+    background: rgba(38, 186, 218, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+  }
+  .nav-btn.btn-ai-highlight:hover {
+    background: rgba(38, 186, 218, 0.25);
+    color: #ffffff;
+  }
+  .nav-btn.btn-ai-highlight.active {
+    background: linear-gradient(90deg, #0284c7, #06b6d4);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.5);
+    border-color: transparent;
+  }
+
+  .sidebar-footer-quote {
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .quote-box {
+    font-style: italic;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #94a3b8;
+  }
+  .quote-box strong {
+    color: #e2e8f0;
+  }
+  .math-doodles {
+    display: flex;
+    justify-content: space-around;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.25);
+    margin-top: 10px;
+    user-select: none;
+  }
+
+  /* ===================== MAIN WRAPPER ===================== */
+  #main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--bg-page);
+    position: relative;
+  }
+
+  /* ===================== TOP HEADER ===================== */
+  #top-header {
+    height: var(--header-h);
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 20;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-toggle-menu {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-main);
+    padding: 4px;
+  }
+
+  /* Center Ribbon */
+  .slogan-ribbon {
+    background: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
+    color: #ffffff;
+    padding: 6px 24px;
+    border-radius: 20px;
+    box-shadow: 0 3px 12px rgba(2, 132, 199, 0.35);
+    position: relative;
+    text-align: center;
+  }
+  .slogan-ribbon::before, .slogan-ribbon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    background: #fbbf24;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  .slogan-ribbon::before { left: 10px; }
+  .slogan-ribbon::after { right: 10px; }
+  .slogan-text-1 {
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+  .slogan-text-2 {
+    font-size: 11.5px;
+    opacity: 0.92;
+    margin-top: 1px;
+  }
+
+  /* Teacher Profile Chip */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .teacher-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 30px;
+  }
+  .teacher-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f472b6, #db2777);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(219, 39, 119, 0.3);
+    flex-shrink: 0;
+  }
+  .teacher-info {
+    text-align: left;
     line-height: 1.25;
   }
-  header .title p {
-    margin: 2px 0 0;
-    font-size: 12px;
-    opacity: 0.88;
+  .teacher-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
   }
-  header button.icon-btn {
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: #fff;
+  .teacher-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .btn-header-action {
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
-    width: 34px; height: 34px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: #475569;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
   }
-  header button.icon-btn:hover { background: rgba(255,255,255,0.28); }
+  .btn-header-action:hover {
+    background: #f1f5f9;
+    color: var(--primary);
+  }
+
+  /* ===================== VIEW CONTAINER ===================== */
+  .view-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    display: none;
+  }
+  .view-container.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===================== TAB 1: TRANG CHỦ ===================== */
+  #tab-home {
+    padding: 16px 20px 60px;
+    gap: 16px;
+  }
+
+  /* Hero Banner */
+  .hero-banner {
+    position: relative;
+    border-radius: var(--radius-lg);
+    min-height: 250px;
+    background: #1e3a8a url('banner.jpg') center/cover no-repeat;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+    display: flex;
+    align-items: center;
+    padding: 24px 30px;
+  }
+  .hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10, 25, 47, 0.88) 0%, rgba(15, 35, 70, 0.72) 48%, rgba(10, 25, 47, 0.25) 100%);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+    color: #fff;
+  }
+  .hero-badge-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fef08a;
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .hero-title span.math-highlight {
+    color: #fde047;
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+  .hero-sub {
+    font-size: 13.5px;
+    opacity: 0.9;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .hero-info-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    color: #0f172a;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+  .hero-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+  }
+  .hero-info-item .item-icon {
+    font-size: 16px;
+  }
+  .hero-info-item strong {
+    color: #0f2b59;
+  }
+
+  /* 6 Feature Cards */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .feature-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 16px 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+  }
+  .feature-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .fc-blue .feature-icon-wrapper { background: #dbeafe; color: #1d4ed8; }
+  .fc-green .feature-icon-wrapper { background: #dcfce7; color: #15803d; }
+  .fc-purple .feature-icon-wrapper { background: #f3e8ff; color: #7e22ce; }
+  .fc-orange .feature-icon-wrapper { background: #ffedd5; color: #c2410c; }
+  .fc-sky .feature-icon-wrapper { background: #e0f2fe; color: #0369a1; }
+  .fc-ai {
+    border: 2px solid #38bdf8;
+    background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+  }
+  .fc-ai .feature-icon-wrapper {
+    background: linear-gradient(135deg, #0284c7, #06b6d4);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(6, 182, 212, 0.4);
+  }
+  .feature-card h3 {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 5px;
+  }
+  .feature-card p {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.45;
+    flex: 1;
+    margin-bottom: 12px;
+  }
+  .btn-arrow-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #fff;
+    align-self: flex-start;
+  }
+  .fc-blue .btn-arrow-circle { background: #2563eb; }
+  .fc-green .btn-arrow-circle { background: #10b981; }
+  .fc-purple .btn-arrow-circle { background: #8b5cf6; }
+  .fc-orange .btn-arrow-circle { background: #f97316; }
+  .fc-sky .btn-arrow-circle { background: #0284c7; }
+  .fc-ai .btn-arrow-circle { background: #06b6d4; }
+
+  /* Bottom Row 4 Summary Cards */
+  .bottom-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr 1.1fr;
+    gap: 12px;
+  }
+  .summary-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .summary-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quote-sunset-card {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-color: #fed7aa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .quote-sunset-text {
+    font-style: italic;
+    font-size: 12.5px;
+    color: #9a3412;
+    line-height: 1.5;
+  }
+  .class-badges-row {
+    display: flex;
+    gap: 10px;
+  }
+  .class-badge-item {
+    flex: 1;
+    background: #f1f5f9;
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+  }
+  .class-badge-name {
+    font-size: 17px;
+    font-weight: 800;
+    color: #0f2b59;
+  }
+  .class-badge-count {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .quick-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .quick-info-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #f1f5f9;
+  }
+  .quick-info-item:last-child { border-bottom: none; }
+  .quick-info-label { color: var(--text-muted); }
+  .quick-info-val { font-weight: 700; color: #0f172a; }
+
+  .study-motivation-card {
+    background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+    border-color: #f5d0fe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .study-motivation-card h4 {
+    font-size: 14px;
+    color: #86198f;
+    margin-bottom: 4px;
+  }
+  .study-motivation-card p {
+    font-size: 11.5px;
+    color: #a21caf;
+    font-style: italic;
+  }
+
+  /* Bottom Ticker */
+  #bottom-ticker {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 38px;
+    background: #0f2b59;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 12px;
+    z-index: 25;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* ===================== TAB 7: HỖ TRỢ AI (CHATBOT GIA SƯ) ===================== */
+  #tab-ai {
+    height: 100%;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    background: #f8fafc;
+  }
+  #tab-ai.active {
+    display: flex;
+  }
+
+  .ai-header-bar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    flex-shrink: 0;
+  }
+  .ai-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ai-bot-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0284c7, #06b6d4);
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(6, 182, 212, 0.35);
+  }
+  .ai-header-title h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f2b59;
+    text-transform: uppercase;
+  }
+  .ai-header-title p {
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+  .ai-status-pill {
+    font-size: 11.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #15803d;
+    font-weight: 600;
+  }
 
   #status-bar {
     font-size: 12px;
     text-align: center;
-    padding: 6px 10px;
+    padding: 6px 12px;
     background: #fff3cd;
     color: #7a5b00;
     border-bottom: 1px solid #f1e2ab;
@@ -115,560 +675,1135 @@
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-    padding: 16px 14px 10px;
+    padding: 16px 20px 10px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
+    background: #f8fafc;
   }
+
   .msg {
-    max-width: 84%;
-    padding: 11px 14px;
-    border-radius: var(--radius);
+    max-width: 82%;
+    padding: 12px 16px;
+    border-radius: 16px;
     line-height: 1.6;
     font-size: 14.5px;
-    word-wrap: break-word;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    word-break: break-word;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .msg.user {
+    align-self: flex-end;
+    background: #1877f2;
+    color: #fff;
+    border-bottom-right-radius: 4px;
   }
   .msg.bot {
     align-self: flex-start;
-    background: var(--bubble-bot);
+    background: #ffffff;
+    color: var(--text-main);
     border: 1px solid var(--border);
     border-bottom-left-radius: 4px;
   }
+  .msg.system {
+    align-self: center;
+    background: #eef2f6;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-style: italic;
+    border-radius: 10px;
+    padding: 5px 12px;
+    box-shadow: none;
+  }
+
   .msg.bot p { margin: 0 0 8px 0; }
   .msg.bot p:last-child { margin-bottom: 0; }
   .msg.bot ul, .msg.bot ol { margin: 6px 0 8px 20px; padding: 0; }
   .msg.bot li { margin-bottom: 4px; }
-  .msg.bot li:last-child { margin-bottom: 0; }
-  .msg.bot strong { color: var(--brand-dark); font-weight: 600; }
-  .msg.bot .katex-display { margin: 10px 0; overflow-x: auto; overflow-y: hidden; }
-  .msg.bot .katex { font-size: 1.06em; }
-  .msg.user {
-    align-self: flex-end;
-    background: var(--bubble-user);
-    color: #fff;
-    border-bottom-right-radius: 4px;
-    white-space: pre-wrap;
-  }
-  .msg.system {
-    align-self: center;
-    background: transparent;
-    color: var(--muted);
-    font-size: 12.5px;
-    text-align: center;
-    max-width: 90%;
-    white-space: pre-wrap;
-  }
-  .typing {
-    align-self: flex-start;
-    display: flex;
-    gap: 4px;
-    padding: 12px 16px;
-    background: var(--bubble-bot);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    border-bottom-left-radius: 4px;
-  }
-  .typing span {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--muted);
-    animation: bounce 1.2s infinite ease-in-out;
-  }
-  .typing span:nth-child(2) { animation-delay: 0.15s; }
-  .typing span:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes bounce {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-    30% { transform: translateY(-4px); opacity: 1; }
-  }
-
-  #composer {
-    display: flex;
-    gap: 8px;
+  .msg.bot strong { color: #0f2b59; }
+  .msg.bot pre {
+    background: #0f172a;
+    color: #f8fafc;
     padding: 10px 12px;
-    padding-bottom: max(10px, env(safe-area-inset-bottom));
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-    background: #fff;
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
-    align-items: flex-end;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    margin: 8px 0;
   }
-  #composer textarea {
-    flex: 1;
-    resize: none;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 10px 14px;
-    font-size: 16px; /* 16px để iOS Safari không tự phóng to màn hình */
-    font-family: inherit;
-    max-height: 120px;
-    outline: none;
-    line-height: 1.4;
+  .msg.bot code {
+    background: #f1f5f9;
+    color: #0f2b59;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
   }
-  #composer textarea:focus { border-color: var(--brand); }
-  #composer button {
-    background: var(--brand);
-    border: none;
-    color: #fff;
-    border-radius: 14px;
-    width: 44px;
-    height: 44px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+  .msg.bot .katex-display {
+    margin: 10px 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 2px;
   }
-  #composer button:disabled { opacity: 0.5; cursor: not-allowed; }
-  #composer button:hover:not(:disabled) { background: var(--brand-dark); }
+  .msg.bot .katex { font-size: 1.05em; }
 
+  /* Quick Actions Bar */
   .quick-row {
     display: flex;
     gap: 8px;
-    padding: 0 12px 10px;
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
+    padding: 6px 18px 8px;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    background: #fff;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
     flex-shrink: 0;
     scrollbar-width: none;
-    -ms-overflow-style: none;
   }
   .quick-row::-webkit-scrollbar { display: none; }
   .quick-row button {
     flex-shrink: 0;
     white-space: nowrap;
     border: 1px solid var(--border);
-    background: #f7fafc;
-    color: var(--brand-dark);
+    background: #f8fafc;
+    color: #0f2b59;
     border-radius: 20px;
-    padding: 7px 13px;
+    padding: 6px 14px;
     font-size: 12.5px;
     cursor: pointer;
-    touch-action: manipulation;
+    transition: all 0.2s;
   }
-  .quick-row button:hover { background: #eaf2fa; }
+  .quick-row button:hover {
+    background: #e0f2fe;
+    border-color: #38bdf8;
+    color: #0284c7;
+  }
+  .quick-row button.btn-quiz-highlight {
+    background: #fef3c7;
+    border-color: #fde047;
+    color: #92400e;
+    font-weight: 600;
+  }
 
-  /* settings modal */
-  #overlay {
-    position: fixed; inset: 0; background: rgba(20,30,40,0.45);
-    display: none; align-items: center; justify-content: center; z-index: 20;
-    padding: 16px;
-  }
-  #overlay.show { display: flex; }
-  #settings {
-    background: #fff; border-radius: 16px; padding: 22px;
-    width: 100%; max-width: 420px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-  #settings h2 { margin: 0 0 4px; font-size: 17px; color: var(--brand-dark); }
-  #settings p.hint { margin: 0 0 16px; font-size: 12.5px; color: var(--muted); }
-  #settings label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
-  #settings input, #settings select, #settings textarea {
-    width: 100%; padding: 9px 11px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 13.5px; font-family: inherit;
-  }
-  #settings textarea {
-    resize: vertical; min-height: 74px; font-family: "Courier New", monospace; font-size: 12.5px;
-  }
-  #settings .row { display: flex; gap: 10px; margin-top: 20px; }
-  #settings .row button {
-    flex: 1; padding: 10px; border-radius: 10px; border: none;
-    font-size: 14px; cursor: pointer;
-  }
-  #settings .btn-save { background: var(--brand); color: #fff; }
-  #settings .btn-cancel { background: #eef2f6; color: var(--text); }
-  #settings a { color: var(--brand); }
-
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-thumb { background: #c7d2dc; border-radius: 6px; }
-
-  /* đính kèm ảnh bài làm */
+  /* Photo Attachment Panel */
   #photo-panel {
     display: none;
-    padding: 10px 12px;
-    background: #fff;
+    padding: 10px 18px;
+    background: #ffffff;
     border-top: 1px solid var(--border);
   }
   #photo-panel.show { display: block; }
-  #photo-panel .row1 { display: flex; gap: 10px; align-items: flex-start; }
+  #photo-panel .row1 { display: flex; gap: 12px; align-items: center; }
   #photo-panel img {
-    width: 64px; height: 64px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border);
-    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
   }
-  #photo-panel .fields { flex: 1; display: flex; gap: 8px; }
+  #photo-panel .fields { flex: 1; display: flex; gap: 10px; }
   #photo-panel .fields input {
-    flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 13px; font-family: inherit;
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
   }
   #photo-panel .actions { display: flex; gap: 8px; margin-top: 8px; }
-  #photo-panel .actions button {
-    padding: 8px 14px; border-radius: 10px; border: none; font-size: 13px; cursor: pointer;
-  }
-  #photo-panel .btn-send-photo { background: var(--brand); color: #fff; }
-  #photo-panel .btn-cancel-photo { background: #eef2f6; color: var(--text); }
-  #photo-panel p.hint2 { margin: 6px 0 0; font-size: 11.5px; color: var(--muted); }
-
-  #composer button.icon2 {
-    background: #eef2f6;
-    color: var(--brand-dark);
+  #photo-panel button {
+    padding: 7px 14px;
+    border-radius: 8px;
     border: none;
-    border-radius: 14px;
-    width: 44px;
-    height: 44px;
+    font-size: 13px;
     cursor: pointer;
-    font-size: 18px;
-    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-send-photo { background: #1877f2; color: #fff; font-weight: 600; }
+  .btn-cancel-photo { background: #e2e8f0; color: #334155; }
+
+  /* Input Composer */
+  #composer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px 14px;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
     flex-shrink: 0;
   }
-  #composer button.icon2:hover { background: #e2eaf2; }
+  #composer textarea {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-size: 14.5px;
+    font-family: inherit;
+    resize: none;
+    max-height: 120px;
+    outline: none;
+    line-height: 1.4;
+    background: #f8fafc;
+  }
+  #composer textarea:focus {
+    border-color: #1877f2;
+    background: #ffffff;
+  }
+  #composer button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #1877f2;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  #composer button:hover:not(:disabled) { background: #0d5cb6; }
+  #composer button:disabled { opacity: 0.5; cursor: not-allowed; }
+  #composer button.btn-cam {
+    background: #f1f5f9;
+    color: #475569;
+  }
+  #composer button.btn-cam:hover { background: #e2e8f0; color: #0f172a; }
 
-  /* modal tạo đề ôn tập (dùng chung layout với #overlay/#settings) */
-  #overlay-quiz {
-    position: fixed; inset: 0; background: rgba(20,30,40,0.45);
-    display: none; align-items: center; justify-content: center; z-index: 20;
+  /* ===================== OTHER TABS (KHÓA HỌC, DS HỌC SINH, ĐIỂM, BÁO CÁO, THỐNG KÊ) ===================== */
+  .generic-tab-content {
+    padding: 20px;
+    gap: 16px;
+  }
+  .page-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .page-title-row h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f2b59;
+  }
+  .table-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    text-align: left;
+  }
+  table.data-table th {
+    background: #f8fafc;
+    padding: 12px 14px;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 1px solid var(--border);
+  }
+  table.data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+  }
+  table.data-table tr:hover td {
+    background: #f8fafc;
+  }
+  .badge-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag-green { background: #dcfce7; color: #15803d; }
+  .tag-blue { background: #dbeafe; color: #1d4ed8; }
+  .tag-yellow { background: #fef9c3; color: #854d0e; }
+
+  /* Course cards */
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .course-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s;
+  }
+  .course-card:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+  .course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  .course-chapter {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0284c7;
+  }
+  .course-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+  .course-desc {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .course-action-row {
+    display: flex;
+    gap: 8px;
+  }
+  .course-btn {
+    flex: 1;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn-study { background: #f1f5f9; color: #0f172a; }
+  .btn-ask-ai { background: #0284c7; color: #ffffff; }
+
+  /* ===================== MODALS ===================== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
     padding: 16px;
   }
-  #overlay-quiz.show { display: flex; }
-  #quiz-settings {
-    background: #fff; border-radius: 16px; padding: 22px;
-    width: 100%; max-width: 420px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  .modal-overlay.show { display: flex; }
+  .modal-box {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
   }
-  #quiz-settings h2 { margin: 0 0 4px; font-size: 17px; color: var(--brand-dark); }
-  #quiz-settings p.hint { margin: 0 0 16px; font-size: 12.5px; color: var(--muted); }
-  #quiz-settings label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
-  #quiz-settings select {
-    width: 100%; padding: 9px 11px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 13.5px; font-family: inherit;
+  .modal-box h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f2b59;
+    margin-bottom: 6px;
   }
-  #quiz-settings .row { display: flex; gap: 10px; margin-top: 20px; }
-  #quiz-settings .row button {
-    flex: 1; padding: 10px; border-radius: 10px; border: none;
-    font-size: 14px; cursor: pointer;
+  .modal-box p.hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
   }
-  #quiz-settings .btn-save { background: var(--brand); color: #fff; }
-  #quiz-settings .btn-cancel { background: #eef2f6; color: var(--text); }
+  .modal-box label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 10px 0 4px;
+  }
+  .modal-box input, .modal-box select, .modal-box textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-family: inherit;
+  }
+  .modal-box .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .modal-box .actions button {
+    flex: 1;
+    padding: 9px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-modal-primary { background: #1877f2; color: #fff; }
+  .btn-modal-cancel { background: #f1f5f9; color: #475569; }
 
-  /* ========================================================
-     TỐI ƯU HÓA 100% TỰ ĐỘNG CHO GIAO DIỆN MOBILE
-     ======================================================== */
-  @media (max-width: 600px) {
-    #app {
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-      height: 100dvh;
+  /* ===================== RESPONSIVE (MOBILE / TABLET) ===================== */
+  @media (max-width: 1024px) {
+    .feature-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
-    header {
-      padding: 10px 12px;
-      padding-top: max(10px, env(safe-area-inset-top));
-      padding-left: max(12px, env(safe-area-inset-left));
-      padding-right: max(12px, env(safe-area-inset-right));
+    .bottom-summary-grid {
+      grid-template-columns: 1fr 1fr;
     }
-    header .title {
+  }
+
+  @media (max-width: 768px) {
+    .btn-toggle-menu { display: block; }
+    #sidebar {
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      transform: translateX(-100%);
+    }
+    #sidebar.mobile-open {
+      transform: translateX(0);
+    }
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 28;
+    }
+    .sidebar-backdrop.show { display: block; }
+
+    .slogan-ribbon { display: none; }
+    .teacher-sub { display: none; }
+
+    #tab-home {
+      padding: 12px 12px 50px;
+      gap: 12px;
+    }
+    .hero-banner {
+      min-height: auto;
+      padding: 18px 16px;
+    }
+    .hero-title { font-size: 20px; }
+    .hero-info-card { grid-template-columns: 1fr; }
+
+    .feature-grid {
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
-    header .title .avatar {
-      width: 36px;
-      height: 36px;
-      font-size: 19px;
-      flex-shrink: 0;
+    .bottom-summary-grid {
+      grid-template-columns: 1fr;
     }
-    header .title h1 {
-      font-size: 15px;
-      line-height: 1.25;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    header .title p {
-      font-size: 11px;
-      max-width: 250px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    header button.icon-btn {
-      width: 34px;
-      height: 34px;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-    #chat {
-      padding: 10px 10px 6px;
-      gap: 10px;
-    }
-    .msg {
-      max-width: 92%;
-      padding: 9px 12px;
-      font-size: 14px;
-      line-height: 1.55;
-      border-radius: 14px;
-    }
-    .msg.bot p { margin: 0 0 6px 0; }
-    .msg.bot ul, .msg.bot ol { margin: 4px 0 6px 16px; padding: 0; }
-    .msg.bot li { margin-bottom: 3px; }
-    .msg.bot .katex-display {
-      margin: 8px 0;
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 2px;
-    }
-    .msg.bot .katex {
-      font-size: 1em;
-    }
-    .quick-row {
-      padding: 0 8px 6px;
-      gap: 6px;
-    }
-    .quick-row button {
-      padding: 5px 10px;
-      font-size: 11px;
-      border-radius: 14px;
-    }
-    #composer {
-      padding: 8px 10px;
-      padding-bottom: max(8px, env(safe-area-inset-bottom));
-      padding-left: max(10px, env(safe-area-inset-left));
-      padding-right: max(10px, env(safe-area-inset-right));
-      gap: 6px;
-    }
-    #composer textarea {
-      font-size: 16px !important; /* QUAN TRỌNG: Ngăn iOS Safari tự phóng to màn hình */
-      padding: 8px 12px;
-      border-radius: 12px;
-      max-height: 90px;
-      line-height: 1.35;
-    }
-    #composer button, #composer button.icon2 {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      font-size: 16px;
-    }
-    /* Khung chụp ảnh bài làm trên Mobile */
-    #photo-panel {
-      padding: 8px 10px;
-    }
-    #photo-panel .row1 {
-      gap: 8px;
-    }
-    #photo-panel img {
-      width: 48px;
-      height: 48px;
-    }
-    #photo-panel .fields {
-      flex-direction: row;
-      gap: 6px;
-    }
-    #photo-panel .fields input {
-      font-size: 14px;
-      padding: 6px 8px;
-    }
-    #photo-panel .actions {
-      margin-top: 6px;
-      gap: 6px;
-    }
-    #photo-panel .actions button {
-      padding: 7px 11px;
-      font-size: 12px;
-    }
-    /* Hộp thoại cài đặt / tạo đề trên Mobile */
-    #settings, #quiz-settings {
-      padding: 16px 14px;
-      border-radius: 14px;
-      max-width: 94%;
-      max-height: 85dvh;
-      overflow-y: auto;
-    }
-    #settings h2, #quiz-settings h2 {
-      font-size: 15px;
-    }
+
+    .msg { max-width: 92%; font-size: 14px; }
+    #composer { padding: 8px 12px 10px; }
+    #composer textarea { font-size: 16px !important; } /* Tránh iOS auto-zoom */
   }
 </style>
 </head>
 <body>
-<div id="app">
-  <header>
-    <div class="title">
-      <div class="avatar">🧮</div>
+
+<div id="app-root">
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="school-logo-emblem">
+        <!-- SVG School Seal -->
+        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="#1e3a8a" stroke="#fbbf24" stroke-width="4"/>
+          <path d="M50 18 L76 34 L76 66 L50 82 L24 66 L24 34 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+          <path d="M34 56 C40 50, 48 50, 50 56 C52 50, 60 50, 66 56 L66 42 C60 38, 52 38, 50 42 C48 38, 40 38, 34 42 Z" fill="#ffffff"/>
+          <path d="M50 30 L50 42" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="50,22 47,28 53,28" fill="#ef4444"/>
+        </svg>
+      </div>
       <div>
-        <h1>GIA SƯ TOÁN 9 · BỘ SÁCH GIÁO KHOA THỐNG NHẤT</h1>
-        <p>Dẫn dắt em tự tìm ra cách làm — không giải hộ</p>
+        <div class="sidebar-school-title">THCS PHƯỚC GIANG</div>
+        <div class="sidebar-school-sub">Phân hiệu 2 · Toán 9</div>
       </div>
     </div>
-    <button class="icon-btn" id="btn-settings" title="Cài đặt">⚙️</button>
-  </header>
 
-  <div id="status-bar"></div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-tab="tab-home">
+        <span class="icon">🏠</span>
+        <span>Trang chủ</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-courses">
+        <span class="icon">📖</span>
+        <span>Khóa học</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-students">
+        <span class="icon">👥</span>
+        <span>Danh sách học sinh</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-grades">
+        <span class="icon">📋</span>
+        <span>Điểm số</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-reports">
+        <span class="icon">📊</span>
+        <span>Báo cáo</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-analytics">
+        <span class="icon">📈</span>
+        <span>Thống kê</span>
+      </button>
+      <button class="nav-btn btn-ai-highlight" data-tab="tab-ai">
+        <span class="icon">🤖</span>
+        <span>Hỗ trợ AI</span>
+      </button>
+    </nav>
 
-  <div id="chat"></div>
+    <div class="sidebar-footer-quote">
+      <div class="quote-box">
+        "Toán học không chỉ là những con số, mà là <strong>chìa khóa</strong> mở ra thế giới tư duy!" ♡
+      </div>
+      <div class="math-doodles">
+        <span>📐</span>
+        <span>$\pi$</span>
+        <span>$\infty$</span>
+        <span>$\Delta$</span>
+      </div>
+    </div>
+  </aside>
 
-  <div class="quick-row">
-    <button data-q="Em bị sai một bài bất phương trình, cô xem giúp em với">Bài bất phương trình</button>
-    <button data-q="Em không biết bắt đầu bài chứng minh hình học này từ đâu">Bí bài chứng minh hình</button>
-    <button data-q="Cô cho em xin một bài luyện tương tự bài vừa rồi">Xin bài luyện tương tự</button>
-    <button data-q="Cô ơi cho em đáp án luôn được không ạ">Thử xin đáp án 😅</button>
-    <button type="button" id="btn-open-quiz">📝 Tạo đề ôn tập</button>
-  </div>
-
-  <div id="photo-panel">
-    <div class="row1">
-      <img id="photo-preview" alt="Ảnh bài làm" />
-      <div style="flex:1">
-        <div class="fields">
-          <input id="photo-bai" type="text" placeholder="Bài số (ví dụ: Bài 19)" />
-          <input id="photo-trang" type="text" placeholder="Trang (ví dụ: 42)" />
+  <!-- ================= MAIN CONTENT AREA ================= -->
+  <main id="main-area">
+    <!-- Top Header -->
+    <header id="top-header">
+      <div class="header-left">
+        <button class="btn-toggle-menu" id="btn-toggle-menu" title="Mở danh mục">☰</button>
+        <div>
+          <div style="font-weight: 800; font-size: 15px; color: #0f2b59; line-height: 1.2;">TRƯỜNG THCS PHƯỚC GIANG</div>
+          <div style="font-size: 11.5px; color: #64748b;">(Phân hiệu 2) — Môn Toán 9</div>
         </div>
-        <p class="hint2">Ghi rõ bài mấy, trang mấy trong SGK để cô đối chiếu đúng đề nhé.</p>
+      </div>
+
+      <div class="slogan-ribbon">
+        <div class="slogan-text-1">Tri thức hôm nay — Thành công ngày mai ♡</div>
+      </div>
+
+      <div class="header-right">
+        <div class="teacher-chip">
+          <div class="teacher-avatar">C</div>
+          <div class="teacher-info">
+            <div class="teacher-name">GVBM: Huỳnh Thị Ngọc Châu</div>
+            <div class="teacher-sub">Môn dạy: Toán &bull; Lớp: 9C3, 9C4</div>
+          </div>
+        </div>
+        <button class="btn-header-action" id="btn-settings-header" title="Cài đặt khoá AI">⚙️</button>
+      </div>
+    </header>
+
+    <!-- ================= VIEW 1: TRANG CHỦ ================= -->
+    <div class="view-container active" id="tab-home">
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <div class="hero-content">
+          <div class="hero-badge-row">
+            <span>💡</span> Cùng nhau học &ndash; Cùng nhau tiến bộ
+          </div>
+          <h1 class="hero-title">
+            Chào mừng bạn đến với lớp học <span class="math-highlight">Toán!</span>
+          </h1>
+          <p class="hero-sub">
+            Kiến tạo tương lai bằng tư duy Toán học! Đồng hành cùng cô trò trường THCS Phước Giang trên hành trình chinh phục kỳ thi vào 10.
+          </p>
+
+          <div class="hero-info-card">
+            <div class="hero-info-item">
+              <span class="item-icon">🏫</span>
+              <span>Trường: <strong>THCS PHƯỚC GIANG (Phân hiệu 2)</strong></span>
+            </div>
+            <div class="hero-info-item">
+              <span class="item-icon">👩‍🏫</span>
+              <span>GVBM: <strong>Huỳnh Thị Ngọc Châu</strong></span>
+            </div>
+            <div class="hero-info-item">
+              <span class="item-icon">📖</span>
+              <span>Môn dạy: <strong>Toán 9 (SGK Thống Nhất)</strong></span>
+            </div>
+            <div class="hero-info-item">
+              <span class="item-icon">👥</span>
+              <span>Lớp giảng dạy: <strong>9C3, 9C4</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Feature Cards Grid -->
+      <div class="feature-grid">
+        <!-- 1. Khóa học -->
+        <div class="feature-card fc-blue" data-open-tab="tab-courses">
+          <div class="feature-icon-wrapper">📖</div>
+          <h3>Khóa học</h3>
+          <p>Quản lý nội dung bài giảng, bài tập, tài liệu học tập theo chương trình Toán 9.</p>
+          <div class="btn-arrow-circle">➔</div>
+        </div>
+
+        <!-- 2. Danh sách học sinh -->
+        <div class="feature-card fc-green" data-open-tab="tab-students">
+          <div class="feature-icon-wrapper">👥</div>
+          <h3>Danh sách học sinh</h3>
+          <p>Theo dõi thông tin, phân loại và quản lý 63 học sinh lớp 9C3 và 9C4.</p>
+          <div class="btn-arrow-circle">➔</div>
+        </div>
+
+        <!-- 3. Điểm số -->
+        <div class="feature-card fc-purple" data-open-tab="tab-grades">
+          <div class="feature-icon-wrapper">📋</div>
+          <h3>Điểm số</h3>
+          <p>Nhập điểm, theo dõi kết quả kiểm tra thường xuyên, giữa kỳ và cuối kỳ.</p>
+          <div class="btn-arrow-circle">➔</div>
+        </div>
+
+        <!-- 4. Báo cáo -->
+        <div class="feature-card fc-orange" data-open-tab="tab-reports">
+          <div class="feature-icon-wrapper">📊</div>
+          <h3>Báo cáo</h3>
+          <p>Tổng hợp, xuất báo cáo đánh giá chất lượng học tập nhanh chóng, chính xác.</p>
+          <div class="btn-arrow-circle">➔</div>
+        </div>
+
+        <!-- 5. Thống kê -->
+        <div class="feature-card fc-sky" data-open-tab="tab-analytics">
+          <div class="feature-icon-wrapper">📈</div>
+          <h3>Thống kê</h3>
+          <p>Phân tích dữ liệu học tập, các dạng bài hay sai và hiệu quả giảng dạy.</p>
+          <div class="btn-arrow-circle">➔</div>
+        </div>
+
+        <!-- 6. HỖ TRỢ AI (HIGHLIGHT) -->
+        <div class="feature-card fc-ai" data-open-tab="tab-ai">
+          <div class="feature-icon-wrapper">🤖</div>
+          <h3>Hỗ trợ AI</h3>
+          <p>Trợ lý thông minh đồng hành giải đáp thắc mắc, luyện đề và gợi ý phương pháp giải Toán.</p>
+          <div class="btn-arrow-circle">➔</div>
+        </div>
+      </div>
+
+      <!-- Bottom 4 Summary Cards Row -->
+      <div class="bottom-summary-grid">
+        <!-- 1. Motivational card -->
+        <div class="summary-card quote-sunset-card">
+          <div class="quote-sunset-text">
+            &ldquo;Không có con đường nào dẫn đến thành công mà không đi qua sự cố gắng.&rdquo; ♡
+          </div>
+          <div style="font-size: 11px; color: #c2410c; margin-top: 6px; font-weight: 600;">
+            &mdash; Lời nhắn từ Cô Huỳnh Thị Ngọc Châu
+          </div>
+        </div>
+
+        <!-- 2. Lớp đang dạy -->
+        <div class="summary-card">
+          <div class="summary-card-title">
+            <span>👥</span> Lớp đang dạy
+          </div>
+          <div class="class-badges-row">
+            <div class="class-badge-item">
+              <div class="class-badge-name">9C3</div>
+              <div class="class-badge-count">Sĩ số: 32</div>
+            </div>
+            <div class="class-badge-item">
+              <div class="class-badge-name">9C4</div>
+              <div class="class-badge-count">Sĩ số: 31</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Thông tin nhanh -->
+        <div class="summary-card">
+          <div class="summary-card-title">
+            <span>📅</span> Thông tin nhanh
+          </div>
+          <div class="quick-info-list">
+            <div class="quick-info-item">
+              <span class="quick-info-label">Tổng số học sinh:</span>
+              <span class="quick-info-val">63</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="quick-info-label">Số bài kiểm tra gần nhất:</span>
+              <span class="quick-info-val">1 bài (15 phút)</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="quick-info-label">Bài học đang dạy:</span>
+              <span class="quick-info-val" style="color: #0284c7;">Hệ thức lượng trong $\Delta$ vuông</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Study motivation -->
+        <div class="summary-card study-motivation-card">
+          <h4>Học Toán</h4>
+          <p>rèn luyện tư duy, kiến tạo tương lai</p>
+          <div style="font-size: 18px; margin-top: 4px;">📐 ✍️ 🏆</div>
+        </div>
       </div>
     </div>
-    <div class="actions">
-      <button type="button" class="btn-cancel-photo" id="btn-cancel-photo">Huỷ</button>
-      <button type="button" class="btn-send-photo" id="btn-send-photo">Gửi ảnh cho cô xem</button>
-    </div>
-  </div>
 
-  <form id="composer">
-    <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none" />
-    <button type="button" class="icon2" id="btn-attach" title="Gửi ảnh bài làm">📷</button>
-    <textarea id="input" rows="1" placeholder="Nhập bài làm hoặc câu hỏi của em..."></textarea>
-    <button type="submit" id="send-btn" title="Gửi">➤</button>
-  </form>
+    <!-- ================= VIEW 2: KHÓA HỌC ================= -->
+    <div class="view-container generic-tab-content" id="tab-courses">
+      <div class="page-title-row">
+        <h2>📖 Khóa học Toán 9 — Bộ sách giáo khoa Thống Nhất</h2>
+        <span class="badge-tag tag-blue">Năm học 2026 &ndash; 2027</span>
+      </div>
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-header">
+            <span class="course-chapter">Chương I &bull; Đại số</span>
+            <span class="badge-tag tag-green">Đã hoàn thành</span>
+          </div>
+          <div class="course-title">Phương trình & Hệ phương trình bậc nhất hai ẩn</div>
+          <div class="course-desc">Phương pháp thế, phương pháp cộng đại số, giải bài toán bằng cách lập hệ phương trình.</div>
+          <div class="course-action-row">
+            <button class="course-btn btn-study">Xem tài liệu</button>
+            <button class="course-btn btn-ask-ai" onclick="openAiWithQuery('Em muốn ôn tập phương pháp cộng đại số và giải bài toán bằng cách lập hệ phương trình')">Hỏi AI bài này</button>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-header">
+            <span class="course-chapter">Chương II &bull; Đại số</span>
+            <span class="badge-tag tag-green">Đã hoàn thành</span>
+          </div>
+          <div class="course-title">Bất đẳng thức & Bất phương trình bậc nhất một ẩn</div>
+          <div class="course-desc">Tính chất bất đẳng thức, biến đổi bất phương trình, lưu ý đổi chiều khi nhân/chia cho số âm.</div>
+          <div class="course-action-row">
+            <button class="course-btn btn-study">Xem tài liệu</button>
+            <button class="course-btn btn-ask-ai" onclick="openAiWithQuery('Em hay bị sai dấu khi giải bất phương trình bậc nhất một ẩn, cô hướng dẫn em với')">Hỏi AI bài này</button>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-header">
+            <span class="course-chapter">Chương III &bull; Đại số</span>
+            <span class="badge-tag tag-green">Đã hoàn thành</span>
+          </div>
+          <div class="course-title">Căn bậc hai và Căn bậc ba</div>
+          <div class="course-desc">Hằng đẳng thức $\sqrt{A^2} = |A|$, liên hệ phép nhân/chia và phép khai phương, rút gọn biểu thức chứa căn.</div>
+          <div class="course-action-row">
+            <button class="course-btn btn-study">Xem tài liệu</button>
+            <button class="course-btn btn-ask-ai" onclick="openAiWithQuery('Cho em xin bài tập rút gọn biểu thức chứa căn bậc hai mức độ thi vào 10')">Hỏi AI bài này</button>
+          </div>
+        </div>
+
+        <div class="course-card" style="border: 2px solid #0284c7;">
+          <div class="course-header">
+            <span class="course-chapter">Chương IV &bull; Hình học</span>
+            <span class="badge-tag tag-yellow">Đang học &bull; Tiết 2</span>
+          </div>
+          <div class="course-title">Hệ thức lượng trong tam giác vuông</div>
+          <div class="course-desc">Định lý Pytago, hệ thức cạnh và đường cao, tỉ số lượng giác góc nhọn ($\sin, \cos, \tan, \cot$).</div>
+          <div class="course-action-row">
+            <button class="course-btn btn-study">Xem bài giảng</button>
+            <button class="course-btn btn-ask-ai" onclick="openAiWithQuery('Cô cho em bài tập áp dụng hệ thức lượng trong tam giác vuông có kẻ đường cao AH nhé')">Hỏi AI bài này</button>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-header">
+            <span class="course-chapter">Chương V &bull; Hình học</span>
+            <span class="badge-tag tag-blue">Sắp học</span>
+          </div>
+          <div class="course-title">Đường tròn & Góc với đường tròn</div>
+          <div class="course-desc">Góc ở tâm, góc nội tiếp, góc tạo bởi tiếp tuyến và dây cung, góc có đỉnh ở bên trong/bên ngoài đường tròn.</div>
+          <div class="course-action-row">
+            <button class="course-btn btn-study">Xem trước</button>
+            <button class="course-btn btn-ask-ai" onclick="openAiWithQuery('Giải thích giúp em mối liên hệ giữa số đo góc nội tiếp và số đo góc ở tâm cùng chắn một cung')">Hỏi AI bài này</button>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-header">
+            <span class="course-chapter">Chương VI &bull; Đại số</span>
+            <span class="badge-tag tag-blue">Sắp học</span>
+          </div>
+          <div class="course-title">Hàm số $y = ax^2$ và Phương trình bậc hai một ẩn</div>
+          <div class="course-desc">Đồ thị Parabol, công thức nghiệm $\Delta$, định lý Viète và ứng dụng nhẩm nghiệm, tìm hai số khi biết tổng và tích.</div>
+          <div class="course-action-row">
+            <button class="course-btn btn-study">Xem trước</button>
+            <button class="course-btn btn-ask-ai" onclick="openAiWithQuery('Cho em công thức định lý Viète và ví dụ bài toán tìm tham số m để phương trình có hai nghiệm phân biệt')">Hỏi AI bài này</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= VIEW 3: DANH SÁCH HỌC SINH ================= -->
+    <div class="view-container generic-tab-content" id="tab-students">
+      <div class="page-title-row">
+        <h2>👥 Danh sách học sinh — Lớp 9C3 & 9C4 (Tổng sĩ số: 63)</h2>
+        <span class="badge-tag tag-green">THCS Phước Giang &bull; Phân hiệu 2</span>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Mã HS</th>
+              <th>Họ và tên</th>
+              <th>Lớp</th>
+              <th>Giới tính</th>
+              <th>Tình trạng học tập</th>
+              <th>Mức độ tương tác AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>HS-090301</td><td>Nguyễn Văn An</td><td>9C3</td><td>Nam</td><td><span class="badge-tag tag-green">Giỏi</span></td><td>Thường xuyên luyện đề</td></tr>
+            <tr><td>2</td><td>HS-090302</td><td>Trần Thị Kim Chi</td><td>9C3</td><td>Nữ</td><td><span class="badge-tag tag-green">Giỏi</span></td><td>Hỏi bài hình học</td></tr>
+            <tr><td>3</td><td>HS-090303</td><td>Lê Hoàng Đức</td><td>9C3</td><td>Nam</td><td><span class="badge-tag tag-blue">Khá</span></td><td>Luyện phương trình</td></tr>
+            <tr><td>4</td><td>HS-090304</td><td>Phạm Thuỳ Dung</td><td>9C3</td><td>Nữ</td><td><span class="badge-tag tag-green">Xuất sắc</span></td><td>Luyện nâng cao</td></tr>
+            <tr><td>5</td><td>HS-090401</td><td>Hoàng Minh Quân</td><td>9C4</td><td>Nam</td><td><span class="badge-tag tag-blue">Khá</span></td><td>Tự ôn tại nhà</td></tr>
+            <tr><td>6</td><td>HS-090402</td><td>Vũ Phương Linh</td><td>9C4</td><td>Nữ</td><td><span class="badge-tag tag-green">Giỏi</span></td><td>Luyện căn thức</td></tr>
+            <tr><td>7</td><td>HS-090403</td><td>Đỗ Gia Huy</td><td>9C4</td><td>Nam</td><td><span class="badge-tag tag-yellow">Đạt</span></td><td>Cần kèm thêm bất phương trình</td></tr>
+            <tr><td>8</td><td>HS-090404</td><td>Bùi Ngọc Mai</td><td>9C4</td><td>Nữ</td><td><span class="badge-tag tag-blue">Khá</span></td><td>Luyện giải hệ phương trình</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= VIEW 4: ĐIỂM SỐ ================= -->
+    <div class="view-container generic-tab-content" id="tab-grades">
+      <div class="page-title-row">
+        <h2>📋 Sổ điểm điện tử bộ môn Toán 9</h2>
+        <span class="badge-tag tag-blue">Học kỳ I &bull; 2026-2027</span>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Họ và tên</th>
+              <th>Lớp</th>
+              <th>TX 1 (15p)</th>
+              <th>TX 2 (15p)</th>
+              <th>TX 3 (Vở bài tập)</th>
+              <th>Giữa kỳ (GK)</th>
+              <th>Cuối kỳ (CK)</th>
+              <th>ĐTBm</th>
+              <th>Xếp loại</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Nguyễn Văn An</td><td>9C3</td><td>9.0</td><td>8.5</td><td>10.0</td><td>8.5</td><td>-</td><td><strong>8.8</strong></td><td><span class="badge-tag tag-green">Giỏi</span></td></tr>
+            <tr><td>Trần Thị Kim Chi</td><td>9C3</td><td>9.5</td><td>9.0</td><td>10.0</td><td>9.0</td><td>-</td><td><strong>9.2</strong></td><td><span class="badge-tag tag-green">Xuất sắc</span></td></tr>
+            <tr><td>Lê Hoàng Đức</td><td>9C3</td><td>7.5</td><td>8.0</td><td>8.5</td><td>7.5</td><td>-</td><td><strong>7.8</strong></td><td><span class="badge-tag tag-blue">Khá</span></td></tr>
+            <tr><td>Phạm Thuỳ Dung</td><td>9C3</td><td>10.0</td><td>9.5</td><td>10.0</td><td>9.5</td><td>-</td><td><strong>9.7</strong></td><td><span class="badge-tag tag-green">Xuất sắc</span></td></tr>
+            <tr><td>Hoàng Minh Quân</td><td>9C4</td><td>7.0</td><td>7.5</td><td>8.0</td><td>7.0</td><td>-</td><td><strong>7.3</strong></td><td><span class="badge-tag tag-blue">Khá</span></td></tr>
+            <tr><td>Vũ Phương Linh</td><td>9C4</td><td>8.5</td><td>9.0</td><td>9.5</td><td>8.5</td><td>-</td><td><strong>8.8</strong></td><td><span class="badge-tag tag-green">Giỏi</span></td></tr>
+            <tr><td>Đỗ Gia Huy</td><td>9C4</td><td>6.0</td><td>6.5</td><td>7.5</td><td>6.0</td><td>-</td><td><strong>6.3</strong></td><td><span class="badge-tag tag-yellow">Đạt</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= VIEW 5: BÁO CÁO ================= -->
+    <div class="view-container generic-tab-content" id="tab-reports">
+      <div class="page-title-row">
+        <h2>📊 Báo cáo chất lượng giáo dục môn Toán 9</h2>
+        <span class="badge-tag tag-green">THCS Phước Giang</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
+        <div class="summary-card" style="border-left: 4px solid #10b981;">
+          <div style="font-size: 12px; color: #64748b;">Học sinh Giỏi / Xuất sắc</div>
+          <div style="font-size: 22px; font-weight: 800; color: #10b981; margin: 4px 0;">36.5%</div>
+          <div style="font-size: 11.5px; color: #64748b;">23 học sinh (&ge; 8.0)</div>
+        </div>
+        <div class="summary-card" style="border-left: 4px solid #3b82f6;">
+          <div style="font-size: 12px; color: #64748b;">Học sinh Khá</div>
+          <div style="font-size: 22px; font-weight: 800; color: #3b82f6; margin: 4px 0;">44.4%</div>
+          <div style="font-size: 11.5px; color: #64748b;">28 học sinh (6.5 &ndash; 7.9)</div>
+        </div>
+        <div class="summary-card" style="border-left: 4px solid #eab308;">
+          <div style="font-size: 12px; color: #64748b;">Học sinh Đạt</div>
+          <div style="font-size: 22px; font-weight: 800; color: #eab308; margin: 4px 0;">19.1%</div>
+          <div style="font-size: 11.5px; color: #64748b;">12 học sinh (5.0 &ndash; 6.4)</div>
+        </div>
+        <div class="summary-card" style="border-left: 4px solid #ef4444;">
+          <div style="font-size: 12px; color: #64748b;">Chưa đạt</div>
+          <div style="font-size: 22px; font-weight: 800; color: #ef4444; margin: 4px 0;">0%</div>
+          <div style="font-size: 11.5px; color: #64748b;">0 học sinh (&lt; 5.0)</div>
+        </div>
+      </div>
+      <div class="table-card" style="padding: 16px;">
+        <h4 style="margin-bottom: 8px; color: #0f2b59;">Nhận xét chuyên môn &bull; GVBM: Huỳnh Thị Ngọc Châu</h4>
+        <p style="font-size: 13.5px; line-height: 1.6; color: #334155;">
+          Học sinh hai lớp 9C3 và 9C4 nắm chắc kiến thức cơ bản về Hệ phương trình và Bất phương trình. Việc ứng dụng Trợ lý AI Toán 9 giúp các em chủ động tự luyện bài tập tại nhà, phát hiện nhanh lỗi sai về dấu và điều kiện xác định căn thức trước khi nộp bài trên lớp.
+        </p>
+      </div>
+    </div>
+
+    <!-- ================= VIEW 6: THỐNG KÊ ================= -->
+    <div class="view-container generic-tab-content" id="tab-analytics">
+      <div class="page-title-row">
+        <h2>📈 Thống kê dạng lỗi thường gặp &amp; Tiến độ học tập</h2>
+        <span class="badge-tag tag-blue">Dữ liệu từ Ngân hàng lỗi sai kt.md</span>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Mã lỗi</th>
+              <th>Tên dạng bài</th>
+              <th>Mô tả lỗi thường gặp</th>
+              <th>Tỉ lệ mắc lỗi</th>
+              <th>Hướng dẫn khắc phục</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>C9-01</strong></td>
+              <td>Góc và Đường tròn</td>
+              <td>Quên chia 2 khi tính số đo góc nội tiếp chắn cùng một cung với góc ở tâm.</td>
+              <td><span class="badge-tag tag-yellow">28% học sinh</span></td>
+              <td>Áp dụng định lý: $\widehat{ACB} = \frac{1}{2}\widehat{AOB}$.</td>
+            </tr>
+            <tr>
+              <td><strong>C9-02</strong></td>
+              <td>Góc và Đường tròn</td>
+              <td>Nhầm lẫn giữa Cung lớn và Cung nhỏ khi điểm nằm trên cung nhỏ.</td>
+              <td><span class="badge-tag tag-yellow">22% học sinh</span></td>
+              <td>Số đo cung lớn = $360^\circ - \text{sđ}\overgroup{AB}_{\text{nhỏ}}$.</td>
+            </tr>
+            <tr>
+              <td><strong>C9-03</strong></td>
+              <td>Bất phương trình</td>
+              <td>Quên đổi chiều dấu bất đẳng thức khi nhân/chia hai vế cho số âm.</td>
+              <td><span class="badge-tag tag-yellow">18% học sinh</span></td>
+              <td>Chú ý quy tắc: Chia cho $-a$ phải đảo chiều $\le$ thành $\ge$.</td>
+            </tr>
+            <tr>
+              <td><strong>C9-04</strong></td>
+              <td>Căn bậc hai</td>
+              <td>Quên đặt điều kiện biểu thức dưới dấu căn không âm ($A \ge 0$).</td>
+              <td><span class="badge-tag tag-yellow">15% học sinh</span></td>
+              <td>Luôn tìm ĐKXĐ trước khi thực hiện biến đổi rút gọn.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= VIEW 7: HỖ TRỢ AI (INTEGRATED CHATBOT) ================= -->
+    <div class="view-container" id="tab-ai">
+      <div class="ai-header-bar">
+        <div class="ai-header-title">
+          <div class="ai-bot-avatar">🤖</div>
+          <div>
+            <h2>TRỢ LÝ AI TOÁN 9 &bull; THCS PHƯỚC GIANG (PHÂN HIỆU 2)</h2>
+            <p>Dẫn dắt phương pháp &bull; Đồng hành cùng học sinh 9C3, 9C4 &bull; GVBM: Huỳnh Thị Ngọc Châu</p>
+          </div>
+        </div>
+        <div class="ai-status-pill">● Trực tuyến</div>
+      </div>
+
+      <div id="status-bar"></div>
+
+      <div id="chat"></div>
+
+      <!-- Quick prompts row -->
+      <div class="quick-row">
+        <button data-q="Em muốn ôn lại hệ thức lượng trong tam giác vuông kèm ví dụ mẫu">📐 Hệ thức lượng tam giác vuông</button>
+        <button data-q="Giải thích giúp em mối liên hệ giữa góc nội tiếp và góc ở tâm cùng chắn một cung">🔘 Góc và đường tròn</button>
+        <button data-q="Em bị sai một bài bất phương trình bậc nhất một ẩn, cô xem giúp em với">🔢 Bất phương trình &amp; Căn thức</button>
+        <button data-q="Cô cho em xin 5 bài tập tự luyện về giải hệ phương trình bằng phương pháp cộng đại số">📊 Luyện hệ phương trình</button>
+        <button type="button" class="btn-quiz-highlight" id="btn-open-quiz">📝 Tạo đề ôn tập</button>
+      </div>
+
+      <!-- Photo panel -->
+      <div id="photo-panel">
+        <div class="row1">
+          <img id="photo-preview" alt="Ảnh bài làm" />
+          <div style="flex:1">
+            <div class="fields">
+              <input id="photo-bai" type="text" placeholder="Bài số (ví dụ: Bài 19)" />
+              <input id="photo-trang" type="text" placeholder="Trang (ví dụ: 42)" />
+            </div>
+            <p style="margin: 6px 0 0; font-size: 11.5px; color: #64748b;">
+              Ghi rõ bài mấy, trang mấy trong SGK Toán 9 Thống Nhất để cô đối chiếu đúng đề nhé.
+            </p>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-cancel-photo" id="btn-cancel-photo">Huỷ</button>
+          <button type="button" class="btn-send-photo" id="btn-send-photo">Gửi ảnh bài làm cho cô xem</button>
+        </div>
+      </div>
+
+      <!-- Composer form -->
+      <form id="composer">
+        <input type="file" id="photo-input" accept="image/*" capture="environment" style="display:none" />
+        <button type="button" class="btn-cam" id="btn-attach" title="Chụp ảnh bài làm">📷</button>
+        <textarea id="input" rows="1" placeholder="Nhập bài làm hoặc câu hỏi toán của em (hoặc gửi ảnh bài tập)..."></textarea>
+        <button type="submit" id="send-btn" title="Gửi câu hỏi">➤</button>
+      </form>
+    </div>
+
+    <!-- Bottom Ticker Bar -->
+    <div id="bottom-ticker">
+      <div>&hearts; Toán học không khó, chỉ cần bạn đúng phương pháp! &hearts;</div>
+      <div>✈️ Cùng nhau chinh phục những đỉnh cao!</div>
+    </div>
+  </main>
 </div>
 
-<div id="overlay">
-  <div id="settings">
+<!-- ================= MODAL: CÀI ĐẶT API KEY ================= -->
+<div class="modal-overlay" id="overlay">
+  <div class="modal-box" id="settings">
     <h2>Cài đặt kết nối AI</h2>
-    <p class="hint">
-      Khoá API được máy chủ giữ bí mật — trang này không hỏi hay lưu khoá API trên máy học sinh, học sinh chỉ cần mở link là dùng được ngay.
-    </p>
-
-    <label for="model-select">Mô hình</label>
-    <select id="model-select">
-      <option value="gemini-3.6-flash" selected>gemini-3.6-flash (ổn định, tốc độ cao - khuyến nghị)</option>
-      <option value="gemini-3.8-flash">gemini-3.8-flash (bản mới nhất)</option>
-      <option value="gemini-3.1-pro-preview">gemini-3.1-pro-preview (mạnh hơn, có thể chậm hơn)</option>
+    <p class="hint">Học sinh không cần nhập khoá &mdash; hệ thống đã tích hợp sẵn khoá API của giáo viên từ máy chủ.</p>
+    <label for="set-key">Khoá Gemini API cá nhân (tuỳ chọn):</label>
+    <input id="set-key" type="password" placeholder="Để trống để dùng khoá tự động của trường" />
+    <label for="set-model">Mô hình AI:</label>
+    <select id="set-model">
+      <option value="gemini-3.6-flash">gemini-3.6-flash (Mặc định &mdash; Nhanh, chuẩn xác)</option>
+      <option value="gemini-3.5-flash">gemini-3.5-flash</option>
+      <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite (Tiết kiệm)</option>
     </select>
-
-    <div class="row">
-      <button class="btn-cancel" id="btn-cancel" type="button">Đóng</button>
-      <button class="btn-save" id="btn-save" type="button">Lưu</button>
+    <div class="actions">
+      <button type="button" class="btn-modal-cancel" id="btn-settings-cancel">Đóng</button>
+      <button type="button" class="btn-modal-primary" id="btn-settings-save">Lưu cấu hình</button>
     </div>
   </div>
 </div>
 
-<div id="overlay-quiz">
-  <div id="quiz-settings">
-    <h2>Tạo đề ôn tập</h2>
-    <p class="hint">Chọn chủ đề và mức độ, cô sẽ ra đề để em luyện tập rồi chấm điểm khi em nộp bài.</p>
-
-    <label for="quiz-chapter">Chủ đề / chương</label>
-    <select id="quiz-chapter">
-      <option value="Phương trình và hệ hai phương trình bậc nhất hai ẩn">C1. Phương trình và hệ hai phương trình bậc nhất hai ẩn</option>
-      <option value="Phương trình và bất phương trình bậc nhất một ẩn">C2. Phương trình và bất phương trình bậc nhất một ẩn</option>
-      <option value="Căn bậc hai và căn bậc ba">C3. Căn bậc hai và căn bậc ba</option>
-      <option value="Hệ thức lượng trong tam giác vuông">C4. Hệ thức lượng trong tam giác vuông</option>
-      <option value="Đường tròn">C5. Đường tròn</option>
-      <option value="Hàm số y=ax² và phương trình bậc hai một ẩn">C6. Hàm số y=ax² và phương trình bậc hai một ẩn</option>
-      <option value="Tần số và tần số tương đối">C7. Tần số và tần số tương đối</option>
-      <option value="Xác suất">C8. Xác suất</option>
-      <option value="Đường tròn ngoại tiếp, nội tiếp">C9. Đường tròn ngoại tiếp, nội tiếp</option>
-      <option value="Hình khối trong thực tiễn">C10. Hình khối trong thực tiễn</option>
-      <option value="tổng hợp nhiều chương đã học">Tổng hợp nhiều chương đã học</option>
+<!-- ================= MODAL: TẠO ĐỀ ÔN TẬP ================= -->
+<div class="modal-overlay" id="overlay-quiz">
+  <div class="modal-box" id="quiz-settings">
+    <h2>📝 Tạo đề ôn tập Toán 9</h2>
+    <p class="hint">Trợ lý AI sẽ tạo đề trọn vẹn theo chuẩn chương trình lớp 9 trường THCS Phước Giang.</p>
+    <label for="quiz-topic">Chuyên đề muốn ôn tập:</label>
+    <select id="quiz-topic">
+      <option value="Tất cả các chủ đề (Đề tổng hợp theo cấu trúc thi vào 10)">Đề tổng hợp (Đại số &amp; Hình học)</option>
+      <option value="Chương I: Phương trình và hệ phương trình bậc nhất hai ẩn">Chương I: Hệ hai phương trình bậc nhất</option>
+      <option value="Chương II: Bất đẳng thức và bất phương trình bậc nhất một ẩn">Chương II: Bất đẳng thức &amp; Bất phương trình</option>
+      <option value="Chương III: Căn bậc hai và căn bậc ba">Chương III: Căn bậc hai và căn bậc ba</option>
+      <option value="Chương IV: Hệ thức lượng trong tam giác vuông">Chương IV: Hệ thức lượng trong tam giác vuông</option>
+      <option value="Chương V: Đường tròn và các góc với đường tròn">Chương V: Đường tròn &amp; Góc với đường tròn</option>
     </select>
-
-    <label for="quiz-level">Mức độ</label>
+    <label for="quiz-level">Mức độ:</label>
     <select id="quiz-level">
-      <option value="nhận biết">Nhận biết (dễ)</option>
-      <option value="thông hiểu" selected>Thông hiểu</option>
-      <option value="vận dụng">Vận dụng</option>
-      <option value="vận dụng cao">Vận dụng cao (khó)</option>
-      <option value="kết hợp nhiều mức độ từ dễ đến khó">Kết hợp nhiều mức độ (dễ → khó)</option>
+      <option value="Thông hiểu và vận dụng (Cơ bản)">Thông hiểu &amp; Vận dụng (Cơ bản)</option>
+      <option value="Nhận biết đến vận dụng cao (Toàn diện)">Nhận biết &rarr; Vận dụng cao (Toàn diện)</option>
+      <option value="Vận dụng cao (Phân loại)">Vận dụng cao (Luyện thi vào 10)</option>
     </select>
-
-    <label for="quiz-count">Số câu</label>
+    <label for="quiz-count">Số lượng câu:</label>
     <select id="quiz-count">
-      <option value="3">3 câu</option>
-      <option value="5" selected>5 câu</option>
-      <option value="10">10 câu</option>
+      <option value="3 câu">3 câu (Ngắn gọn - 15 phút)</option>
+      <option value="5 câu" selected>5 câu (Vừa sức - 45 phút)</option>
+      <option value="10 câu">10 câu (Toàn diện)</option>
     </select>
-
-    <div class="row">
-      <button class="btn-cancel" id="btn-quiz-cancel" type="button">Đóng</button>
-      <button class="btn-save" id="btn-quiz-create" type="button">Tạo đề</button>
+    <div class="actions">
+      <button type="button" class="btn-modal-cancel" id="btn-quiz-cancel">Huỷ</button>
+      <button type="button" class="btn-modal-primary" id="btn-quiz-create">Tạo đề ngay</button>
     </div>
   </div>
 </div>
 
 <script>
 (function () {
-  "use strict";
+  // ---------- Navigation Tabs Logic ----------
+  var navButtons = document.querySelectorAll(".nav-btn[data-tab]");
+  var viewContainers = document.querySelectorAll(".view-container");
+  var sidebar = document.getElementById("sidebar");
+  var sidebarBackdrop = document.getElementById("sidebar-backdrop");
+  var btnToggleMenu = document.getElementById("btn-toggle-menu");
 
-  // ---------- Cấu hình ----------
-  // Khoá API được giữ bí mật ở máy chủ trung gian (api/chat.js) — trình duyệt học sinh
-  // KHÔNG bao giờ gọi thẳng Gemini và không cần biết khoá API.
-  var CHAT_ENDPOINT = "/api/chat";
+  function switchTab(tabId) {
+    navButtons.forEach(function (btn) {
+      if (btn.getAttribute("data-tab") === tabId) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
 
+    viewContainers.forEach(function (v) {
+      if (v.id === tabId) {
+        v.classList.add("active");
+      } else {
+        v.classList.remove("active");
+      }
+    });
+
+    // Close mobile sidebar if open
+    sidebar.classList.remove("mobile-open");
+    sidebarBackdrop.classList.remove("show");
+
+    // Scroll to top
+    var activeView = document.getElementById(tabId);
+    if (activeView) activeView.scrollTop = 0;
+  }
+
+  navButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var tabId = this.getAttribute("data-tab");
+      if (tabId) switchTab(tabId);
+    });
+  });
+
+  // Feature cards on home view that open tabs
+  document.querySelectorAll("[data-open-tab]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var tabId = this.getAttribute("data-open-tab");
+      if (tabId) switchTab(tabId);
+    });
+  });
+
+  // Mobile menu toggle
+  btnToggleMenu.addEventListener("click", function () {
+    sidebar.classList.add("mobile-open");
+    sidebarBackdrop.classList.add("show");
+  });
+  sidebarBackdrop.addEventListener("click", function () {
+    sidebar.classList.remove("mobile-open");
+    sidebarBackdrop.classList.remove("show");
+  });
+
+  window.openAiWithQuery = function (queryText) {
+    switchTab("tab-ai");
+    setTimeout(function () {
+      sendMessage(queryText);
+    }, 200);
+  };
+
+  // ---------- Math & Chatbot Logic ----------
   var els = {
     chat: document.getElementById("chat"),
-    composer: document.getElementById("composer"),
     input: document.getElementById("input"),
+    composer: document.getElementById("composer"),
     sendBtn: document.getElementById("send-btn"),
     statusBar: document.getElementById("status-bar"),
     overlay: document.getElementById("overlay"),
-    modelSelect: document.getElementById("model-select"),
-    btnSettings: document.getElementById("btn-settings"),
-    btnSave: document.getElementById("btn-save"),
-    btnCancel: document.getElementById("btn-cancel"),
-    quickRow: document.querySelector(".quick-row"),
-    // đính kèm ảnh
+    setKey: document.getElementById("set-key"),
+    setModel: document.getElementById("set-model"),
+    btnSettingsHeader: document.getElementById("btn-settings-header"),
+    btnSettingsCancel: document.getElementById("btn-settings-cancel"),
+    btnSettingsSave: document.getElementById("btn-settings-save"),
     btnAttach: document.getElementById("btn-attach"),
     photoInput: document.getElementById("photo-input"),
     photoPanel: document.getElementById("photo-panel"),
     photoPreview: document.getElementById("photo-preview"),
     photoBai: document.getElementById("photo-bai"),
     photoTrang: document.getElementById("photo-trang"),
-    btnSendPhoto: document.getElementById("btn-send-photo"),
     btnCancelPhoto: document.getElementById("btn-cancel-photo"),
-    // tạo đề ôn tập
+    btnSendPhoto: document.getElementById("btn-send-photo"),
     btnOpenQuiz: document.getElementById("btn-open-quiz"),
     overlayQuiz: document.getElementById("overlay-quiz"),
-    quizChapter: document.getElementById("quiz-chapter"),
+    quizTopic: document.getElementById("quiz-topic"),
     quizLevel: document.getElementById("quiz-level"),
     quizCount: document.getElementById("quiz-count"),
-    btnQuizCreate: document.getElementById("btn-quiz-create"),
     btnQuizCancel: document.getElementById("btn-quiz-cancel"),
+    btnQuizCreate: document.getElementById("btn-quiz-create")
   };
 
   var state = {
-    systemPrompt: null,   // tc.md + kt.md gộp lại
-    history: [],          // [{role: "user"|"model", parts: [{text}|{inline_data}]}]
+    history: [],
+    loading: false,
+    systemPrompt: "",
     loadingKnowledge: true,
-    pendingPhoto: null,   // { mimeType, base64, dataUrl } ảnh đang chờ gửi
+    pendingPhoto: null
   };
-
-  // ---------- Tiện ích giao diện ----------
-  function showStatus(msg, kind) {
-    els.statusBar.textContent = msg;
-    els.statusBar.className = "show" + (kind ? " " + kind : "");
-  }
-  function hideStatus() {
-    els.statusBar.className = "";
-  }
-
-  function escapeHtml(str) {
-    return String(str || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
 
   var KATEX_MACROS = {
     "\\overparen": "\\overgroup{#1}",
@@ -687,23 +1822,28 @@
   function cleanMathExpr(expr) {
     if (!expr) return "";
     var s = expr;
-    // Sửa trường hợp thiếu ngoặc nhọn ở cung tròn: \overparenAB -> \overparen{AB}, \overparen AB -> \overparen{AB}
     s = s.replace(/\\(overparen|wideparen|overarc|overgroup|arc)([A-Z]{2,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
     s = s.replace(/\\(overparen|wideparen|overarc|overgroup|arc)\s+([A-Za-z]{1,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
-    // Sửa trường hợp thiếu ngoặc nhọn ở góc: \widehatABC -> \widehat{ABC}, \widehat ABC -> \widehat{ABC}
     s = s.replace(/\\(widehat|widecheck)([A-Z]{2,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
     s = s.replace(/\\(widehat|widecheck)\s+([A-Za-z]{1,4})(?=[^A-Za-z{]|$)/g, "\\$1{$2}");
-    // Xử lý trường hợp bị escape 2 lần (\\overparen -> \overparen)
     s = s.replace(/\\\\([a-zA-Z]+)/g, "\\$1");
     return s;
   }
 
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function formatContent(text) {
     if (!text) return "";
-
     var mathBlocks = [];
 
-    // 1. Tách display math: $$...$$ hoặc \[...\]
+    // 1. Tách display math
     var protectedText = String(text).replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\])/g, function (match) {
       var placeholder = "%%%MATH_BLOCK_" + mathBlocks.length + "%%%";
       var expr = match.slice(2, -2).trim();
@@ -711,7 +1851,7 @@
       return placeholder;
     });
 
-    // 2. Tách inline math: $...$ hoặc \(...\)
+    // 2. Tách inline math
     protectedText = protectedText.replace(/(\$([^\$\n]+?)\$|\\\(([^\n]+?)\\\))/g, function (match, p1, p2, p3) {
       var placeholder = "%%%MATH_BLOCK_" + mathBlocks.length + "%%%";
       var expr = ((p2 !== undefined ? p2 : p3) || "").trim();
@@ -719,7 +1859,7 @@
       return placeholder;
     });
 
-    // 3. Parse Markdown bằng Marked nếu có
+    // 3. Parse Markdown
     var html = "";
     if (typeof marked !== "undefined" && marked.parse) {
       html = marked.parse(protectedText, { breaks: true, gfm: true });
@@ -727,7 +1867,7 @@
       html = escapeHtml(protectedText).replace(/\n/g, "<br>");
     }
 
-    // 4. Render KaTeX vào các placeholder
+    // 4. Render KaTeX
     html = html.replace(/%%%MATH_BLOCK_(\d+)%%%/g, function (_, idx) {
       var item = mathBlocks[Number(idx)];
       if (!item) return "";
@@ -737,7 +1877,7 @@
           return katex.renderToString(cleaned, {
             displayMode: item.display,
             throwOnError: false,
-            macros: KATEX_MACROS,
+            macros: KATEX_MACROS
           });
         } catch (e) {
           return item.display ? "$$" + escapeHtml(item.expr) + "$$" : "$" + escapeHtml(item.expr) + "$";
@@ -766,29 +1906,41 @@
     return addMessage("system", text);
   }
 
+  function showStatus(text, kind) {
+    els.statusBar.textContent = text;
+    els.statusBar.className = "show " + (kind || "");
+  }
+  function hideStatus() {
+    els.statusBar.className = "";
+  }
+
   var typingEl = null;
   function showTyping() {
+    if (typingEl) return;
     typingEl = document.createElement("div");
-    typingEl.className = "typing";
-    typingEl.innerHTML = "<span></span><span></span><span></span>";
+    typingEl.className = "msg bot";
+    typingEl.style.color = "var(--text-muted)";
+    typingEl.style.fontStyle = "italic";
+    typingEl.textContent = "Cô đang suy nghĩ và chuẩn bị phản hồi...";
     els.chat.appendChild(typingEl);
     els.chat.scrollTop = els.chat.scrollHeight;
   }
   function hideTyping() {
-    if (typingEl) { typingEl.remove(); typingEl = null; }
+    if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
+    typingEl = null;
   }
 
-  // ---------- Nạp kiến thức + tính cách ----------
   function loadKnowledgeFiles() {
+    state.loadingKnowledge = true;
     return Promise.all([
       fetch("tc.md").then(function (r) {
-        if (!r.ok) throw new Error("Không đọc được tc.md (HTTP " + r.status + ")");
+        if (!r.ok) throw new Error("tc.md status " + r.status);
         return r.text();
       }),
       fetch("kt.md").then(function (r) {
-        if (!r.ok) throw new Error("Không đọc được kt.md (HTTP " + r.status + ")");
+        if (!r.ok) throw new Error("kt.md status " + r.status);
         return r.text();
-      }),
+      })
     ]).then(function (results) {
       var tc = results[0];
       var kt = results[1];
@@ -796,139 +1948,117 @@
         tc +
         "\n\n===== HẾT PHẦN TÍNH CÁCH — BẮT ĐẦU PHẦN KIẾN THỨC (kt.md) =====\n\n" +
         kt +
-        "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n2) GỢI Ý MỞ RỘNG CÁC TRƯỜNG HỢP TƯƠNG TỰ: Luôn chỉ ra thêm các trường hợp đặc biệt, bẫy thường gặp hoặc các biến thể bài tập tương tự (hệ số âm dễ sai dấu, có mẫu số, nghiệm đặc biệt vô số nghiệm/vô nghiệm, bài toán thực tế,...).\n3) YÊU CẦU HỌC SINH RÈN LUYỆN: Luôn giao nhiệm vụ cụ thể yêu cầu học sinh lấy giấy nháp làm ngay ít nhất 1 bài và gửi lời giải hoặc chụp ảnh để cô nhận xét từng bước.\n4) CÔNG THỨC TOÁN: Mọi ký hiệu toán học, biến số, phương trình, bất phương trình bắt buộc đặt trong $...$ hoặc $$...$$ để hiển thị qua KaTeX. Trong hình học: góc viết \\widehat{ABC}; cung tròn viết \\overparen{AB} hoặc \\overgroup{AB} (bắt buộc có cặp ngoặc nhọn {...}); số đo cung viết \\text{sđ}\\overparen{AB}.\nTừ giờ hãy nhập vai đúng như đã mô tả và trò chuyện với học sinh bằng tiếng Việt. =====";
+        "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n" +
+        "1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n" +
+        "2) GỢI Ý MỞ RỘNG CÁC TRƯỜNG HỢP TƯƠNG TỰ: Luôn chỉ ra thêm các trường hợp đặc biệt, bẫy thường gặp hoặc các biến thể bài tập tương tự.\n" +
+        "3) YÊU CẦU HỌC SINH RÈN LUYỆN: Luôn giao nhiệm vụ cụ thể yêu cầu học sinh lấy giấy nháp làm ngay ít nhất 1 bài và gửi lời giải hoặc chụp ảnh để cô nhận xét từng bước.\n" +
+        "4) CÔNG THỨC TOÁN: Mọi ký hiệu toán học, biến số, phương trình, bất phương trình bắt buộc đặt trong $...$ hoặc $$...$$ để hiển thị qua KaTeX. Trong hình học: góc viết \\widehat{ABC}; cung tròn viết \\overparen{AB} hoặc \\overgroup{AB} (bắt buộc có cặp ngoặc nhọn {...}); số đo cung viết \\text{sđ}\\overparen{AB}.\n" +
+        "Từ giờ hãy nhập vai đúng như đã mô tả và trò chuyện với học sinh bằng tiếng Việt. =====";
       state.loadingKnowledge = false;
     });
   }
 
-  // ---------- Gọi AI qua máy chủ trung gian (api/chat.js) ----------
-  // Trình duyệt học sinh KHÔNG gọi thẳng Gemini và không cần biết khoá API —
-  // máy chủ trung gian tự giữ khoá và tự xoay vòng nhiều khoá (nếu quản trị viên cấu hình nhiều khoá).
   function callGemini(userText, imagePart, retryCount) {
     retryCount = retryCount || 0;
-    var model = localStorage.getItem("gsToan9_model");
-    if (!model || model === "gemini-3.8-flash") {
-      model = "gemini-3.6-flash";
-      localStorage.setItem("gsToan9_model", "gemini-3.6-flash");
-    }
-
+    var model = localStorage.getItem("gsToan9_model") || "gemini-3.6-flash";
     var parts = [{ text: userText }];
-    if (imagePart) parts.push(imagePart);
-    if (retryCount === 0) {
-      state.history.push({ role: "user", parts: parts });
-    }
+    if (imagePart) parts.unshift(imagePart);
 
-    var body = {
-      systemPrompt: state.systemPrompt,
-      contents: state.history,
-      model: model,
-    };
+    var contents = state.history.concat([{ role: "user", parts: parts }]);
+    var customKey = (localStorage.getItem("gsToan9_apiKey") || "").trim();
 
-    return fetch(CHAT_ENDPOINT, {
+    // Gọi serverless api/chat
+    return fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        model: model,
+        systemPrompt: state.systemPrompt,
+        contents: contents,
+        customKey: customKey || undefined
+      })
     })
-      .then(function (r) {
-        return r.json().catch(function () { return {}; }).then(function (data) {
-          if (!r.ok) {
-            var msg = data.error || ("Lỗi HTTP " + r.status);
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var msg = (data && data.error) || ("HTTP " + res.status);
             throw new Error(msg);
           }
           return data;
         });
       })
       .then(function (data) {
-        var reply = "";
-        try {
-          reply = data.candidates[0].content.parts.map(function (p) { return p.text || ""; }).join("");
-        } catch (e) {
-          reply = "Xin lỗi em, cô chưa hiểu ý câu trả lời vừa rồi. Em thử gửi lại câu hỏi xem sao nhé.";
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+          throw new Error("Phản hồi từ AI không đúng cấu trúc mong đợi.");
         }
-        state.history.push({ role: "model", parts: [{ text: reply }] });
-        return reply;
-      })
-      .catch(function (err) {
-        if (retryCount < 2 && /high demand|overloaded|HTTP 502|HTTP 503/i.test(err.message)) {
-          return new Promise(function (resolve) { setTimeout(resolve, 800); })
-            .then(function () { return callGemini(userText, imagePart, retryCount + 1); });
-        }
-        throw err;
+        var botParts = data.candidates[0].content.parts || [];
+        var botText = botParts.map(function (p) { return p.text || ""; }).join("").trim();
+        if (!botText) throw new Error("AI trả về nội dung rỗng.");
+        return botText;
       });
   }
 
-  // ---------- Gửi tin nhắn ----------
-  function sendMessage(text, imagePart, displayText) {
+  function sendMessage(text, imagePart, displayUserText) {
+    if (state.loading) return;
     text = (text || "").trim();
-    if (!text) return;
+    if (!text && !imagePart) return;
+
     if (state.loadingKnowledge) {
-      addSystemNote("Đang nạp tài liệu, em đợi cô một chút nhé...");
+      showStatus("Đang nạp kiến thức Toán 9... vui lòng chờ giây lát.", "ok");
       return;
     }
 
-    addMessage("user", displayText || text);
+    addMessage("user", displayUserText || text);
     els.input.value = "";
-    autoResize();
-    setComposerEnabled(false);
+    autoResizeInput();
+
+    state.loading = true;
+    els.sendBtn.disabled = true;
     showTyping();
+    hideStatus();
 
     callGemini(text, imagePart)
-      .then(function (reply) {
+      .then(function (botReply) {
         hideTyping();
-        addMessage("bot", reply);
+        addMessage("bot", botReply);
+        state.history.push({
+          role: "user",
+          parts: imagePart ? [imagePart, { text: text }] : [{ text: text }]
+        });
+        state.history.push({
+          role: "model",
+          parts: [{ text: botReply }]
+        });
+        if (state.history.length > 20) {
+          state.history = state.history.slice(state.history.length - 20);
+        }
       })
       .catch(function (err) {
         hideTyping();
-        var extra = "";
-        if (/not found|404|NOT_FOUND/i.test(err.message)) {
-          extra = " Có thể mô hình này chưa được hỗ trợ — vào Cài đặt (⚙️) và thử đổi sang một mô hình khác trong danh sách.";
-        } else if (/chưa được cấu hình khoá API/i.test(err.message)) {
-          extra = " Việc này do quản trị viên trang cần cấu hình, không phải do em nhé.";
-        }
-        addSystemNote("Có lỗi khi kết nối tới AI: " + err.message + extra);
+        showStatus("Có lỗi khi kết nối tới AI: " + err.message, "error");
+        addSystemNote("Không gửi được tin nhắn (" + err.message + "). Em thử gửi lại nhé.");
       })
       .finally(function () {
-        setComposerEnabled(true);
+        state.loading = false;
+        els.sendBtn.disabled = false;
         els.input.focus();
       });
   }
 
-  function setComposerEnabled(enabled) {
-    els.input.disabled = !enabled;
-    els.sendBtn.disabled = !enabled;
-  }
-
-  function autoResize() {
+  function autoResizeInput() {
     els.input.style.height = "auto";
     els.input.style.height = Math.min(els.input.scrollHeight, 120) + "px";
   }
 
-  // ---------- Cài đặt ----------
-  function openSettings() {
-    els.modelSelect.value = localStorage.getItem("gsToan9_model") || "gemini-3.6-flash";
-    els.overlay.className = "show";
-  }
-  function closeSettings() {
-    els.overlay.className = "";
-  }
-  function saveSettings() {
-    var model = els.modelSelect.value;
-    localStorage.setItem("gsToan9_model", model);
-    closeSettings();
-    hideStatus();
-    addSystemNote("Đã lưu mô hình đang dùng: " + model);
-  }
-
-  // ---------- Đính kèm ảnh bài làm (chấm bài chụp ảnh theo bài/trang SGK) ----------
+  // Chụp ảnh bài làm
   function openPhotoPanel(file) {
+    if (!file) return;
     var reader = new FileReader();
-    reader.onload = function () {
-      var dataUrl = reader.result; // "data:image/jpeg;base64,...."
-      var comma = dataUrl.indexOf(",");
-      state.pendingPhoto = {
-        mimeType: file.type || "image/jpeg",
-        base64: dataUrl.slice(comma + 1),
-      };
+    reader.onload = function (e) {
+      var dataUrl = e.target.result;
+      var commaIdx = dataUrl.indexOf(",");
+      var base64 = dataUrl.slice(commaIdx + 1);
+      state.pendingPhoto = { mimeType: file.type || "image/jpeg", base64: base64, dataUrl: dataUrl };
       els.photoPreview.src = dataUrl;
       els.photoPanel.className = "show";
       els.photoBai.focus();
@@ -958,73 +2088,58 @@
       (noteText ? " Em có ghi chú thêm: " + noteText : "");
     var imagePart = { inline_data: { mime_type: state.pendingPhoto.mimeType, data: state.pendingPhoto.base64 } };
     sendMessage(userText, imagePart, "[Đã gửi ảnh bài làm — " + refText + "]" + (noteText ? " " + noteText : ""));
-    els.input.value = "";
-    autoResize();
     closePhotoPanel();
   }
 
-  // ---------- Tạo đề ôn tập ----------
-  function openQuizModal() {
-    els.overlayQuiz.className = "show";
-  }
-  function closeQuizModal() {
-    els.overlayQuiz.className = "";
-  }
+  // Quiz Modal
+  function openQuizModal() { els.overlayQuiz.className = "modal-overlay show"; }
+  function closeQuizModal() { els.overlayQuiz.className = "modal-overlay"; }
   function createQuiz() {
-    var chapter = els.quizChapter.value;
+    var topic = els.quizTopic.value;
     var level = els.quizLevel.value;
     var count = els.quizCount.value;
+    var prompt =
+      "Cô hãy tạo cho em một đề ôn tập tự luyện với các yêu cầu sau:\n" +
+      "- Chủ đề: " + topic + "\n" +
+      "- Mức độ yêu cầu: " + level + "\n" +
+      "- Số lượng câu: Đúng đủ " + count + "\n\n" +
+      "Quy định: Đánh số rõ ràng (Câu 1, Câu 2,...), công thức toán để trong KaTeX, không kèm lời giải ngay để em tự làm trước.";
     closeQuizModal();
-    var text =
-      "Cô ơi, cô tạo giúp em một đề ôn tập gồm " + count + " câu về chủ đề \"" + chapter +
-      "\", mức độ " + level + ". Sau khi làm xong em sẽ gửi bài làm để cô chấm điểm và chữa lỗi giúp em nhé.";
-    sendMessage(text);
+    sendMessage(prompt, null, "📝 [Yêu cầu tạo đề ôn tập: " + topic + " · " + count + " · " + level + "]");
   }
 
-  // ---------- Gắn sự kiện ----------
-  els.composer.addEventListener("submit", function (e) {
-    e.preventDefault();
-    sendMessage(els.input.value);
-  });
+  // Settings Modal
+  function openSettings() {
+    els.setKey.value = localStorage.getItem("gsToan9_apiKey") || "";
+    els.setModel.value = localStorage.getItem("gsToan9_model") || "gemini-3.6-flash";
+    els.overlay.className = "modal-overlay show";
+  }
+  function closeSettings() { els.overlay.className = "modal-overlay"; }
+  function saveSettings() {
+    localStorage.setItem("gsToan9_apiKey", els.setKey.value.trim());
+    localStorage.setItem("gsToan9_model", els.setModel.value.trim());
+    closeSettings();
+    showStatus("Đã lưu cài đặt!", "ok");
+    setTimeout(hideStatus, 2000);
+  }
+
+  // Event Listeners
+  els.input.addEventListener("input", autoResizeInput);
   els.input.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage(els.input.value);
     }
   });
-  els.input.addEventListener("input", autoResize);
-
-  // Tự động cuộn mượt và không bị che khuất khi bàn phím ảo bật lên trên Mobile
-  function scrollToBottom(smooth) {
-    if (smooth) {
-      els.chat.scrollTo({ top: els.chat.scrollHeight, behavior: "smooth" });
-    } else {
-      els.chat.scrollTop = els.chat.scrollHeight;
-    }
-  }
-
-  els.input.addEventListener("focus", function () {
-    setTimeout(function () {
-      scrollToBottom(true);
-    }, 320);
+  els.composer.addEventListener("submit", function (e) {
+    e.preventDefault();
+    sendMessage(els.input.value);
   });
 
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", function () {
-      if (document.activeElement === els.input) {
-        scrollToBottom(false);
-      }
+  document.querySelectorAll(".quick-row button[data-q]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      sendMessage(this.getAttribute("data-q"));
     });
-  }
-  els.btnSettings.addEventListener("click", openSettings);
-  els.btnCancel.addEventListener("click", closeSettings);
-  els.btnSave.addEventListener("click", saveSettings);
-  els.overlay.addEventListener("click", function (e) {
-    if (e.target === els.overlay) closeSettings();
-  });
-  els.quickRow.addEventListener("click", function (e) {
-    var btn = e.target.closest("button[data-q]");
-    if (btn) sendMessage(btn.getAttribute("data-q"));
   });
 
   els.btnAttach.addEventListener("click", function () { els.photoInput.click(); });
@@ -1041,31 +2156,31 @@
     if (e.target === els.overlayQuiz) closeQuizModal();
   });
 
+  els.btnSettingsHeader.addEventListener("click", openSettings);
+  els.btnSettingsCancel.addEventListener("click", closeSettings);
+  els.btnSettingsSave.addEventListener("click", saveSettings);
+  els.overlay.addEventListener("click", function (e) {
+    if (e.target === els.overlay) closeSettings();
+  });
+
   // ---------- Khởi động ----------
   function init() {
-    addSystemNote("Đang nạp ngân hàng kiến thức Toán 9...");
-
+    addSystemNote("Đang nạp ngân hàng kiến thức Toán 9 trường THCS Phước Giang (Phân hiệu 2)...");
     loadKnowledgeFiles()
       .then(function () {
         els.chat.innerHTML = "";
         addMessage(
           "bot",
-          "Chào em! Cô là gia sư Toán 9 theo Bộ sách giáo khoa Thống Nhất. " +
-          "Em gửi cho cô bài đang làm hoặc chỗ đang bị vướng, cô sẽ cùng em tìm ra hướng đi nhé — " +
-          "cô sẽ không giải hộ đâu, nhưng chắc chắn sẽ đồng hành cùng em đến khi em tự làm được 🙂"
+          "Chào em! Cô là trợ lý AI Toán 9 của trường THCS Phước Giang (Phân hiệu 2), đồng hành cùng các bạn học sinh lớp 9C3 và 9C4 của cô giáo Huỳnh Thị Ngọc Châu.\n\n" +
+          "Em gửi cho cô bài toán đang làm hoặc chỗ đang bị vướng nhé — cô sẽ hướng dẫn phương pháp từng bước để em tự giải được bài toán 🙂"
         );
-        showStatus("Đã sẵn sàng.", "ok");
+        showStatus("Hệ thống học tập trực tuyến đã sẵn sàng.", "ok");
         setTimeout(hideStatus, 2500);
       })
       .catch(function (err) {
         els.chat.innerHTML = "";
-        showStatus(
-          "Không nạp được tc.md / kt.md (" + err.message + "). " +
-          "Nếu em đang mở file này trực tiếp (đường dẫn bắt đầu bằng file://), trình duyệt sẽ chặn việc đọc file cùng thư mục — " +
-          "hãy chạy một máy chủ tĩnh đơn giản (ví dụ lệnh: python -m http.server) trong thư mục chứa 3 file rồi mở lại qua http://localhost.",
-          "error"
-        );
-        addSystemNote("Chưa thể trò chuyện được cho đến khi nạp xong tài liệu. Xem hướng dẫn phía trên.");
+        showStatus("Lỗi nạp kiến thức (" + err.message + ")", "error");
+        addSystemNote("Không nạp được tài liệu tc.md/kt.md. Hãy kiểm tra máy chủ tĩnh.");
       });
   }
 
