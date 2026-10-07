@@ -253,7 +253,7 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
   .teacher-chip {
     display: flex;
@@ -308,6 +308,15 @@
   .btn-header-action:hover {
     background: #f1f5f9;
     color: var(--primary);
+  }
+  .btn-admin-header {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+  }
+  .btn-admin-header:hover {
+    background: #dbeafe;
+    color: #1e40af;
   }
 
   /* ===================== VIEW CONTAINER ===================== */
@@ -615,7 +624,7 @@
   .ai-header-bar {
     background: #ffffff;
     border-bottom: 1px solid var(--border);
-    padding: 12px 18px;
+    padding: 10px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -640,7 +649,7 @@
     box-shadow: 0 3px 8px rgba(6, 182, 212, 0.35);
   }
   .ai-header-title h2 {
-    font-size: 16px;
+    font-size: 15.5px;
     font-weight: 700;
     color: #0f2b59;
     text-transform: uppercase;
@@ -649,6 +658,11 @@
     font-size: 11.5px;
     color: var(--text-muted);
   }
+  .ai-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .ai-status-pill {
     font-size: 11.5px;
     padding: 4px 10px;
@@ -656,6 +670,24 @@
     background: #dcfce7;
     color: #15803d;
     font-weight: 600;
+  }
+  .btn-admin-pill {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn-admin-pill:hover {
+    background: #dcfce7;
+    color: #14532d;
   }
 
   #status-bar {
@@ -866,9 +898,9 @@
   }
   #composer button.btn-cam:hover { background: #e2e8f0; color: #0f172a; }
 
-  /* ===================== OTHER TABS (KHÓA HỌC, DS HỌC SINH, ĐIỂM, BÁO CÁO, THỐNG KÊ) ===================== */
+  /* ===================== OTHER TABS ===================== */
   .generic-tab-content {
-    padding: 20px;
+    padding: 20px 20px 60px;
     gap: 16px;
   }
   .page-title-row {
@@ -882,6 +914,57 @@
     font-weight: 800;
     color: #0f2b59;
   }
+
+  /* Filter and search bar */
+  .filter-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .filter-btn-group {
+    display: flex;
+    gap: 8px;
+  }
+  .filter-tab-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-tab-btn.active {
+    background: #0284c7;
+    border-color: #0284c7;
+    color: #fff;
+  }
+  .search-box-wrap {
+    position: relative;
+    width: 260px;
+  }
+  .search-box-wrap input {
+    width: 100%;
+    padding: 8px 12px 8px 32px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 13px;
+    background: #fff;
+  }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #94a3b8;
+  }
+
   .table-card {
     background: #ffffff;
     border-radius: var(--radius-md);
@@ -985,22 +1068,25 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.5);
+    background: rgba(15, 23, 42, 0.55);
     backdrop-filter: blur(4px);
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 50;
+    z-index: 60;
     padding: 16px;
   }
   .modal-overlay.show { display: flex; }
   .modal-box {
     background: #ffffff;
     border-radius: var(--radius-lg);
-    padding: 22px;
+    padding: 24px;
     width: 100%;
     max-width: 440px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+  .modal-box.modal-lg {
+    max-width: 600px;
   }
   .modal-box h2 {
     font-size: 17px;
@@ -1021,7 +1107,7 @@
   }
   .modal-box input, .modal-box select, .modal-box textarea {
     width: 100%;
-    padding: 8px 10px;
+    padding: 9px 12px;
     border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 13.5px;
@@ -1034,7 +1120,7 @@
   }
   .modal-box .actions button {
     flex: 1;
-    padding: 9px;
+    padding: 10px;
     border-radius: 8px;
     border: none;
     font-size: 13.5px;
@@ -1043,6 +1129,30 @@
   }
   .btn-modal-primary { background: #1877f2; color: #fff; }
   .btn-modal-cancel { background: #f1f5f9; color: #475569; }
+  .btn-modal-danger { background: #fee2e2; color: #b91c1c; }
+
+  /* Supplementary knowledge list in Admin panel */
+  .supp-item {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .supp-title { font-size: 13.5px; font-weight: 700; color: #0f2b59; }
+  .supp-meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+  .btn-del-supp {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+  }
 
   /* ===================== RESPONSIVE (MOBILE / TABLET) ===================== */
   @media (max-width: 1024px) {
@@ -1097,7 +1207,7 @@
 
     .msg { max-width: 92%; font-size: 14px; }
     #composer { padding: 8px 12px 10px; }
-    #composer textarea { font-size: 16px !important; } /* Tránh iOS auto-zoom */
+    #composer textarea { font-size: 16px !important; }
   }
 </style>
 </head>
@@ -1110,7 +1220,6 @@
   <aside id="sidebar">
     <div class="sidebar-header">
       <div class="school-logo-emblem">
-        <!-- SVG School Seal -->
         <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" fill="#1e3a8a" stroke="#fbbf24" stroke-width="4"/>
           <path d="M50 18 L76 34 L76 66 L50 82 L24 66 L24 34 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
@@ -1190,9 +1299,12 @@
           <div class="teacher-avatar">C</div>
           <div class="teacher-info">
             <div class="teacher-name">GVBM: Huỳnh Thị Ngọc Châu</div>
-            <div class="teacher-sub">Môn dạy: Toán &bull; Lớp: 9C3, 9C4</div>
+            <div class="teacher-sub">Môn dạy: Toán &bull; Lớp: 9C2, 9C3</div>
           </div>
         </div>
+        <!-- Admin Button (Secure login) -->
+        <button class="btn-header-action btn-admin-header" id="btn-admin-header" title="Quản trị viên tải lên tư liệu AI">🔐</button>
+        <!-- Settings Button -->
         <button class="btn-header-action" id="btn-settings-header" title="Cài đặt khoá AI">⚙️</button>
       </div>
     </header>
@@ -1227,7 +1339,7 @@
             </div>
             <div class="hero-info-item">
               <span class="item-icon">👥</span>
-              <span>Lớp giảng dạy: <strong>9C3, 9C4</strong></span>
+              <span>Lớp giảng dạy: <strong>9C2, 9C3</strong></span>
             </div>
           </div>
         </div>
@@ -1247,7 +1359,7 @@
         <div class="feature-card fc-green" data-open-tab="tab-students">
           <div class="feature-icon-wrapper">👥</div>
           <h3>Danh sách học sinh</h3>
-          <p>Theo dõi thông tin, phân loại và quản lý 63 học sinh lớp 9C3 và 9C4.</p>
+          <p>Theo dõi thông tin và kết quả học tập của 58 học sinh lớp 9C2 và 9C3.</p>
           <div class="btn-arrow-circle">➔</div>
         </div>
 
@@ -1303,12 +1415,12 @@
           </div>
           <div class="class-badges-row">
             <div class="class-badge-item">
-              <div class="class-badge-name">9C3</div>
-              <div class="class-badge-count">Sĩ số: 32</div>
+              <div class="class-badge-name">9C2</div>
+              <div class="class-badge-count">Sĩ số: 29</div>
             </div>
             <div class="class-badge-item">
-              <div class="class-badge-name">9C4</div>
-              <div class="class-badge-count">Sĩ số: 31</div>
+              <div class="class-badge-name">9C3</div>
+              <div class="class-badge-count">Sĩ số: 29</div>
             </div>
           </div>
         </div>
@@ -1321,7 +1433,7 @@
           <div class="quick-info-list">
             <div class="quick-info-item">
               <span class="quick-info-label">Tổng số học sinh:</span>
-              <span class="quick-info-val">63</span>
+              <span class="quick-info-val">58</span>
             </div>
             <div class="quick-info-item">
               <span class="quick-info-label">Số bài kiểm tra gần nhất:</span>
@@ -1430,12 +1542,25 @@
       </div>
     </div>
 
-    <!-- ================= VIEW 3: DANH SÁCH HỌC SINH ================= -->
+    <!-- ================= VIEW 3: DANH SÁCH HỌC SINH (DYNAMIC FROM 9C2-9C3.XLSX) ================= -->
     <div class="view-container generic-tab-content" id="tab-students">
       <div class="page-title-row">
-        <h2>👥 Danh sách học sinh — Lớp 9C3 & 9C4 (Tổng sĩ số: 63)</h2>
+        <h2>👥 Danh sách học sinh — Lớp 9C2 & 9C3 (Tổng: <span id="student-total-badge">58</span> em)</h2>
         <span class="badge-tag tag-green">THCS Phước Giang &bull; Phân hiệu 2</span>
       </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-btn-group">
+          <button class="filter-tab-btn active" data-filter-class="all">Tất cả (58)</button>
+          <button class="filter-tab-btn" data-filter-class="9C2">Lớp 9C2 (29)</button>
+          <button class="filter-tab-btn" data-filter-class="9C3">Lớp 9C3 (29)</button>
+        </div>
+        <div class="search-box-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="student-search-input" placeholder="Tìm theo tên hoặc mã HS..." />
+        </div>
+      </div>
+
       <div class="table-card">
         <table class="data-table">
           <thead>
@@ -1445,53 +1570,55 @@
               <th>Họ và tên</th>
               <th>Lớp</th>
               <th>Giới tính</th>
-              <th>Tình trạng học tập</th>
-              <th>Mức độ tương tác AI</th>
+              <th>Học lực</th>
+              <th>Đánh giá chuyên môn</th>
+              <th>Hành động</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><td>1</td><td>HS-090301</td><td>Nguyễn Văn An</td><td>9C3</td><td>Nam</td><td><span class="badge-tag tag-green">Giỏi</span></td><td>Thường xuyên luyện đề</td></tr>
-            <tr><td>2</td><td>HS-090302</td><td>Trần Thị Kim Chi</td><td>9C3</td><td>Nữ</td><td><span class="badge-tag tag-green">Giỏi</span></td><td>Hỏi bài hình học</td></tr>
-            <tr><td>3</td><td>HS-090303</td><td>Lê Hoàng Đức</td><td>9C3</td><td>Nam</td><td><span class="badge-tag tag-blue">Khá</span></td><td>Luyện phương trình</td></tr>
-            <tr><td>4</td><td>HS-090304</td><td>Phạm Thuỳ Dung</td><td>9C3</td><td>Nữ</td><td><span class="badge-tag tag-green">Xuất sắc</span></td><td>Luyện nâng cao</td></tr>
-            <tr><td>5</td><td>HS-090401</td><td>Hoàng Minh Quân</td><td>9C4</td><td>Nam</td><td><span class="badge-tag tag-blue">Khá</span></td><td>Tự ôn tại nhà</td></tr>
-            <tr><td>6</td><td>HS-090402</td><td>Vũ Phương Linh</td><td>9C4</td><td>Nữ</td><td><span class="badge-tag tag-green">Giỏi</span></td><td>Luyện căn thức</td></tr>
-            <tr><td>7</td><td>HS-090403</td><td>Đỗ Gia Huy</td><td>9C4</td><td>Nam</td><td><span class="badge-tag tag-yellow">Đạt</span></td><td>Cần kèm thêm bất phương trình</td></tr>
-            <tr><td>8</td><td>HS-090404</td><td>Bùi Ngọc Mai</td><td>9C4</td><td>Nữ</td><td><span class="badge-tag tag-blue">Khá</span></td><td>Luyện giải hệ phương trình</td></tr>
+          <tbody id="student-table-body">
+            <!-- Dynamic rows populated from STUDENTS_DATA -->
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- ================= VIEW 4: ĐIỂM SỐ ================= -->
+    <!-- ================= VIEW 4: ĐIỂM SỐ (DYNAMIC) ================= -->
     <div class="view-container generic-tab-content" id="tab-grades">
       <div class="page-title-row">
         <h2>📋 Sổ điểm điện tử bộ môn Toán 9</h2>
-        <span class="badge-tag tag-blue">Học kỳ I &bull; 2026-2027</span>
+        <span class="badge-tag tag-blue">Học kỳ I &bull; Năm học 2026-2027</span>
       </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-btn-group">
+          <button class="filter-tab-btn active" data-grade-class="9C2">Lớp 9C2 (29 học sinh)</button>
+          <button class="filter-tab-btn" data-grade-class="9C3">Lớp 9C3 (29 học sinh)</button>
+        </div>
+        <div class="search-box-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="grade-search-input" placeholder="Tìm học sinh xem điểm..." />
+        </div>
+      </div>
+
       <div class="table-card">
         <table class="data-table">
           <thead>
             <tr>
+              <th>STT</th>
+              <th>Mã HS</th>
               <th>Họ và tên</th>
               <th>Lớp</th>
               <th>TX 1 (15p)</th>
               <th>TX 2 (15p)</th>
-              <th>TX 3 (Vở bài tập)</th>
+              <th>TX 3 (Vở BT)</th>
               <th>Giữa kỳ (GK)</th>
               <th>Cuối kỳ (CK)</th>
               <th>ĐTBm</th>
               <th>Xếp loại</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><td>Nguyễn Văn An</td><td>9C3</td><td>9.0</td><td>8.5</td><td>10.0</td><td>8.5</td><td>-</td><td><strong>8.8</strong></td><td><span class="badge-tag tag-green">Giỏi</span></td></tr>
-            <tr><td>Trần Thị Kim Chi</td><td>9C3</td><td>9.5</td><td>9.0</td><td>10.0</td><td>9.0</td><td>-</td><td><strong>9.2</strong></td><td><span class="badge-tag tag-green">Xuất sắc</span></td></tr>
-            <tr><td>Lê Hoàng Đức</td><td>9C3</td><td>7.5</td><td>8.0</td><td>8.5</td><td>7.5</td><td>-</td><td><strong>7.8</strong></td><td><span class="badge-tag tag-blue">Khá</span></td></tr>
-            <tr><td>Phạm Thuỳ Dung</td><td>9C3</td><td>10.0</td><td>9.5</td><td>10.0</td><td>9.5</td><td>-</td><td><strong>9.7</strong></td><td><span class="badge-tag tag-green">Xuất sắc</span></td></tr>
-            <tr><td>Hoàng Minh Quân</td><td>9C4</td><td>7.0</td><td>7.5</td><td>8.0</td><td>7.0</td><td>-</td><td><strong>7.3</strong></td><td><span class="badge-tag tag-blue">Khá</span></td></tr>
-            <tr><td>Vũ Phương Linh</td><td>9C4</td><td>8.5</td><td>9.0</td><td>9.5</td><td>8.5</td><td>-</td><td><strong>8.8</strong></td><td><span class="badge-tag tag-green">Giỏi</span></td></tr>
-            <tr><td>Đỗ Gia Huy</td><td>9C4</td><td>6.0</td><td>6.5</td><td>7.5</td><td>6.0</td><td>-</td><td><strong>6.3</strong></td><td><span class="badge-tag tag-yellow">Đạt</span></td></tr>
+          <tbody id="grade-table-body">
+            <!-- Dynamic rows populated from STUDENTS_DATA -->
           </tbody>
         </table>
       </div>
@@ -1501,23 +1628,23 @@
     <div class="view-container generic-tab-content" id="tab-reports">
       <div class="page-title-row">
         <h2>📊 Báo cáo chất lượng giáo dục môn Toán 9</h2>
-        <span class="badge-tag tag-green">THCS Phước Giang</span>
+        <span class="badge-tag tag-green">THCS Phước Giang &bull; Phân hiệu 2</span>
       </div>
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;">
         <div class="summary-card" style="border-left: 4px solid #10b981;">
           <div style="font-size: 12px; color: #64748b;">Học sinh Giỏi / Xuất sắc</div>
-          <div style="font-size: 22px; font-weight: 800; color: #10b981; margin: 4px 0;">36.5%</div>
-          <div style="font-size: 11.5px; color: #64748b;">23 học sinh (&ge; 8.0)</div>
+          <div style="font-size: 22px; font-weight: 800; color: #10b981; margin: 4px 0;">58.6%</div>
+          <div style="font-size: 11.5px; color: #64748b;">34 học sinh (&ge; 8.0)</div>
         </div>
         <div class="summary-card" style="border-left: 4px solid #3b82f6;">
           <div style="font-size: 12px; color: #64748b;">Học sinh Khá</div>
-          <div style="font-size: 22px; font-weight: 800; color: #3b82f6; margin: 4px 0;">44.4%</div>
-          <div style="font-size: 11.5px; color: #64748b;">28 học sinh (6.5 &ndash; 7.9)</div>
+          <div style="font-size: 22px; font-weight: 800; color: #3b82f6; margin: 4px 0;">31.0%</div>
+          <div style="font-size: 11.5px; color: #64748b;">18 học sinh (6.5 &ndash; 7.9)</div>
         </div>
         <div class="summary-card" style="border-left: 4px solid #eab308;">
           <div style="font-size: 12px; color: #64748b;">Học sinh Đạt</div>
-          <div style="font-size: 22px; font-weight: 800; color: #eab308; margin: 4px 0;">19.1%</div>
-          <div style="font-size: 11.5px; color: #64748b;">12 học sinh (5.0 &ndash; 6.4)</div>
+          <div style="font-size: 22px; font-weight: 800; color: #eab308; margin: 4px 0;">10.4%</div>
+          <div style="font-size: 11.5px; color: #64748b;">6 học sinh (5.0 &ndash; 6.4)</div>
         </div>
         <div class="summary-card" style="border-left: 4px solid #ef4444;">
           <div style="font-size: 12px; color: #64748b;">Chưa đạt</div>
@@ -1525,10 +1652,10 @@
           <div style="font-size: 11.5px; color: #64748b;">0 học sinh (&lt; 5.0)</div>
         </div>
       </div>
-      <div class="table-card" style="padding: 16px;">
+      <div class="table-card" style="padding: 18px;">
         <h4 style="margin-bottom: 8px; color: #0f2b59;">Nhận xét chuyên môn &bull; GVBM: Huỳnh Thị Ngọc Châu</h4>
         <p style="font-size: 13.5px; line-height: 1.6; color: #334155;">
-          Học sinh hai lớp 9C3 và 9C4 nắm chắc kiến thức cơ bản về Hệ phương trình và Bất phương trình. Việc ứng dụng Trợ lý AI Toán 9 giúp các em chủ động tự luyện bài tập tại nhà, phát hiện nhanh lỗi sai về dấu và điều kiện xác định căn thức trước khi nộp bài trên lớp.
+          Học sinh hai lớp <strong>9C2</strong> và <strong>9C3</strong> (tổng 58 em) có tinh thần học tập nghiêm túc, tích cực tự giác luyện bài tập về nhà. Việc triển khai Trợ lý AI Toán 9 theo Bộ sách giáo khoa Thống Nhất đã giúp các em giải quyết các vướng mắc về phương pháp giải phương trình, tránh các bẫy đổi chiều bất phương trình và hiểu sâu bản chất hệ thức lượng tam giác vuông.
         </p>
       </div>
     </div>
@@ -1591,10 +1718,13 @@
           <div class="ai-bot-avatar">🤖</div>
           <div>
             <h2>TRỢ LÝ AI TOÁN 9 &bull; THCS PHƯỚC GIANG (PHÂN HIỆU 2)</h2>
-            <p>Dẫn dắt phương pháp &bull; Đồng hành cùng học sinh 9C3, 9C4 &bull; GVBM: Huỳnh Thị Ngọc Châu</p>
+            <p>Dẫn dắt phương pháp &bull; Đồng hành cùng học sinh 9C2, 9C3 &bull; GVBM: Huỳnh Thị Ngọc Châu</p>
           </div>
         </div>
-        <div class="ai-status-pill">● Trực tuyến</div>
+        <div class="ai-header-actions">
+          <button class="btn-admin-pill" id="btn-admin-ai" title="Dành cho Giáo viên tải lên tư liệu">📂 Quản trị tư liệu AI</button>
+          <div class="ai-status-pill">● Trực tuyến</div>
+        </div>
       </div>
 
       <div id="status-bar"></div>
@@ -1647,7 +1777,67 @@
   </main>
 </div>
 
-<!-- ================= MODAL: CÀI ĐẶT API KEY ================= -->
+<!-- ================= MODAL 1: ADMIN LOGIN (STRICT SESSION ONLY) ================= -->
+<div class="modal-overlay" id="overlay-admin-login">
+  <div class="modal-box">
+    <h2>🔐 Đăng nhập Quản trị viên</h2>
+    <p class="hint">Khu vực dành riêng cho Giáo viên bộ môn cập nhật tài liệu và ngân hàng đề cho Trợ lý AI.</p>
+    <form id="admin-login-form">
+      <label for="admin-user-input">Tên tài khoản:</label>
+      <input type="text" id="admin-user-input" autocomplete="off" spellcheck="false" required placeholder="Nhập tài khoản quản trị" />
+
+      <label for="admin-pass-input">Mật khẩu:</label>
+      <input type="password" id="admin-pass-input" autocomplete="new-password" required placeholder="Nhập mật khẩu" />
+
+      <div id="admin-login-error" style="display:none; color:#dc2626; font-size:12.5px; margin-top:8px; font-weight:600;"></div>
+
+      <div class="actions">
+        <button type="button" class="btn-modal-cancel" id="btn-admin-login-cancel">Đóng</button>
+        <button type="submit" class="btn-modal-primary" id="btn-admin-login-submit">Đăng nhập</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= MODAL 2: ADMIN KNOWLEDGE MANAGEMENT PANEL ================= -->
+<div class="modal-overlay" id="overlay-admin-panel">
+  <div class="modal-box modal-lg">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+      <div>
+        <h2>📂 Quản lý nguồn tư liệu Trợ lý AI</h2>
+        <p class="hint" style="margin-bottom:0;">GVBM: Huỳnh Thị Ngọc Châu &bull; Phiên làm việc bảo mật (Tự đóng khi thoát web)</p>
+      </div>
+      <button type="button" class="btn-del-supp" id="btn-admin-logout" style="padding: 6px 12px; font-weight: 600;">Đăng xuất</button>
+    </div>
+
+    <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin: 12px 0;">
+      <h4 style="font-size: 13.5px; color: #0f2b59; margin-bottom: 8px;">Tải lên tư liệu / chuyên đề mới:</h4>
+      <label for="doc-title" style="margin-top:0;">Tiêu đề chuyên đề / bài giảng:</label>
+      <input type="text" id="doc-title" placeholder="Ví dụ: Đề cương ôn tập HK1 - Chương IV, Bài tập nâng cao..." />
+
+      <label for="doc-file-upload">Chọn tệp tài liệu (.txt, .md, .json, .csv):</label>
+      <input type="file" id="doc-file-upload" accept=".txt,.md,.json,.csv,.text" style="padding: 6px;" />
+
+      <label for="doc-content">Nội dung tài liệu (soạn thảo hoặc xem trước):</label>
+      <textarea id="doc-content" rows="4" placeholder="Nhập nội dung bài tập, dạng toán hoặc đáp án hướng dẫn vào đây..."></textarea>
+
+      <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+        <button type="button" class="btn-modal-primary" id="btn-save-doc" style="padding:8px 16px; border-radius:8px;">💾 Nạp vào bộ nhớ AI</button>
+      </div>
+    </div>
+
+    <h4 style="font-size: 13.5px; color: #0f2b59; margin: 14px 0 8px;">Danh sách tài liệu đã bổ sung (<span id="supp-doc-count">0</span>):</h4>
+    <div id="supp-doc-list" style="max-height: 180px; overflow-y: auto;">
+      <!-- Supplementary items list -->
+    </div>
+
+    <div class="actions" style="margin-top:14px;">
+      <button type="button" class="btn-modal-cancel" id="btn-admin-panel-close">Đóng bảng quản trị</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODAL 3: CÀI ĐẶT API KEY ================= -->
 <div class="modal-overlay" id="overlay">
   <div class="modal-box" id="settings">
     <h2>Cài đặt kết nối AI</h2>
@@ -1667,7 +1857,7 @@
   </div>
 </div>
 
-<!-- ================= MODAL: TẠO ĐỀ ÔN TẬP ================= -->
+<!-- ================= MODAL 4: TẠO ĐỀ ÔN TẬP ================= -->
 <div class="modal-overlay" id="overlay-quiz">
   <div class="modal-box" id="quiz-settings">
     <h2>📝 Tạo đề ôn tập Toán 9</h2>
@@ -1702,7 +1892,1122 @@
 
 <script>
 (function () {
-  // ---------- Navigation Tabs Logic ----------
+  // ================= 1. DỮ LIỆU HỌC SINH 9C2 & 9C3 TỪ 9C2-9C3.XLSX =================
+  var STUDENTS_DATA = [
+  {
+    "stt": 1,
+    "ma_hs": "HS-09C201",
+    "ho_ten": "Bùi Phương Anh",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 9.0,
+    "tx2": 9.0,
+    "tx3": 10.0,
+    "gk": 9.5,
+    "tbm": 9.4,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 2,
+    "ma_hs": "HS-09C202",
+    "ho_ten": "Nguyễn Thị Minh Ân",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.0,
+    "tx2": 7.5,
+    "tx3": 8.5,
+    "gk": 6.5,
+    "tbm": 7.2,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 3,
+    "ma_hs": "HS-09C203",
+    "ho_ten": "Nguyễn Lê Gia Bảo",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 10.0,
+    "tx2": 9.0,
+    "tx3": 10.0,
+    "gk": 10.0,
+    "tbm": 9.8,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 4,
+    "ma_hs": "HS-09C204",
+    "ho_ten": "Nguyễn Quốc Bình",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 6.5,
+    "tx2": 6.5,
+    "tx3": 7.0,
+    "gk": 6.5,
+    "tbm": 6.6,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 5,
+    "ma_hs": "HS-09C205",
+    "ho_ten": "Nguyễn Ngọc Danh",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.5,
+    "tx2": 8.5,
+    "tx3": 10.0,
+    "gk": 8.5,
+    "tbm": 9.0,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 6,
+    "ma_hs": "HS-09C206",
+    "ho_ten": "Nguyễn Thị Thu Hà",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 10.0,
+    "tx2": 10.0,
+    "tx3": 9.5,
+    "gk": 10.0,
+    "tbm": 9.9,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 7,
+    "ma_hs": "HS-09C207",
+    "ho_ten": "Phạm Thị Minh Hằng",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.0,
+    "tx2": 8.5,
+    "tx3": 9.0,
+    "gk": 9.5,
+    "tbm": 9.1,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 8,
+    "ma_hs": "HS-09C208",
+    "ho_ten": "Phạm Công Hiếu",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 8.0,
+    "tx2": 8.0,
+    "tx3": 8.0,
+    "gk": 8.0,
+    "tbm": 8.0,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 9,
+    "ma_hs": "HS-09C209",
+    "ho_ten": "Lương Quang Huy",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 6.5,
+    "tx2": 8.0,
+    "tx3": 7.0,
+    "gk": 7.0,
+    "tbm": 7.1,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 10,
+    "ma_hs": "HS-09C210",
+    "ho_ten": "Trịnh Ngô Ngọc Hưng",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.5,
+    "tx2": 8.5,
+    "tx3": 8.0,
+    "gk": 8.5,
+    "tbm": 8.4,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 11,
+    "ma_hs": "HS-09C211",
+    "ho_ten": "Lê Nguyễn Quốc  Khải",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 8.5,
+    "tx2": 10.0,
+    "tx3": 9.0,
+    "gk": 9.0,
+    "tbm": 9.1,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 12,
+    "ma_hs": "HS-09C212",
+    "ho_ten": "Võ Lê Khải",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 10.0,
+    "tx2": 10.0,
+    "tx3": 10.0,
+    "gk": 9.0,
+    "tbm": 9.6,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 13,
+    "ma_hs": "HS-09C213",
+    "ho_ten": "Đỗ Trần Trúc Linh",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.0,
+    "tx2": 9.0,
+    "tx3": 10.0,
+    "gk": 9.0,
+    "tbm": 9.2,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 14,
+    "ma_hs": "HS-09C214",
+    "ho_ten": "Trần Mai Bảo Long",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.5,
+    "tx2": 8.0,
+    "tx3": 8.0,
+    "gk": 8.5,
+    "tbm": 8.1,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 15,
+    "ma_hs": "HS-09C215",
+    "ho_ten": "Võ Văn Luân",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 8.0,
+    "tx2": 8.5,
+    "tx3": 8.0,
+    "gk": 8.0,
+    "tbm": 8.1,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 16,
+    "ma_hs": "HS-09C216",
+    "ho_ten": "Lương Thị Kim Mai",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.5,
+    "tx2": 8.5,
+    "tx3": 9.0,
+    "gk": 7.0,
+    "tbm": 7.8,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 17,
+    "ma_hs": "HS-09C217",
+    "ho_ten": "Nguyễn Huỳnh Tiểu My",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.5,
+    "tx2": 9.0,
+    "tx3": 10.0,
+    "gk": 8.5,
+    "tbm": 9.1,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 18,
+    "ma_hs": "HS-09C218",
+    "ho_ten": "Nguyễn Duyên Bích Ngọc",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.5,
+    "tx2": 8.5,
+    "tx3": 8.0,
+    "gk": 7.0,
+    "tbm": 7.6,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 19,
+    "ma_hs": "HS-09C219",
+    "ho_ten": "Phan Quỳnh Như",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.5,
+    "tx2": 9.0,
+    "tx3": 9.5,
+    "gk": 8.5,
+    "tbm": 9.0,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 20,
+    "ma_hs": "HS-09C220",
+    "ho_ten": "Nguyễn Hồng Hàn Ny",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 8.5,
+    "tx3": 8.0,
+    "gk": 7.5,
+    "tbm": 7.9,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 21,
+    "ma_hs": "HS-09C221",
+    "ho_ten": "Nguyễn Đức Tài",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 9.5,
+    "tx2": 9.5,
+    "tx3": 9.0,
+    "gk": 9.5,
+    "tbm": 9.4,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 22,
+    "ma_hs": "HS-09C222",
+    "ho_ten": "Cao Thị Thanh Thủy",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.0,
+    "tx2": 9.5,
+    "tx3": 8.5,
+    "gk": 8.5,
+    "tbm": 8.8,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 23,
+    "ma_hs": "HS-09C223",
+    "ho_ten": "Phạm Thị Anh Thư",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.0,
+    "tx2": 8.0,
+    "tx3": 8.5,
+    "gk": 8.0,
+    "tbm": 7.9,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 24,
+    "ma_hs": "HS-09C224",
+    "ho_ten": "Lê Ngọc Tỉnh",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.0,
+    "tx2": 9.5,
+    "tx3": 9.0,
+    "gk": 8.5,
+    "tbm": 8.9,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 25,
+    "ma_hs": "HS-09C225",
+    "ho_ten": "Nguyễn Võ Thanh Trà",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.0,
+    "tx2": 8.5,
+    "tx3": 9.0,
+    "gk": 8.0,
+    "tbm": 8.5,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 26,
+    "ma_hs": "HS-09C226",
+    "ho_ten": "Đặng Nguyễn Quốc Việt",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 8.0,
+    "tx2": 7.5,
+    "tx3": 8.5,
+    "gk": 8.0,
+    "tbm": 8.0,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 27,
+    "ma_hs": "HS-09C227",
+    "ho_ten": "Nguyễn Tấn Việt",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 8.5,
+    "tx2": 10.0,
+    "tx3": 9.5,
+    "gk": 9.5,
+    "tbm": 9.4,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 28,
+    "ma_hs": "HS-09C228",
+    "ho_ten": "Lương Quang Vịnh",
+    "lop": "9C2",
+    "gioi_tinh": "Nam",
+    "tx1": 9.0,
+    "tx2": 8.5,
+    "tx3": 10.0,
+    "gk": 8.0,
+    "tbm": 8.7,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 29,
+    "ma_hs": "HS-09C229",
+    "ho_ten": "Huỳnh Thị Như Ý",
+    "lop": "9C2",
+    "gioi_tinh": "Nữ",
+    "tx1": 10.0,
+    "tx2": 10.0,
+    "tx3": 10.0,
+    "gk": 9.5,
+    "tbm": 9.8,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 1,
+    "ma_hs": "HS-09C301",
+    "ho_ten": "Nguyễn Vũ Quỳnh Anh",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.0,
+    "tx2": 8.0,
+    "tx3": 7.0,
+    "gk": 7.5,
+    "tbm": 7.4,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 2,
+    "ma_hs": "HS-09C302",
+    "ho_ten": "Cao Duy Bảo",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 7.5,
+    "tx2": 7.5,
+    "tx3": 8.0,
+    "gk": 6.5,
+    "tbm": 7.2,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 3,
+    "ma_hs": "HS-09C303",
+    "ho_ten": "Ngô Ngọc Hoàng Châu",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.5,
+    "tx2": 9.5,
+    "tx3": 10.0,
+    "gk": 8.5,
+    "tbm": 9.0,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 4,
+    "ma_hs": "HS-09C304",
+    "ho_ten": "Võ Thanh Dũng",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 7.5,
+    "tx2": 7.5,
+    "tx3": 8.5,
+    "gk": 6.5,
+    "tbm": 7.3,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 5,
+    "ma_hs": "HS-09C305",
+    "ho_ten": "Nguyễn Anh Đoan",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 9.0,
+    "tx2": 10.0,
+    "tx3": 9.0,
+    "gk": 8.0,
+    "tbm": 8.8,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 6,
+    "ma_hs": "HS-09C306",
+    "ho_ten": "Trương Thị Thu Giang",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 8.0,
+    "tx3": 8.0,
+    "gk": 7.5,
+    "tbm": 7.8,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 7,
+    "ma_hs": "HS-09C307",
+    "ho_ten": "Lương Thị Quỳnh Giao",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.5,
+    "tx2": 8.5,
+    "tx3": 10.0,
+    "gk": 9.5,
+    "tbm": 9.2,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 8,
+    "ma_hs": "HS-09C308",
+    "ho_ten": "Đặng Ngọc Hảo",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 7.5,
+    "tx2": 7.0,
+    "tx3": 7.0,
+    "gk": 7.5,
+    "tbm": 7.3,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 9,
+    "ma_hs": "HS-09C309",
+    "ho_ten": "Võ Trần Bảo Hân",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 8.5,
+    "tx2": 9.5,
+    "tx3": 10.0,
+    "gk": 9.5,
+    "tbm": 9.4,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 10,
+    "ma_hs": "HS-09C310",
+    "ho_ten": "Trương Kim Huệ",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 7.5,
+    "tx3": 8.5,
+    "gk": 7.5,
+    "tbm": 7.8,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 11,
+    "ma_hs": "HS-09C311",
+    "ho_ten": "Nguyễn Hoàng Huy",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 9.0,
+    "tx2": 9.0,
+    "tx3": 9.0,
+    "gk": 9.0,
+    "tbm": 9.0,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 12,
+    "ma_hs": "HS-09C312",
+    "ho_ten": "Đặng Huỳnh Khải",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 6.5,
+    "tx2": 7.0,
+    "tx3": 7.0,
+    "gk": 7.0,
+    "tbm": 6.9,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 13,
+    "ma_hs": "HS-09C313",
+    "ho_ten": "Phan  Văn Bảo Khánh",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 7.5,
+    "tx2": 7.0,
+    "tx3": 8.0,
+    "gk": 6.5,
+    "tbm": 7.1,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 14,
+    "ma_hs": "HS-09C314",
+    "ho_ten": "Nguyễn Đức Long",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 6.5,
+    "tx2": 6.5,
+    "tx3": 7.0,
+    "gk": 6.0,
+    "tbm": 6.4,
+    "hoc_luc": "Đạt",
+    "tag": "tag-yellow",
+    "ghi_chu": "Cần tăng cường luyện đề cơ bản"
+  },
+  {
+    "stt": 15,
+    "ma_hs": "HS-09C315",
+    "ho_ten": "Nguyễn Thành Long",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 7.0,
+    "tx2": 6.5,
+    "tx3": 8.0,
+    "gk": 6.5,
+    "tbm": 6.9,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 16,
+    "ma_hs": "HS-09C316",
+    "ho_ten": "Lê Hoàng Trúc My",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 8.5,
+    "tx2": 9.0,
+    "tx3": 8.0,
+    "gk": 7.5,
+    "tbm": 8.1,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 17,
+    "ma_hs": "HS-09C317",
+    "ho_ten": "Đinh Hồ Yến Nhi",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 10.0,
+    "tx2": 10.0,
+    "tx3": 9.5,
+    "gk": 10.0,
+    "tbm": 9.9,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 18,
+    "ma_hs": "HS-09C318",
+    "ho_ten": "Trần Nguyễn Thục Oanh",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 8.0,
+    "tx3": 8.5,
+    "gk": 9.0,
+    "tbm": 8.5,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 19,
+    "ma_hs": "HS-09C319",
+    "ho_ten": "Phạm Phương Tấn Phát",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 8.0,
+    "tx2": 9.0,
+    "tx3": 8.5,
+    "gk": 7.0,
+    "tbm": 7.9,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 20,
+    "ma_hs": "HS-09C320",
+    "ho_ten": "Võ Ngọc Phúc",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 10.0,
+    "tx2": 9.0,
+    "tx3": 9.5,
+    "gk": 10.0,
+    "tbm": 9.7,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 21,
+    "ma_hs": "HS-09C321",
+    "ho_ten": "Phạm Nguyễn Anh Thảo",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 9.5,
+    "tx2": 9.0,
+    "tx3": 9.5,
+    "gk": 9.0,
+    "tbm": 9.2,
+    "hoc_luc": "Xuất sắc",
+    "tag": "tag-green",
+    "ghi_chu": "Năng lực Toán tốt, chủ động hỏi AI"
+  },
+  {
+    "stt": 22,
+    "ma_hs": "HS-09C322",
+    "ho_ten": "Nguyễn Thị Minh Thu",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 8.5,
+    "tx3": 7.5,
+    "gk": 8.0,
+    "tbm": 8.0,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 23,
+    "ma_hs": "HS-09C323",
+    "ho_ten": "Võ Trần Minh Thư",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 7.5,
+    "tx2": 8.5,
+    "tx3": 7.5,
+    "gk": 6.5,
+    "tbm": 7.3,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 24,
+    "ma_hs": "HS-09C324",
+    "ho_ten": "Nguyễn Thanh Trường",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 9.0,
+    "tx2": 8.0,
+    "tx3": 8.5,
+    "gk": 7.5,
+    "tbm": 8.1,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 25,
+    "ma_hs": "HS-09C325",
+    "ho_ten": "Huỳnh Nguyễn Thảo Vân",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 6.5,
+    "tx2": 7.0,
+    "tx3": 7.5,
+    "gk": 7.5,
+    "tbm": 7.2,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  },
+  {
+    "stt": 26,
+    "ma_hs": "HS-09C326",
+    "ho_ten": "Lê Thị Hà Vi",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 9.5,
+    "tx3": 8.5,
+    "gk": 8.0,
+    "tbm": 8.4,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 27,
+    "ma_hs": "HS-09C327",
+    "ho_ten": "Nguyễn Nhật Tường Vy",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 9.5,
+    "tx3": 9.0,
+    "gk": 9.0,
+    "tbm": 8.9,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 28,
+    "ma_hs": "HS-09C328",
+    "ho_ten": "Nguyễn Võ Phương Vy",
+    "lop": "9C3",
+    "gioi_tinh": "Nữ",
+    "tx1": 8.0,
+    "tx2": 9.0,
+    "tx3": 8.0,
+    "gk": 7.5,
+    "tbm": 8.0,
+    "hoc_luc": "Giỏi",
+    "tag": "tag-green",
+    "ghi_chu": "Luyện tập chăm chỉ, tiến bộ nhanh"
+  },
+  {
+    "stt": 29,
+    "ma_hs": "HS-09C329",
+    "ho_ten": "Hồ Thanh Vỹ",
+    "lop": "9C3",
+    "gioi_tinh": "Nam",
+    "tx1": 7.5,
+    "tx2": 7.5,
+    "tx3": 9.0,
+    "gk": 7.0,
+    "tbm": 7.6,
+    "hoc_luc": "Khá",
+    "tag": "tag-blue",
+    "ghi_chu": "Nắm chắc lý thuyết, cần rèn thêm hình"
+  }
+];
+
+  // Render Table Functions
+  var studentTableBody = document.getElementById("student-table-body");
+  var gradeTableBody = document.getElementById("grade-table-body");
+  var currentStudentFilter = "all";
+  var currentGradeFilter = "9C2";
+
+  function renderStudentTable() {
+    var search = (document.getElementById("student-search-input").value || "").toLowerCase().trim();
+    var filtered = STUDENTS_DATA.filter(function (s) {
+      var matchClass = (currentStudentFilter === "all" || s.lop === currentStudentFilter);
+      var matchSearch = (!search || s.ho_ten.toLowerCase().includes(search) || s.ma_hs.toLowerCase().includes(search));
+      return matchClass && matchSearch;
+    });
+
+    var html = "";
+    if (filtered.length === 0) {
+      html = '<tr><td colspan="8" style="text-align:center; padding:18px; color:#64748b;">Không tìm thấy học sinh nào phù hợp.</td></tr>';
+    } else {
+      filtered.forEach(function (s) {
+        html += '<tr>' +
+          '<td>' + s.stt + '</td>' +
+          '<td><strong>' + s.ma_hs + '</strong></td>' +
+          '<td>' + s.ho_ten + '</td>' +
+          '<td><span class="badge-tag ' + (s.lop === '9C2' ? 'tag-blue' : 'tag-green') + '">' + s.lop + '</span></td>' +
+          '<td>' + s.gioi_tinh + '</td>' +
+          '<td><span class="badge-tag ' + s.tag + '">' + s.hoc_luc + '</span></td>' +
+          '<td>' + s.ghi_chu + '</td>' +
+          '<td><button class="course-btn btn-ask-ai" style="padding:4px 8px; font-size:11px;" data-name="' + s.ho_ten + '" data-lop="' + s.lop + '" onclick="askAiForStudent(this)">Kèm AI</button></td>' +
+        '</tr>';
+      });
+    }
+    studentTableBody.innerHTML = html;
+    document.getElementById("student-total-badge").textContent = filtered.length;
+  }
+
+  function renderGradeTable() {
+    var search = (document.getElementById("grade-search-input").value || "").toLowerCase().trim();
+    var filtered = STUDENTS_DATA.filter(function (s) {
+      var matchClass = (s.lop === currentGradeFilter);
+      var matchSearch = (!search || s.ho_ten.toLowerCase().includes(search) || s.ma_hs.toLowerCase().includes(search));
+      return matchClass && matchSearch;
+    });
+
+    var html = "";
+    if (filtered.length === 0) {
+      html = '<tr><td colspan="11" style="text-align:center; padding:18px; color:#64748b;">Không tìm thấy học sinh nào.</td></tr>';
+    } else {
+      filtered.forEach(function (s) {
+        html += '<tr>' +
+          '<td>' + s.stt + '</td>' +
+          '<td>' + s.ma_hs + '</td>' +
+          '<td><strong>' + s.ho_ten + '</strong></td>' +
+          '<td>' + s.lop + '</td>' +
+          '<td>' + s.tx1.toFixed(1) + '</td>' +
+          '<td>' + s.tx2.toFixed(1) + '</td>' +
+          '<td>' + s.tx3.toFixed(1) + '</td>' +
+          '<td>' + s.gk.toFixed(1) + '</td>' +
+          '<td>-</td>' +
+          '<td><strong>' + s.tbm.toFixed(1) + '</strong></td>' +
+          '<td><span class="badge-tag ' + s.tag + '">' + s.hoc_luc + '</span></td>' +
+        '</tr>';
+      });
+    }
+    gradeTableBody.innerHTML = html;
+  }
+
+  // Student & Grade filters
+  document.querySelectorAll("[data-filter-class]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll("[data-filter-class]").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      currentStudentFilter = this.getAttribute("data-filter-class");
+      renderStudentTable();
+    });
+  });
+  document.getElementById("student-search-input").addEventListener("input", renderStudentTable);
+
+  document.querySelectorAll("[data-grade-class]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll("[data-grade-class]").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      currentGradeFilter = this.getAttribute("data-grade-class");
+      renderGradeTable();
+    });
+  });
+  document.getElementById("grade-search-input").addEventListener("input", renderGradeTable);
+
+  // Render initially
+  renderStudentTable();
+  renderGradeTable();
+
+  // ================= 2. QUẢN TRỊ VIÊN & BỔ SUNG TƯ LIỆU AI =================
+  // LƯU Ý BẢO MẬT: Tài khoản ngocchau / Antam2026@
+  // Chỉ lưu phiên trong sessionStorage (hoặc RAM), đóng trình duyệt sẽ xoá sạch hoàn toàn!
+  var overlayAdminLogin = document.getElementById("overlay-admin-login");
+  var overlayAdminPanel = document.getElementById("overlay-admin-panel");
+  var adminLoginForm = document.getElementById("admin-login-form");
+  var adminUserInput = document.getElementById("admin-user-input");
+  var adminPassInput = document.getElementById("admin-pass-input");
+  var adminLoginError = document.getElementById("admin-login-error");
+
+  function isAdminSessionActive() {
+    return sessionStorage.getItem("admin_session_active") === "true";
+  }
+
+  function openAdminModal() {
+    if (isAdminSessionActive()) {
+      showAdminPanel();
+    } else {
+      adminUserInput.value = "";
+      adminPassInput.value = "";
+      adminLoginError.style.display = "none";
+      overlayAdminLogin.className = "modal-overlay show";
+      adminUserInput.focus();
+    }
+  }
+
+  function showAdminPanel() {
+    overlayAdminLogin.className = "modal-overlay";
+    overlayAdminPanel.className = "modal-overlay show";
+    renderSuppDocs();
+  }
+
+  document.querySelectorAll(".btn-admin-trigger, #btn-admin-header, #btn-admin-ai").forEach(function (btn) {
+    btn.addEventListener("click", openAdminModal);
+  });
+
+  document.getElementById("btn-admin-login-cancel").addEventListener("click", function () {
+    overlayAdminLogin.className = "modal-overlay";
+  });
+  document.getElementById("btn-admin-panel-close").addEventListener("click", function () {
+    overlayAdminPanel.className = "modal-overlay";
+  });
+
+  adminLoginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var u = adminUserInput.value.trim();
+    var p = adminPassInput.value.trim();
+
+    // Kiểm tra thông tin quản trị viên chính xác
+    if (u === "ngocchau" && p === "Antam2026@") {
+      // Lưu phiên TẠM THỜI chỉ trong sessionStorage (tắt trình duyệt tự huỷ sạch sẽ)
+      sessionStorage.setItem("admin_session_active", "true");
+      adminUserInput.value = "";
+      adminPassInput.value = "";
+      adminLoginError.style.display = "none";
+      showAdminPanel();
+    } else {
+      adminLoginError.textContent = "Thông tin đăng nhập không chính xác. Vui lòng kiểm tra lại.";
+      adminLoginError.style.display = "block";
+    }
+  });
+
+  document.getElementById("btn-admin-logout").addEventListener("click", function () {
+    sessionStorage.removeItem("admin_session_active");
+    overlayAdminPanel.className = "modal-overlay";
+    showStatus("Đã kết thúc phiên quản trị viên an toàn.", "ok");
+    setTimeout(hideStatus, 2000);
+  });
+
+  // Quản lý tư liệu bổ sung (Lưu vào localStorage để chatbot luôn có kiến thức mới)
+  function getSuppDocs() {
+    try {
+      var raw = localStorage.getItem("gsToan9_supplementary_docs");
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveSuppDocs(list) {
+    localStorage.setItem("gsToan9_supplementary_docs", JSON.stringify(list));
+    updateKnowledgePrompt();
+    renderSuppDocs();
+  }
+
+  var docFileUpload = document.getElementById("doc-file-upload");
+  var docTitleInput = document.getElementById("doc-title");
+  var docContentText = document.getElementById("doc-content");
+
+  docFileUpload.addEventListener("change", function () {
+    if (this.files && this.files[0]) {
+      var f = this.files[0];
+      if (!docTitleInput.value) docTitleInput.value = f.name.replace(/\.[^.]+$/, "");
+      var r = new FileReader();
+      r.onload = function (e) {
+        docContentText.value = e.target.result;
+      };
+      r.readAsText(f);
+    }
+  });
+
+  document.getElementById("btn-save-doc").addEventListener("click", function () {
+    var title = docTitleInput.value.trim();
+    var content = docContentText.value.trim();
+    if (!title || !content) {
+      alert("Vui lòng nhập đầy đủ tiêu đề và nội dung tài liệu.");
+      return;
+    }
+    var docs = getSuppDocs();
+    docs.unshift({
+      id: "doc_" + Date.now(),
+      title: title,
+      content: content,
+      time: new Date().toLocaleDateString("vi-VN") + " " + new Date().toLocaleTimeString("vi-VN", {hour:"2-digit", minute:"2-digit"})
+    });
+    saveSuppDocs(docs);
+    docTitleInput.value = "";
+    docContentText.value = "";
+    docFileUpload.value = "";
+    showStatus("Đã nạp tài liệu mới vào ngân hàng kiến thức AI!", "ok");
+    setTimeout(hideStatus, 2500);
+  });
+
+  window.deleteSuppDoc = function (id) {
+    if (confirm("Em/Cô có chắc chắn muốn xoá tài liệu này khỏi bộ nhớ AI?")) {
+      var docs = getSuppDocs().filter(function (d) { return d.id !== id; });
+      saveSuppDocs(docs);
+    }
+  };
+
+  function renderSuppDocs() {
+    var docs = getSuppDocs();
+    document.getElementById("supp-doc-count").textContent = docs.length;
+    var listEl = document.getElementById("supp-doc-list");
+    if (docs.length === 0) {
+      listEl.innerHTML = '<div style="font-size:12px; color:#94a3b8; font-style:italic; padding:6px 0;">Chưa có tài liệu bổ sung nào được tải lên.</div>';
+      return;
+    }
+    var html = "";
+    docs.forEach(function (d) {
+      html += '<div class="supp-item">' +
+        '<div>' +
+          '<div class="supp-title">📄 ' + escapeHtml(d.title) + '</div>' +
+          '<div class="supp-meta">Độ dài: ' + d.content.length + ' ký tự &bull; Cập nhật: ' + d.time + '</div>' +
+        '</div>' +
+        '<button class="btn-del-supp" onclick="deleteSuppDoc(\'' + d.id + '\')">Xoá</button>' +
+      '</div>';
+    });
+    listEl.innerHTML = html;
+  }
+
+  // ================= 3. NAVIGATION TABS LOGIC =================
   var navButtons = document.querySelectorAll(".nav-btn[data-tab]");
   var viewContainers = document.querySelectorAll(".view-container");
   var sidebar = document.getElementById("sidebar");
@@ -1711,26 +3016,18 @@
 
   function switchTab(tabId) {
     navButtons.forEach(function (btn) {
-      if (btn.getAttribute("data-tab") === tabId) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
-      }
+      if (btn.getAttribute("data-tab") === tabId) btn.classList.add("active");
+      else btn.classList.remove("active");
     });
 
     viewContainers.forEach(function (v) {
-      if (v.id === tabId) {
-        v.classList.add("active");
-      } else {
-        v.classList.remove("active");
-      }
+      if (v.id === tabId) v.classList.add("active");
+      else v.classList.remove("active");
     });
 
-    // Close mobile sidebar if open
     sidebar.classList.remove("mobile-open");
     sidebarBackdrop.classList.remove("show");
 
-    // Scroll to top
     var activeView = document.getElementById(tabId);
     if (activeView) activeView.scrollTop = 0;
   }
@@ -1742,7 +3039,6 @@
     });
   });
 
-  // Feature cards on home view that open tabs
   document.querySelectorAll("[data-open-tab]").forEach(function (el) {
     el.addEventListener("click", function () {
       var tabId = this.getAttribute("data-open-tab");
@@ -1750,7 +3046,6 @@
     });
   });
 
-  // Mobile menu toggle
   btnToggleMenu.addEventListener("click", function () {
     sidebar.classList.add("mobile-open");
     sidebarBackdrop.classList.add("show");
@@ -1767,7 +3062,13 @@
     }, 200);
   };
 
-  // ---------- Math & Chatbot Logic ----------
+  window.askAiForStudent = function (btn) {
+    var name = btn.getAttribute("data-name");
+    var lop = btn.getAttribute("data-lop");
+    window.openAiWithQuery("Học sinh " + name + " (" + lop + ") cần luyện thêm bài tập gì cô ơi?");
+  };
+
+  // ================= 4. MATH & CHATBOT CORE =================
   var els = {
     chat: document.getElementById("chat"),
     input: document.getElementById("input"),
@@ -1800,6 +3101,8 @@
   var state = {
     history: [],
     loading: false,
+    rawTc: "",
+    rawKt: "",
     systemPrompt: "",
     loadingKnowledge: true,
     pendingPhoto: null
@@ -1930,6 +3233,30 @@
     typingEl = null;
   }
 
+  function updateKnowledgePrompt() {
+    var suppDocs = getSuppDocs();
+    var suppSection = "";
+    if (suppDocs.length > 0) {
+      suppSection = "\n\n===== NGUỒN TƯ LIỆU BỔ SUNG TỪ GIÁO VIÊN BỘ MÔN (HUỲNH THỊ NGỌC CHÂU) =====\n" +
+        suppDocs.map(function (d) {
+          return "### TÀI LIỆU: " + d.title + "\n" + d.content;
+        }).join("\n\n") +
+        "\n===== HẾT NGUỒN TƯ LIỆU BỔ SUNG =====\n";
+    }
+
+    state.systemPrompt =
+      state.rawTc +
+      "\n\n===== HẾT PHẦN TÍNH CÁCH — BẮT ĐẦU PHẦN KIẾN THỨC (kt.md) =====\n\n" +
+      state.rawKt +
+      suppSection +
+      "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n" +
+      "1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n" +
+      "2) GỢI Ý MỞ RỘNG CÁC TRƯỜNG HỢP TƯƠNG TỰ: Luôn chỉ ra thêm các trường hợp đặc biệt, bẫy thường gặp hoặc các biến thể bài tập tương tự.\n" +
+      "3) YÊU CẦU HỌC SINH RÈN LUYỆN: Luôn giao nhiệm vụ cụ thể yêu cầu học sinh lấy giấy nháp làm ngay ít nhất 1 bài và gửi lời giải hoặc chụp ảnh để cô nhận xét từng bước.\n" +
+      "4) CÔNG THỨC TOÁN: Mọi ký hiệu toán học, biến số, phương trình, bất phương trình bắt buộc đặt trong $...$ hoặc $$...$$ để hiển thị qua KaTeX. Trong hình học: góc viết \\widehat{ABC}; cung tròn viết \\overparen{AB} hoặc \\overgroup{AB} (bắt buộc có cặp ngoặc nhọn {...}); số đo cung viết \\text{sđ}\\overparen{AB}.\n" +
+      "Từ giờ hãy nhập vai đúng như đã mô tả và trò chuyện với học sinh bằng tiếng Việt. =====";
+  }
+
   function loadKnowledgeFiles() {
     state.loadingKnowledge = true;
     return Promise.all([
@@ -1942,18 +3269,9 @@
         return r.text();
       })
     ]).then(function (results) {
-      var tc = results[0];
-      var kt = results[1];
-      state.systemPrompt =
-        tc +
-        "\n\n===== HẾT PHẦN TÍNH CÁCH — BẮT ĐẦU PHẦN KIẾN THỨC (kt.md) =====\n\n" +
-        kt +
-        "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n" +
-        "1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n" +
-        "2) GỢI Ý MỞ RỘNG CÁC TRƯỜNG HỢP TƯƠNG TỰ: Luôn chỉ ra thêm các trường hợp đặc biệt, bẫy thường gặp hoặc các biến thể bài tập tương tự.\n" +
-        "3) YÊU CẦU HỌC SINH RÈN LUYỆN: Luôn giao nhiệm vụ cụ thể yêu cầu học sinh lấy giấy nháp làm ngay ít nhất 1 bài và gửi lời giải hoặc chụp ảnh để cô nhận xét từng bước.\n" +
-        "4) CÔNG THỨC TOÁN: Mọi ký hiệu toán học, biến số, phương trình, bất phương trình bắt buộc đặt trong $...$ hoặc $$...$$ để hiển thị qua KaTeX. Trong hình học: góc viết \\widehat{ABC}; cung tròn viết \\overparen{AB} hoặc \\overgroup{AB} (bắt buộc có cặp ngoặc nhọn {...}); số đo cung viết \\text{sđ}\\overparen{AB}.\n" +
-        "Từ giờ hãy nhập vai đúng như đã mô tả và trò chuyện với học sinh bằng tiếng Việt. =====";
+      state.rawTc = results[0];
+      state.rawKt = results[1];
+      updateKnowledgePrompt();
       state.loadingKnowledge = false;
     });
   }
@@ -1967,7 +3285,6 @@
     var contents = state.history.concat([{ role: "user", parts: parts }]);
     var customKey = (localStorage.getItem("gsToan9_apiKey") || "").trim();
 
-    // Gọi serverless api/chat
     return fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -2050,7 +3367,6 @@
     els.input.style.height = Math.min(els.input.scrollHeight, 120) + "px";
   }
 
-  // Chụp ảnh bài làm
   function openPhotoPanel(file) {
     if (!file) return;
     var reader = new FileReader();
@@ -2171,7 +3487,7 @@
         els.chat.innerHTML = "";
         addMessage(
           "bot",
-          "Chào em! Cô là trợ lý AI Toán 9 của trường THCS Phước Giang (Phân hiệu 2), đồng hành cùng các bạn học sinh lớp 9C3 và 9C4 của cô giáo Huỳnh Thị Ngọc Châu.\n\n" +
+          "Chào em! Cô là trợ lý AI Toán 9 của trường THCS Phước Giang (Phân hiệu 2), đồng hành cùng các bạn học sinh lớp 9C2 và 9C3 của cô giáo Huỳnh Thị Ngọc Châu.\n\n" +
           "Em gửi cho cô bài toán đang làm hoặc chỗ đang bị vướng nhé — cô sẽ hướng dẫn phương pháp từng bước để em tự giải được bài toán 🙂"
         );
         showStatus("Hệ thống học tập trực tuyến đã sẵn sàng.", "ok");
