@@ -1173,14 +1173,344 @@
     word-break: break-word;
   }
 
+  /* ===================== V3 INTERACTIVE EXERCISES & STUDENT STATS ===================== */
+  .file-badge-html {
+    background: #f3e8ff;
+    color: #7e22ce;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .topic-chip {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .lesson-chip {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .student-session-pill {
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #065f46;
+    font-weight: 700;
+  }
+  .student-session-pill.pending {
+    background: #fef3c7;
+    border-color: #fcd34d;
+    color: #92400e;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .hero-cta-btn {
+    padding: 9px 18px;
+    border-radius: 10px;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s;
+  }
+  .hero-cta-primary {
+    background: #ffffff;
+    color: #0e2a58;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  .hero-cta-primary:hover { transform: translateY(-2px); background: #f8fafc; }
+  .hero-cta-secondary {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .hero-cta-secondary:hover { background: rgba(255, 255, 255, 0.28); transform: translateY(-2px); }
+
+  /* Exercises Grid View */
+  .exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .exercise-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 18px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .exercise-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(24, 119, 242, 0.12);
+    border-color: #93c5fd;
+  }
+  .exercise-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  .exercise-card-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #0f2b59;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .exercise-card-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .exercise-last-score {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .btn-play-exercise {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 9px;
+    border: none;
+    background: linear-gradient(135deg, #1877f2, #0d5cb6);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: opacity 0.2s;
+  }
+  .btn-play-exercise:hover { opacity: 0.92; }
+
+  /* Inline Chat Exercise Suggestions */
+  .chat-exercise-suggestions {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #cbd5e1;
+  }
+  .chat-ex-suggest-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #7e22ce;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .chat-exercise-card {
+    background: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .chat-exercise-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .chat-exercise-card-info strong {
+    display: block;
+    font-size: 13px;
+    color: #0f2b59;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .chat-exercise-card-info span {
+    font-size: 11.5px;
+    color: #6b21a8;
+  }
+  .btn-chat-play-ex {
+    background: #7e22ce;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .btn-chat-play-ex:hover { background: #6b21a8; }
+
+  /* AI Review Timer Bar */
+  #ai-review-timer-bar {
+    display: none;
+    background: linear-gradient(90deg, #eff6ff, #f0fdf4);
+    border-bottom: 1px solid #bfdbfe;
+    padding: 8px 16px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    flex-shrink: 0;
+  }
+  #ai-review-timer-bar.show { display: flex; }
+  .ai-timer-pill {
+    background: #1e293b;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 12.5px;
+  }
+
+  /* Exercise Player Modal */
+  .modal-box.player-modal-box {
+    width: 96vw;
+    max-width: 1120px;
+    height: 92vh;
+    max-height: 92vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .player-header-bar {
+    background: #0e2a58;
+    color: #ffffff;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .player-title-wrap {
+    flex: 1;
+    min-width: 200px;
+  }
+  .player-title-wrap h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px;
+    color: #ffffff;
+  }
+  .player-title-sub {
+    font-size: 11.5px;
+    color: #cbd5e1;
+  }
+  .player-controls-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .player-timer-chip {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .player-captured-banner {
+    display: none;
+    background: #dcfce7;
+    border-bottom: 1px solid #86efac;
+    color: #166534;
+    padding: 8px 18px;
+    font-size: 12.5px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .player-captured-banner.show { display: flex; }
+  #exercise-iframe {
+    width: 100%;
+    flex: 1;
+    border: none;
+    background: #ffffff;
+  }
+
+  /* Progress Bar in Analytics */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #1877f2, #10b981);
+  }
+
+  /* Admin Form Grids */
+  .admin-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
   /* ===================== RESPONSIVE (MOBILE / TABLET) ===================== */
   @media (max-width: 1024px) {
     .feature-grid { grid-template-columns: repeat(3, 1fr); }
     .bottom-summary-grid { grid-template-columns: 1fr 1fr; }
     .courses-grid { grid-template-columns: repeat(2, 1fr); }
+    .exercises-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
+    .exercises-grid { grid-template-columns: 1fr; }
+    .admin-meta-grid { grid-template-columns: 1fr; }
+    .modal-box.player-modal-box { width: 99vw; height: 95vh; max-height: 95vh; border-radius: 10px; }
+    .player-header-bar { padding: 10px 12px; }
+    #analytics-kpis-grid, #grade-stats-banner, #report-cards-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .btn-toggle-menu { display: block; }
     #sidebar {
       position: fixed;
@@ -1239,6 +1569,12 @@
         <span class="nav-badge-pill">6 bài</span>
       </button>
 
+      <button class="nav-item" data-tab="tab-exercises">
+        <span class="nav-icon">🧩</span>
+        <span>Bài tập tương tác</span>
+        <span class="nav-badge-pill" id="nav-ex-count-pill">0 bài</span>
+      </button>
+
       <button class="nav-item" data-tab="tab-students">
         <span class="nav-icon">👥</span>
         <span>Danh sách học sinh</span>
@@ -1291,6 +1627,12 @@
       </div>
 
       <div class="header-right">
+        <!-- Session-only Student Check-in indicator -->
+        <button class="header-btn student-session-pill pending" id="student-session-pill" title="Khai báo Họ tên &amp; Lớp học để làm bài tập và lưu thống kê">
+          <span>👨‍🎓</span>
+          <span id="student-session-label">Khai báo HS</span>
+        </button>
+
         <!-- Admin trigger button (Session Only) -->
         <button class="header-btn btn-admin-header" id="btn-admin-header" title="Quản trị viên tải tài liệu bổ sung">
           <span>🔒</span>
@@ -1344,6 +1686,17 @@
               <span class="item-icon">👥</span>
               <span>Lớp giảng dạy: <strong>9C2, 9C3</strong></span>
             </div>
+          </div>
+
+          <div class="hero-cta-row">
+            <button type="button" class="hero-cta-btn hero-cta-primary" data-open-tab="tab-exercises">
+              <span>🧩</span>
+              <span>Làm bài tập tương tác HTML</span>
+            </button>
+            <button type="button" class="hero-cta-btn hero-cta-secondary" data-open-tab="tab-ai">
+              <span>🤖</span>
+              <span>Ôn tập cùng Cô Trợ Giảng AI</span>
+            </button>
           </div>
         </div>
       </div>
@@ -1546,6 +1899,42 @@
       </div>
     </div>
 
+    <!-- ================= VIEW 2B: BÀI TẬP TƯƠNG TÁC HTML (THEO CHỦ ĐỀ / BÀI HỌC) ================= -->
+    <div class="view-container generic-tab-content" id="tab-exercises">
+      <div class="page-title-row">
+        <h2>🧩 Kho bài tập tương tác HTML theo Chủ đề &amp; Bài học</h2>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button type="button" class="header-btn" id="btn-exercises-checkin" style="background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8;">
+            <span>👨‍🎓</span>
+            <span id="ex-view-student-badge">Chưa khai báo Họ tên / Lớp</span>
+          </button>
+          <button type="button" class="header-btn btn-admin-header btn-admin-trigger" title="Giáo viên tải lên file HTML bài tập">
+            <span>➕</span>
+            <span>Tải lên bài tập HTML (GV)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-controls-row" style="flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+          <select id="ex-filter-topic" class="filter-dropdown-select" title="Lọc theo Chủ đề (Chương)">
+            <option value="all">Chủ đề: Tất cả các chương</option>
+          </select>
+          <select id="ex-filter-lesson" class="filter-dropdown-select" title="Lọc theo Bài học">
+            <option value="all">Bài học: Tất cả bài</option>
+          </select>
+        </div>
+        <div class="search-box-wrap" style="min-width: 220px;">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="ex-search-input" placeholder="Tìm tên bài tập, bài học..." />
+        </div>
+      </div>
+
+      <div class="exercises-grid" id="exercises-grid">
+        <!-- Dynamic HTML interactive exercise cards -->
+      </div>
+    </div>
+
     <!-- ================= VIEW 3: DANH SÁCH HỌC SINH (DYNAMIC FROM 9C2-9C3.XLSX) ================= -->
     <div class="view-container generic-tab-content" id="tab-students">
       <div class="page-title-row">
@@ -1697,7 +2086,87 @@
     <!-- ================= VIEW 6: THỐNG KÊ ================= -->
     <div class="view-container generic-tab-content" id="tab-analytics">
       <div class="page-title-row">
-        <h2>📈 Thống kê dạng lỗi thường gặp &amp; Tiến độ học tập</h2>
+        <h2>📈 Thống kê kết quả làm bài, thời gian &amp; Tiến độ học sinh</h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="header-btn" id="btn-export-results-csv" style="background:#ecfdf5; border-color:#a7f3d0; color:#047857;">
+            <span>📥</span>
+            <span>Xuất CSV thống kê</span>
+          </button>
+          <button type="button" class="header-btn" id="btn-clear-results-admin" style="background:#fef2f2; border-color:#fecaca; color:#b91c1c;">
+            <span>🗑️</span>
+            <span>Xoá lịch sử (GV)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards for Student Submissions -->
+      <div id="analytics-kpis-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px;">
+        <div class="summary-card" style="padding: 12px 14px; border-left: 3px solid #1877f2;">
+          <div style="font-size: 11.5px; color: #64748b;">Tổng lượt nộp bài</div>
+          <div style="font-size: 19px; font-weight: 700; color: #0f2b59;" id="stat-total-attempts">0 lượt</div>
+        </div>
+        <div class="summary-card" style="padding: 12px 14px; border-left: 3px solid #10b981;">
+          <div style="font-size: 11.5px; color: #64748b;">Điểm trung bình</div>
+          <div style="font-size: 19px; font-weight: 700; color: #10b981;" id="stat-avg-score">0.0 / 10</div>
+        </div>
+        <div class="summary-card" style="padding: 12px 14px; border-left: 3px solid #7e22ce;">
+          <div style="font-size: 11.5px; color: #64748b;">Mức độ làm bài TB</div>
+          <div style="font-size: 19px; font-weight: 700; color: #7e22ce;" id="stat-avg-completion">0%</div>
+        </div>
+        <div class="summary-card" style="padding: 12px 14px; border-left: 3px solid #f59e0b;">
+          <div style="font-size: 11.5px; color: #64748b;">Thời gian làm bài TB</div>
+          <div style="font-size: 19px; font-weight: 700; color: #d97706;" id="stat-avg-duration">00:00</div>
+        </div>
+      </div>
+
+      <!-- Filters for Student Statistics -->
+      <div class="filter-controls-row" style="flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+        <div class="filter-btn-group">
+          <button class="filter-tab-btn active" data-stat-class="all">Tất cả lớp</button>
+          <button class="filter-tab-btn" data-stat-class="9C2">Lớp 9C2</button>
+          <button class="filter-tab-btn" data-stat-class="9C3">Lớp 9C3</button>
+        </div>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+          <select id="stat-filter-mode" class="filter-dropdown-select">
+            <option value="all">Hình thức: Tất cả</option>
+            <option value="html">Bài tập tương tác HTML</option>
+            <option value="ai_review">Ôn tập cùng AI</option>
+          </select>
+          <select id="stat-filter-topic" class="filter-dropdown-select">
+            <option value="all">Chủ đề: Tất cả</option>
+          </select>
+          <div class="search-box-wrap" style="min-width: 200px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="stat-search-input" placeholder="Tìm tên học sinh, bài..." />
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Student Results Table -->
+      <div class="table-card" style="margin-bottom: 22px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 46px;">STT</th>
+              <th>Họ tên học sinh</th>
+              <th style="width: 72px;">Lớp</th>
+              <th>Chủ đề &amp; Bài học / Tên bài</th>
+              <th style="width: 115px;">Hình thức</th>
+              <th style="width: 85px;">Điểm số</th>
+              <th style="width: 165px;">Mức độ làm bài</th>
+              <th style="width: 100px;">Thời gian</th>
+              <th style="width: 120px;">Thời điểm nộp</th>
+            </tr>
+          </thead>
+          <tbody id="analytics-results-body">
+            <!-- Populated dynamically by renderAnalyticsResults() -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-title-row" style="margin-top: 8px;">
+        <h3 style="font-size: 16px; color: #0f2b59;">⚠️ Thống kê các dạng lỗi thường gặp môn Toán 9</h3>
         <span class="badge-tag tag-blue">Dữ liệu từ Ngân hàng lỗi sai kt.md</span>
       </div>
       <div class="table-card">
@@ -1756,7 +2225,11 @@
           </div>
         </div>
 
-        <div style="display: flex; gap: 8px;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" class="header-btn" id="btn-ai-exercises" title="Mở kho bài tập tương tác HTML theo chủ đề">
+            <span>🧩</span>
+            <span>Bài tập tương tác</span>
+          </button>
           <button type="button" class="header-btn" id="btn-admin-ai" title="Tải thêm tư liệu cho AI">
             <span>🔒</span>
             <span>Nạp tư liệu</span>
@@ -1765,6 +2238,20 @@
             <span>📝</span>
             <span>Tạo đề ôn tập</span>
           </button>
+        </div>
+      </div>
+
+      <!-- Active AI Topic Review Session Timer Bar -->
+      <div id="ai-review-timer-bar">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <span>👨‍🎓 <strong id="ai-timer-student">Chưa điểm danh</strong></span>
+          <span>&bull;</span>
+          <span style="color:#1d4ed8; font-weight:600;" id="ai-timer-topic">Đang ôn tập</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="ai-timer-pill" id="ai-timer-clock">⏱️ 00:00</span>
+          <button type="button" class="btn-modal-primary" id="btn-ai-submit-review" style="padding:5px 12px; font-size:12px;">✅ Nộp bài ôn tập</button>
+          <button type="button" class="btn-del-supp" id="btn-ai-cancel-review" style="padding:5px 10px; font-size:12px;">Huỷ</button>
         </div>
       </div>
 
@@ -1830,7 +2317,7 @@
       <div>
         <h2>📂 Quản lý nguồn tư liệu Trợ lý AI</h2>
         <p class="hint" style="margin-bottom:0;">
-          Hỗ trợ 2 định dạng: <strong>Markdown (.md)</strong> &amp; <strong>JSON (.json)</strong> &bull; Dung lượng: <strong>&lt; 20 MB/tệp</strong>
+          Hỗ trợ 3 định dạng: <strong>HTML bài tập tương tác (.html)</strong>, <strong>Markdown (.md)</strong> &amp; <strong>JSON (.json)</strong> &bull; Dung lượng: <strong>&lt; 20 MB/tệp</strong>
         </p>
       </div>
       <button type="button" class="btn-del-supp" id="btn-admin-logout" style="padding: 6px 14px; font-weight: 600;">Đăng xuất</button>
@@ -1845,7 +2332,7 @@
     <!-- Tabs inside Admin Modal: Upload File vs Paste Text -->
     <div style="display: flex; border-bottom: 1px solid var(--border); margin: 6px 0 12px; flex-shrink: 0;">
       <button type="button" class="admin-tab-btn active" id="btn-tab-upload-file" style="padding: 8px 16px; border: none; background: none; font-weight: 700; color: #1877f2; border-bottom: 2px solid #1877f2; cursor: pointer; font-size: 13px;">
-        📁 Tải lên tệp (.md / .json &lt; 20MB)
+        📁 Tải lên tệp (.html / .md / .json &lt; 20MB)
       </button>
       <button type="button" class="admin-tab-btn" id="btn-tab-paste-text" style="padding: 8px 16px; border: none; background: none; font-weight: 600; color: #64748b; border-bottom: 2px solid transparent; cursor: pointer; font-size: 13px;">
         ✍️ Dán trực tiếp nội dung
@@ -1855,13 +2342,32 @@
     <div style="flex: 1; overflow-y: auto; padding-right: 4px;">
       <!-- Panel 1: Upload File -->
       <div id="panel-upload-file">
+        <!-- Shared lesson suggestions datalist -->
+        <datalist id="lesson-suggestions">
+          <option value="Bài 1: Khái niệm phương trình và hệ hai phương trình bậc nhất hai ẩn"></option>
+          <option value="Bài 2: Giải hệ hai phương trình bậc nhất hai ẩn"></option>
+          <option value="Bài 3: Giải bài toán bằng cách lập hệ phương trình"></option>
+          <option value="Bài 1: Phương trình quy về phương trình bậc nhất một ẩn"></option>
+          <option value="Bài 2: Bất đẳng thức &amp; Bất phương trình bậc nhất một ẩn"></option>
+          <option value="Bài 1: Căn bậc hai và Căn bậc ba"></option>
+          <option value="Bài 2: Biến đổi đơn giản và rút gọn biểu thức chứa căn thức bậc hai"></option>
+          <option value="Bài 1: Tỉ số lượng giác của góc nhọn"></option>
+          <option value="Bài 2: Một số hệ thức về cạnh và góc trong tam giác vuông"></option>
+          <option value="Bài 1: Đường tròn, Góc ở tâm và Góc nội tiếp"></option>
+          <option value="Bài 2: Tiếp tuyến của đường tròn &amp; Tứ giác nội tiếp"></option>
+          <option value="Bài 1: Hàm số y = ax² và Phương trình bậc hai một ẩn"></option>
+          <option value="Bài 2: Định lý Viète và ứng dụng"></option>
+          <option value="Đề ôn tập tổng hợp vào lớp 10"></option>
+        </datalist>
+
         <!-- Drag & drop zone -->
         <div class="dropzone" id="admin-dropzone">
-          <input type="file" id="admin-file-input" accept=".md,.markdown,.json" style="display:none;" />
+          <input type="file" id="admin-file-input" accept=".md,.markdown,.json,.html,.htm" style="display:none;" />
           <div class="dropzone-icon">📄</div>
-          <div class="dropzone-title">Kéo thả tệp Markdown (.md) hoặc JSON (.json) vào đây</div>
+          <div class="dropzone-title">Kéo thả tệp HTML bài tập (.html), Markdown (.md) hoặc JSON (.json) vào đây</div>
           <div class="dropzone-subtitle">Hoặc bấm vào để duyệt tệp từ máy tính &bull; Giới hạn tối đa 20 MB/tệp</div>
-          <div style="margin-top: 10px; display: flex; justify-content: center; gap: 8px;">
+          <div style="margin-top: 10px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;">
+            <span class="file-badge-html">HTML Tương tác (.html)</span>
             <span class="file-badge-md">Markdown (.md)</span>
             <span class="file-badge-json">JSON (.json)</span>
             <span style="background: #f1f5f9; color: #475569; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600;">Dưới 20MB</span>
@@ -1879,31 +2385,72 @@
           </div>
           <div id="selected-file-desc" style="font-size: 12px; color: #64748b; margin-bottom: 8px;"></div>
           <label for="selected-file-title" style="margin: 6px 0 2px; font-size: 12.5px;">Tên tiêu đề hiển thị:</label>
-          <input type="text" id="selected-file-title" placeholder="Nhập tiêu đề tài liệu..." style="padding: 7px 10px; font-size: 13px;" />
+          <input type="text" id="selected-file-title" placeholder="Nhập tiêu đề bài tập / tài liệu..." style="padding: 7px 10px; font-size: 13px;" />
+
+          <div class="admin-meta-grid">
+            <div>
+              <label for="selected-file-topic" style="margin: 6px 0 2px; font-size: 12.5px;">Chủ đề (Chương):</label>
+              <select id="selected-file-topic" style="padding: 7px 10px; font-size: 13px;">
+                <option value="Chương I: Hệ hai phương trình bậc nhất hai ẩn">Chương I: Hệ hai phương trình bậc nhất hai ẩn</option>
+                <option value="Chương II: Phương trình và bất phương trình bậc nhất một ẩn">Chương II: Bất phương trình bậc nhất một ẩn</option>
+                <option value="Chương III: Căn bậc hai và căn bậc ba">Chương III: Căn bậc hai và căn bậc ba</option>
+                <option value="Chương IV: Hệ thức lượng trong tam giác vuông">Chương IV: Hệ thức lượng trong tam giác vuông</option>
+                <option value="Chương V: Đường tròn và góc với đường tròn">Chương V: Đường tròn và góc với đường tròn</option>
+                <option value="Chương VI: Phương trình bậc hai và định lý Vi-ét">Chương VI: Phương trình bậc hai và định lý Vi-ét</option>
+                <option value="Tổng hợp ôn thi vào lớp 10">Tổng hợp ôn thi vào lớp 10</option>
+                <option value="Tài liệu chuyên đề khác">Tài liệu chuyên đề khác</option>
+              </select>
+            </div>
+            <div>
+              <label for="selected-file-lesson" style="margin: 6px 0 2px; font-size: 12.5px;">Bài học cụ thể:</label>
+              <input type="text" id="selected-file-lesson" list="lesson-suggestions" placeholder="VD: Bài 1: Khái niệm phương trình..." style="padding: 7px 10px; font-size: 13px;" />
+            </div>
+          </div>
+
           <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;">
             <button type="button" class="btn-modal-cancel" id="btn-cancel-selected-file" style="padding: 7px 14px; font-size: 12.5px;">Huỷ chọn</button>
-            <button type="button" class="btn-modal-primary" id="btn-save-selected-file" style="padding: 7px 18px; font-size: 12.5px;">💾 Nạp vào bộ nhớ AI</button>
+            <button type="button" class="btn-modal-primary" id="btn-save-selected-file" style="padding: 7px 18px; font-size: 12.5px;">💾 Nạp vào hệ thống</button>
           </div>
         </div>
       </div>
 
       <!-- Panel 2: Paste Text -->
       <div id="panel-paste-text" style="display: none; background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
-        <div style="display: flex; gap: 10px; margin-bottom: 8px;">
-          <div style="flex: 1;">
+        <div style="display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 170px;">
             <label for="paste-doc-format" style="margin-top:0;">Định dạng:</label>
             <select id="paste-doc-format">
+              <option value="html">HTML Bài tập tương tác (.html)</option>
               <option value="markdown">Chuẩn Markdown (.md)</option>
               <option value="json">Chuẩn JSON (.json)</option>
             </select>
           </div>
-          <div style="flex: 2;">
-            <label for="paste-doc-title" style="margin-top:0;">Tiêu đề chuyên đề:</label>
-            <input type="text" id="paste-doc-title" placeholder="Ví dụ: Đề cương chuyên đề Hệ thức lượng HK1..." />
+          <div style="flex: 2; min-width: 220px;">
+            <label for="paste-doc-title" style="margin-top:0;">Tiêu đề bài tập / chuyên đề:</label>
+            <input type="text" id="paste-doc-title" placeholder="Ví dụ: Trắc nghiệm Hệ thức lượng trong tam giác vuông..." />
           </div>
         </div>
-        <label for="paste-doc-content">Nội dung (tối đa 20MB):</label>
-        <textarea id="paste-doc-content" rows="6" placeholder="Nhập hoặc dán nội dung Markdown hoặc JSON vào đây..."></textarea>
+        <div class="admin-meta-grid" style="margin-bottom: 8px;">
+          <div>
+            <label for="paste-doc-topic" style="margin-top:0;">Chủ đề (Chương):</label>
+            <select id="paste-doc-topic">
+              <option value="Chương I: Hệ hai phương trình bậc nhất hai ẩn">Chương I: Hệ hai phương trình bậc nhất hai ẩn</option>
+              <option value="Chương II: Phương trình và bất phương trình bậc nhất một ẩn">Chương II: Bất phương trình bậc nhất một ẩn</option>
+              <option value="Chương III: Căn bậc hai và căn bậc ba">Chương III: Căn bậc hai và căn bậc ba</option>
+              <option value="Chương IV: Hệ thức lượng trong tam giác vuông">Chương IV: Hệ thức lượng trong tam giác vuông</option>
+              <option value="Chương V: Đường tròn và góc với đường tròn">Chương V: Đường tròn và góc với đường tròn</option>
+              <option value="Chương VI: Phương trình bậc hai và định lý Vi-ét">Chương VI: Phương trình bậc hai và định lý Vi-ét</option>
+              <option value="Tổng hợp ôn thi vào lớp 10">Tổng hợp ôn thi vào lớp 10</option>
+              <option value="Tài liệu chuyên đề khác">Tài liệu chuyên đề khác</option>
+            </select>
+          </div>
+          <div>
+            <label for="paste-doc-lesson" style="margin-top:0;">Bài học:</label>
+            <input type="text" id="paste-doc-lesson" list="lesson-suggestions" placeholder="VD: Bài 1: Tỉ số lượng giác của góc nhọn..." />
+          </div>
+        </div>
+        <label for="paste-doc-content">Nội dung mã nguồn HTML / Markdown / JSON (tối đa 20MB):</label>
+        <textarea id="paste-doc-content" rows="6" placeholder="Dán mã nguồn HTML bài tập tương tác, hoặc nội dung Markdown / JSON vào đây..."></textarea>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
           <span id="paste-size-counter" style="font-size: 11.5px; color: #64748b;">Đã nhập: 0 ký tự (~0 KB)</span>
           <button type="button" class="btn-modal-primary" id="btn-save-pasted-doc" style="padding: 7px 18px; font-size: 12.5px;">💾 Nạp vào bộ nhớ AI</button>
@@ -1965,11 +2512,29 @@
   </div>
 </div>
 
-<!-- ================= MODAL 5: TẠO ĐỀ ÔN TẬP ================= -->
+<!-- ================= MODAL 5: TẠO ĐỀ ÔN TẬP (CÓ KHAI BÁO HỌC SINH & TÍNH GIỜ) ================= -->
 <div class="modal-overlay" id="overlay-quiz">
   <div class="modal-box">
-    <h2>📝 Tạo đề luyện tập Toán 9</h2>
-    <p class="hint">Cô Trợ Giảng sẽ soạn đề kèm gợi ý giải theo chuẩn Bộ sách giáo khoa Thống Nhất.</p>
+    <h2>📝 Tạo đề ôn tập theo Chủ đề &amp; Bài học</h2>
+    <p class="hint">Khai báo Họ tên &amp; Lớp để hệ thống bắt đầu tính thời gian làm bài và thống kê kết quả ôn tập.</p>
+
+    <div style="background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:10px;">
+      <div style="display:grid; grid-template-columns: 110px 1fr; gap:8px;">
+        <div>
+          <label for="quiz-student-class" style="margin-top:0; font-size:12px;">Lớp học (*):</label>
+          <select id="quiz-student-class" style="padding:7px 8px; font-size:13px;">
+            <option value="9C2">9C2</option>
+            <option value="9C3">9C3</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+        <div>
+          <label for="quiz-student-name" style="margin-top:0; font-size:12px;">Họ và tên học sinh (*):</label>
+          <input type="text" id="quiz-student-name" list="students-datalist" placeholder="Chọn hoặc nhập họ tên..." autocomplete="off" style="padding:7px 10px; font-size:13px;" />
+        </div>
+      </div>
+    </div>
+
     <label for="quiz-topic">Chủ đề bài tập:</label>
     <select id="quiz-topic">
       <option value="Hệ hai phương trình bậc nhất hai ẩn">Chương I: Hệ hai phương trình bậc nhất hai ẩn</option>
@@ -1980,6 +2545,9 @@
       <option value="Phương trình bậc hai và định lý Vi-ét">Chương VI: Phương trình bậc hai &amp; Định lý Vi-ét</option>
       <option value="Tổng hợp ôn thi vào lớp 10">Đề tổng hợp cấu trúc thi vào lớp 10</option>
     </select>
+
+    <label for="quiz-lesson">Bài học trọng tâm (tuỳ chọn):</label>
+    <input type="text" id="quiz-lesson" list="lesson-suggestions" placeholder="VD: Bài 1: Tỉ số lượng giác... (để trống nếu ôn cả chương)" />
 
     <label for="quiz-level">Mức độ:</label>
     <select id="quiz-level">
@@ -1997,6 +2565,114 @@
     <div class="actions">
       <button type="button" class="btn-modal-cancel" id="btn-quiz-cancel">Huỷ</button>
       <button type="button" class="btn-modal-primary" id="btn-quiz-create">Tạo đề ngay</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODAL 6: KHAI BÁO THÔNG TIN HỌC SINH (SESSION ONLY) ================= -->
+<div class="modal-overlay" id="overlay-student-checkin" style="z-index: 65;">
+  <div class="modal-box">
+    <h2>👨‍🎓 Khai báo thông tin học sinh</h2>
+    <p class="hint">Vui lòng điền đầy đủ <strong>Họ và tên</strong> &amp; <strong>Lớp học</strong> trước khi làm bài tập để hệ thống thống kê điểm số, mức độ hoàn thành và thời gian làm bài.</p>
+
+    <form id="student-checkin-form">
+      <label for="checkin-class">Chọn lớp học (*):</label>
+      <select id="checkin-class" required>
+        <option value="9C2">Lớp 9C2</option>
+        <option value="9C3">Lớp 9C3</option>
+        <option value="Khác">Lớp khác / Tự do</option>
+      </select>
+
+      <label for="checkin-student-select">Chọn nhanh từ danh sách lớp:</label>
+      <select id="checkin-student-select">
+        <option value="">-- Chọn tên em trong danh sách (hoặc nhập ở ô dưới) --</option>
+      </select>
+
+      <label for="checkin-name">Họ và tên học sinh (*):</label>
+      <input type="text" id="checkin-name" list="students-datalist" placeholder="Nhập đầy đủ Họ và tên..." autocomplete="off" required />
+      <datalist id="students-datalist"></datalist>
+
+      <div id="checkin-error" style="display:none; color:#dc2626; font-size:12px; margin-top:8px; font-weight:600;"></div>
+
+      <div class="actions">
+        <button type="button" class="btn-modal-cancel" id="btn-checkin-cancel">Huỷ</button>
+        <button type="submit" class="btn-modal-primary" id="btn-checkin-confirm">Bắt đầu làm bài ➔</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= MODAL 7: KHO BÀI TẬP HTML TRONG CHATBOT AI ================= -->
+<div class="modal-overlay" id="overlay-ai-exercises" style="z-index: 60;">
+  <div class="modal-box modal-lg" style="max-height:85vh; display:flex; flex-direction:column;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-shrink:0;">
+      <h2 style="margin:0;">🧩 Bài tập tương tác theo Chủ đề &amp; Bài học</h2>
+      <button type="button" class="btn-del-supp" id="btn-close-ai-exercises" style="background:#e2e8f0; color:#334155;">✕ Đóng</button>
+    </div>
+    <p class="hint" style="margin-bottom:10px; flex-shrink:0;">Chọn bài tập HTML tương tác do cô giáo tải lên để làm trực tiếp và ghi nhận điểm tự động.</p>
+    <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; flex-shrink:0;">
+      <select id="ai-ex-filter-topic" class="filter-dropdown-select" style="flex:1; min-width:180px;">
+        <option value="all">Chủ đề: Tất cả</option>
+      </select>
+      <input type="text" id="ai-ex-search" placeholder="Tìm nhanh bài học, tên bài..." style="flex:1; min-width:180px; margin:0; padding:7px 11px; border:1px solid var(--border); border-radius:8px; font-size:13px;" />
+    </div>
+    <div id="ai-exercises-list" style="flex:1; overflow-y:auto;">
+      <!-- Dynamic items -->
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODAL 8: TRÌNH LÀM BÀI TẬP TƯƠNG TÁC HTML (IFRAME PLAYER + TIMER) ================= -->
+<div class="modal-overlay" id="overlay-exercise-player" style="z-index: 75;">
+  <div class="modal-box player-modal-box">
+    <div class="player-header-bar">
+      <div class="player-title-wrap">
+        <h3 id="player-ex-title">Bài tập tương tác Toán 9</h3>
+        <div class="player-title-sub" id="player-ex-sub">👨‍🎓 Học sinh &bull; Chủ đề &bull; Bài học</div>
+      </div>
+      <div class="player-controls-wrap">
+        <div class="player-timer-chip" id="player-timer-chip">⏱️ 00:00</div>
+        <button type="button" class="btn-modal-primary" id="btn-player-submit" style="background:#10b981; border:none; padding:7px 14px; font-size:12.5px;">✅ Nộp bài &amp; Ghi nhận điểm</button>
+        <button type="button" class="btn-modal-cancel" id="btn-player-close" style="background:rgba(255,255,255,0.18); color:#fff; border:none; padding:7px 12px; font-size:12.5px;">✕ Đóng</button>
+      </div>
+    </div>
+    <div class="player-captured-banner" id="player-captured-banner">
+      <span id="player-captured-text">🎉 Đã tự động ghi nhận kết quả từ bài làm!</span>
+      <button type="button" class="btn-modal-primary" id="btn-player-confirm-captured" style="background:#16a34a; padding:5px 12px; font-size:12px;">Lưu thống kê ngay</button>
+    </div>
+    <iframe id="exercise-iframe" sandbox="allow-scripts allow-forms allow-same-origin allow-modals" title="Bài tập tương tác HTML Toán 9"></iframe>
+  </div>
+</div>
+
+<!-- ================= MODAL 9: XÁC NHẬN & LƯU KẾT QUẢ LÀM BÀI ================= -->
+<div class="modal-overlay" id="overlay-submit-result" style="z-index: 80;">
+  <div class="modal-box">
+    <h2>🏆 Ghi nhận kết quả làm bài</h2>
+    <p class="hint" id="submit-result-summary">Thông tin bài làm của em sẽ được lưu vào bảng thống kê lớp học.</p>
+
+    <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:10px 12px; margin-bottom:10px; font-size:12.5px; color:#0369a1;">
+      <div>👨‍🎓 Học sinh: <strong id="sub-res-student"></strong> (<strong id="sub-res-class"></strong>)</div>
+      <div style="margin-top:3px;">📚 Bài: <strong id="sub-res-title"></strong></div>
+      <div style="margin-top:3px;">⏱️ Thời gian thực hiện: <strong id="sub-res-duration">00:00</strong></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+      <div>
+        <label for="sub-res-score">Điểm số (thang 10):</label>
+        <input type="number" id="sub-res-score" min="0" max="10" step="0.25" value="8" />
+      </div>
+      <div>
+        <label for="sub-res-completion">Mức độ hoàn thành (%):</label>
+        <input type="number" id="sub-res-completion" min="0" max="100" step="5" value="100" />
+      </div>
+    </div>
+
+    <label for="sub-res-notes">Ghi chú / Tự nhận xét bài làm (tuỳ chọn):</label>
+    <input type="text" id="sub-res-notes" placeholder="VD: Đã nắm vững phương pháp, cần cẩn thận phép tính..." />
+
+    <div class="actions">
+      <button type="button" class="btn-modal-cancel" id="btn-sub-res-cancel">Làm tiếp</button>
+      <button type="button" class="btn-modal-primary" id="btn-sub-res-save">💾 Lưu kết quả vào thống kê</button>
     </div>
   </div>
 </div>
@@ -2905,11 +3581,12 @@
     return (bytes / Math.pow(k, i)).toFixed(1) + " " + sizes[i];
   }
 
-  // ================= 2. QUẢN LÝ DỮ LIỆU TƯ LIỆU INDEXEDDB (< 20MB) =================
+  // ================= 2. QUẢN LÝ DỮ LIỆU TƯ LIỆU & KẾT QUẢ BÀI TẬP INDEXEDDB (< 20MB) =================
   var DocDB = (function() {
     var DB_NAME = "Toan9_KnowledgeDB";
-    var DB_VERSION = 1;
+    var DB_VERSION = 2;
     var STORE_NAME = "knowledge_docs";
+    var RESULTS_STORE = "exercise_results";
     var dbPromise = null;
 
     function openDB() {
@@ -2925,6 +3602,9 @@
           var db = e.target.result;
           if (!db.objectStoreNames.contains(STORE_NAME)) {
             db.createObjectStore(STORE_NAME, { keyPath: "id" });
+          }
+          if (!db.objectStoreNames.contains(RESULTS_STORE)) {
+            db.createObjectStore(RESULTS_STORE, { keyPath: "id" });
           }
         };
         req.onsuccess = function(e) { resolve(e.target.result); };
@@ -3022,11 +3702,71 @@
       });
     }
 
+    function getAllResults() {
+      return openDB().then(function(db) {
+        if (!db) {
+          try {
+            var raw = localStorage.getItem("gsToan9_exercise_results");
+            return raw ? JSON.parse(raw) : [];
+          } catch (e) { return []; }
+        }
+        return new Promise(function(resolve) {
+          var tx = db.transaction(RESULTS_STORE, "readonly");
+          var store = tx.objectStore(RESULTS_STORE);
+          var req = store.getAll();
+          req.onsuccess = function() {
+            var res = req.result || [];
+            res.sort(function(a, b) { return (b.timestamp || 0) - (a.timestamp || 0); });
+            resolve(res);
+          };
+          req.onerror = function() { resolve([]); };
+        });
+      });
+    }
+
+    function saveResult(resObj) {
+      return openDB().then(function(db) {
+        if (!db) {
+          var list = [];
+          try { list = JSON.parse(localStorage.getItem("gsToan9_exercise_results") || "[]"); } catch(e){}
+          list.unshift(resObj);
+          try { localStorage.setItem("gsToan9_exercise_results", JSON.stringify(list)); } catch(e){}
+          return resObj;
+        }
+        return new Promise(function(resolve, reject) {
+          var tx = db.transaction(RESULTS_STORE, "readwrite");
+          var store = tx.objectStore(RESULTS_STORE);
+          var req = store.put(resObj);
+          req.onsuccess = function() { resolve(resObj); };
+          req.onerror = function(e) { reject(e.target.error); };
+        });
+      });
+    }
+
+    function clearResults() {
+      return openDB().then(function(db) {
+        if (!db) {
+          try { localStorage.removeItem("gsToan9_exercise_results"); } catch(e){}
+          return;
+        }
+        return new Promise(function(resolve, reject) {
+          var tx = db.transaction(RESULTS_STORE, "readwrite");
+          var store = tx.objectStore(RESULTS_STORE);
+          var req = store.clear();
+          req.onsuccess = function() { resolve(); };
+          req.onerror = function(e) { reject(e.target.error); };
+        });
+      });
+    }
+
     return {
       getAll: getAllDocs,
       save: saveDoc,
       delete: deleteDoc,
-      toggle: toggleDoc
+      toggle: toggleDoc,
+      getAllResults: getAllResults,
+      saveResult: saveResult,
+      clearResults: clearResults
     };
   })();
 
@@ -3133,6 +3873,8 @@
   var selectedFileSize = document.getElementById("selected-file-size");
   var selectedFileDesc = document.getElementById("selected-file-desc");
   var selectedFileTitle = document.getElementById("selected-file-title");
+  var selectedFileTopic = document.getElementById("selected-file-topic");
+  var selectedFileLesson = document.getElementById("selected-file-lesson");
   var btnCancelSelectedFile = document.getElementById("btn-cancel-selected-file");
   var btnSaveSelectedFile = document.getElementById("btn-save-selected-file");
 
@@ -3164,13 +3906,18 @@
     }
   });
 
+  function extractHtmlTitle(htmlStr) {
+    var m = /<title[^>]*>([^<]+)<\/title>/i.exec(htmlStr || "");
+    return m ? m[1].trim() : "";
+  }
+
   function processSelectedFile(file) {
     var fileName = file.name;
     var ext = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
 
-    // 1. Kiểm tra định dạng: Chỉ chấp nhận Markdown (.md, .markdown) và JSON (.json)
-    if (ext !== "md" && ext !== "markdown" && ext !== "json") {
-      alert("Định dạng tệp không được hỗ trợ!\n\nHệ thống chỉ hỗ trợ 2 hình thức tệp:\n1. Chuẩn Markdown (.md)\n2. Chuẩn JSON (.json)\n\nTệp bạn vừa chọn là: ." + ext);
+    // 1. Kiểm tra định dạng: HTML (.html, .htm), Markdown (.md, .markdown) và JSON (.json)
+    if (ext !== "md" && ext !== "markdown" && ext !== "json" && ext !== "html" && ext !== "htm") {
+      alert("Định dạng tệp không được hỗ trợ!\n\nHệ thống hỗ trợ 3 hình thức tệp:\n1. HTML bài tập tương tác (.html / .htm)\n2. Chuẩn Markdown (.md)\n3. Chuẩn JSON (.json)\n\nTệp bạn vừa chọn là: ." + ext);
       adminFileInput.value = "";
       return;
     }
@@ -3184,6 +3931,7 @@
     }
 
     var isJson = (ext === "json");
+    var isHtml = (ext === "html" || ext === "htm");
     var reader = new FileReader();
 
     reader.onload = function (e) {
@@ -3208,13 +3956,17 @@
           adminFileInput.value = "";
           return;
         }
+      } else if (isHtml) {
+        var detectedTitle = extractHtmlTitle(content);
+        summaryText = "Bài tập HTML tương tác" + (detectedTitle ? " — \"" + detectedTitle + "\"" : "") + " (" + content.length.toLocaleString("vi-VN") + " ký tự)";
       } else {
         summaryText = "Tài liệu chuẩn Markdown (" + content.length.toLocaleString("vi-VN") + " ký tự)";
       }
 
+      var fileType = isHtml ? "html" : (isJson ? "json" : "markdown");
       currentSelectedFile = {
         name: fileName,
-        type: isJson ? "json" : "markdown",
+        type: fileType,
         size: file.size,
         sizeFormatted: formatBytes(file.size),
         content: content,
@@ -3224,12 +3976,13 @@
       };
 
       // Cập nhật giao diện xem trước tệp chọn
-      selectedFileBadge.className = isJson ? "file-badge-json" : "file-badge-md";
-      selectedFileBadge.textContent = isJson ? "JSON" : "MARKDOWN";
+      selectedFileBadge.className = isHtml ? "file-badge-html" : (isJson ? "file-badge-json" : "file-badge-md");
+      selectedFileBadge.textContent = isHtml ? "HTML BÀI TẬP" : (isJson ? "JSON" : "MARKDOWN");
       selectedFileName.textContent = fileName;
       selectedFileSize.textContent = currentSelectedFile.sizeFormatted;
       selectedFileDesc.textContent = summaryText;
-      selectedFileTitle.value = fileName.replace(/\.[^.]+$/, "");
+      selectedFileTitle.value = (isHtml && extractHtmlTitle(content)) || fileName.replace(/\.[^.]+$/, "");
+      selectedFileLesson.value = "";
 
       selectedFileWrap.style.display = "block";
       adminDropzone.style.display = "none";
@@ -3252,11 +4005,15 @@
   btnSaveSelectedFile.addEventListener("click", function () {
     if (!currentSelectedFile) return;
     var title = selectedFileTitle.value.trim() || currentSelectedFile.name;
+    var topic = selectedFileTopic.value || "Tài liệu chuyên đề khác";
+    var lesson = selectedFileLesson.value.trim() || "Bài học tổng hợp";
     var doc = {
       id: "doc_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
       title: title,
       name: currentSelectedFile.name,
       type: currentSelectedFile.type,
+      topic: topic,
+      lesson: lesson,
       size: currentSelectedFile.size,
       sizeFormatted: currentSelectedFile.sizeFormatted,
       content: currentSelectedFile.content,
@@ -3273,7 +4030,8 @@
       adminDropzone.style.display = "block";
       adminFileInput.value = "";
       renderSuppDocsList();
-      showStatus("Đã nạp tệp " + doc.name + " (" + doc.sizeFormatted + ") vào bộ nhớ AI!", "ok");
+      if (typeof renderInteractiveExercisesView === "function") renderInteractiveExercisesView();
+      showStatus("Đã nạp tệp " + doc.name + " (" + doc.sizeFormatted + ") vào hệ thống!", "ok");
       setTimeout(hideStatus, 2500);
     }).catch(function (err) {
       alert("Lỗi khi lưu tệp: " + err);
@@ -3283,6 +4041,8 @@
   // Direct Paste Handler
   var pasteDocFormat = document.getElementById("paste-doc-format");
   var pasteDocTitle = document.getElementById("paste-doc-title");
+  var pasteDocTopic = document.getElementById("paste-doc-topic");
+  var pasteDocLesson = document.getElementById("paste-doc-lesson");
   var pasteDocContent = document.getElementById("paste-doc-content");
   var pasteSizeCounter = document.getElementById("paste-size-counter");
   var btnSavePastedDoc = document.getElementById("btn-save-pasted-doc");
@@ -3297,6 +4057,8 @@
     var title = pasteDocTitle.value.trim();
     var content = pasteDocContent.value.trim();
     var format = pasteDocFormat.value;
+    var topic = pasteDocTopic.value || "Tài liệu chuyên đề khác";
+    var lesson = pasteDocLesson.value.trim() || "Bài học tổng hợp";
 
     if (!title || !content) {
       alert("Vui lòng nhập đầy đủ tiêu đề và nội dung.");
@@ -3321,15 +4083,20 @@
         alert("Lỗi cú pháp JSON:\n" + err.message + "\n\nVui lòng nhập đúng định dạng JSON hợp lệ.");
         return;
       }
+    } else if (format === "html") {
+      summary = "Bài tập HTML tương tác (" + content.length.toLocaleString("vi-VN") + " ký tự)";
     } else {
       summary = "Nội dung soạn thảo Markdown (" + content.length.toLocaleString("vi-VN") + " ký tự)";
     }
 
+    var extSuffix = format === "json" ? ".json" : (format === "html" ? ".html" : ".md");
     var doc = {
       id: "doc_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
       title: title,
-      name: title + (format === "json" ? ".json" : ".md"),
+      name: title + extSuffix,
       type: format,
+      topic: topic,
+      lesson: lesson,
       size: byteSize,
       sizeFormatted: formatBytes(byteSize),
       content: content,
@@ -3342,10 +4109,12 @@
 
     DocDB.save(doc).then(function () {
       pasteDocTitle.value = "";
+      pasteDocLesson.value = "";
       pasteDocContent.value = "";
       pasteSizeCounter.textContent = "Đã nhập: 0 ký tự (~0 KB)";
       renderSuppDocsList();
-      showStatus("Đã nạp tư liệu mới vào bộ nhớ AI!", "ok");
+      if (typeof renderInteractiveExercisesView === "function") renderInteractiveExercisesView();
+      showStatus("Đã nạp dữ liệu mới vào hệ thống!", "ok");
       setTimeout(hideStatus, 2500);
     });
   });
@@ -3366,26 +4135,28 @@
 
       var html = "";
       docs.forEach(function (d) {
+        var isHtml = (d.type === "html");
         var isMd = (d.type === "markdown");
-        var badgeClass = isMd ? "file-badge-md" : "file-badge-json";
-        var badgeText = isMd ? "MARKDOWN" : "JSON";
+        var badgeClass = isHtml ? "file-badge-html" : (isMd ? "file-badge-md" : "file-badge-json");
+        var badgeText = isHtml ? "HTML BÀI TẬP" : (isMd ? "MARKDOWN" : "JSON");
         var isChecked = (d.active !== false) ? "checked" : "";
+        var topicMeta = d.topic ? ' &bull; <strong style="color:#0369a1;">' + escapeHtml(d.topic) + '</strong>' : '';
+        var lessonMeta = d.lesson ? ' &bull; <span>' + escapeHtml(d.lesson) + '</span>' : '';
 
         html += '<div class="supp-item">' +
           '<div class="supp-item-left" style="display:flex; align-items:flex-start; gap:10px; flex:1; min-width:0;">' +
-            '<span class="' + badgeClass + '" style="margin-top:2px;">' + badgeText + '</span>' +
+            '<span class="' + badgeClass + '" style="margin-top:2px; flex-shrink:0;">' + badgeText + '</span>' +
             '<div style="overflow:hidden; text-overflow:ellipsis;">' +
               '<div class="supp-title" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + escapeHtml(d.title) + '</div>' +
-              '<div class="supp-meta">' +
+              '<div class="supp-meta" style="flex-wrap:wrap;">' +
                 '<span>' + d.sizeFormatted + '</span> &bull; ' +
-                '<span>' + d.time + '</span>' +
-                (d.summary ? ' &bull; <span>' + escapeHtml(d.summary) + '</span>' : '') +
+                '<span>' + d.time + '</span>' + topicMeta + lessonMeta +
               '</div>' +
             '</div>' +
           '</div>' +
           '<div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">' +
-            '<label style="display:flex; align-items:center; gap:4px; font-size:11.5px; color:#475569; margin:0; cursor:pointer;" title="Bật/Tắt tư liệu cho AI">' +
-              '<input type="checkbox" ' + isChecked + ' onchange="toggleSuppDoc(\'' + d.id + '\', this.checked)" style="width:16px; height:16px; cursor:pointer;" /> AI dùng' +
+            '<label style="display:flex; align-items:center; gap:4px; font-size:11.5px; color:#475569; margin:0; cursor:pointer;" title="' + (isHtml ? "Hiển thị cho học sinh" : "Bật/Tắt tư liệu cho AI") + '">' +
+              '<input type="checkbox" ' + isChecked + ' onchange="toggleSuppDoc(\'' + d.id + '\', this.checked)" style="width:16px; height:16px; cursor:pointer;" /> ' + (isHtml ? "Mở bài" : "AI dùng") +
             '</label>' +
             '<button class="btn-preview-supp" onclick="previewSuppDoc(\'' + d.id + '\')">Xem</button>' +
             '<button class="btn-del-supp" onclick="deleteSuppDoc(\'' + d.id + '\')">Xoá</button>' +
@@ -3399,14 +4170,16 @@
   window.toggleSuppDoc = function (id, checked) {
     DocDB.toggle(id, checked).then(function () {
       renderSuppDocsList();
+      if (typeof renderInteractiveExercisesView === "function") renderInteractiveExercisesView();
     });
   };
 
   window.deleteSuppDoc = function (id) {
-    if (confirm("Em/Cô có chắc chắn muốn xoá tài liệu này khỏi bộ nhớ AI?")) {
+    if (confirm("Cô có chắc chắn muốn xoá tệp này khỏi hệ thống?")) {
       DocDB.delete(id).then(function () {
         renderSuppDocsList();
-        showStatus("Đã xoá tài liệu khỏi bộ nhớ AI.", "ok");
+        if (typeof renderInteractiveExercisesView === "function") renderInteractiveExercisesView();
+        showStatus("Đã xoá tệp khỏi hệ thống.", "ok");
         setTimeout(hideStatus, 2000);
       });
     }
@@ -3417,14 +4190,18 @@
       var doc = docs.find(function (d) { return d.id === id; });
       if (!doc) return;
 
+      var isHtml = (doc.type === "html");
       var isMd = (doc.type === "markdown");
-      document.getElementById("preview-doc-badge").className = isMd ? "file-badge-md" : "file-badge-json";
-      document.getElementById("preview-doc-badge").textContent = isMd ? "MARKDOWN" : "JSON";
+      document.getElementById("preview-doc-badge").className = isHtml ? "file-badge-html" : (isMd ? "file-badge-md" : "file-badge-json");
+      document.getElementById("preview-doc-badge").textContent = isHtml ? "HTML BÀI TẬP" : (isMd ? "MARKDOWN" : "JSON");
       document.getElementById("preview-doc-title").textContent = doc.title;
-      document.getElementById("preview-doc-meta").textContent = "Tệp: " + doc.name + " • Dung lượng: " + doc.sizeFormatted + " • Cập nhật: " + doc.time;
+      document.getElementById("preview-doc-meta").textContent = "Tệp: " + doc.name + (doc.topic ? " • " + doc.topic : "") + (doc.lesson ? " • " + doc.lesson : "") + " • Dung lượng: " + doc.sizeFormatted;
 
       var bodyEl = document.getElementById("preview-doc-body");
-      if (isMd) {
+      if (isHtml) {
+        bodyEl.innerHTML = '<iframe id="preview-html-frame" sandbox="allow-scripts allow-forms allow-same-origin" style="width:100%; height:48vh; border:1px solid #cbd5e1; border-radius:8px; background:#fff;"></iframe>';
+        document.getElementById("preview-html-frame").srcdoc = doc.content;
+      } else if (isMd) {
         bodyEl.innerHTML = formatContent(doc.content);
       } else {
         try {
@@ -3702,9 +4479,11 @@
     sidebar.classList.remove("mobile-open");
     sidebarBackdrop.classList.remove("show");
 
+    if (targetId === "tab-exercises" && typeof renderInteractiveExercisesView === "function") renderInteractiveExercisesView();
     if (targetId === "tab-students") renderStudentTable();
     if (targetId === "tab-grades") renderGradeTable();
     if (targetId === "tab-reports") renderReportView();
+    if (targetId === "tab-analytics" && typeof renderAnalyticsResults === "function") renderAnalyticsResults();
   }
 
   navItems.forEach(function (item) {
@@ -3912,7 +4691,16 @@
   // Xây dựng System Prompt với trích lọc ngữ cảnh thông minh từ tư liệu (< 20MB)
   async function buildDynamicSystemPrompt(userQuery) {
     var suppDocs = await DocDB.getAll();
-    var activeDocs = suppDocs.filter(function (d) { return d.active !== false; });
+    var activeDocs = suppDocs.filter(function (d) { return d.active !== false && d.type !== "html"; });
+    var activeHtmlExercises = suppDocs.filter(function (d) { return d.active !== false && d.type === "html"; });
+    var htmlCatalogSection = "";
+    if (activeHtmlExercises.length > 0) {
+      htmlCatalogSection = "\n\n===== KHO BÀI TẬP TƯƠNG TÁC HTML ĐANG MỞ CHO HỌC SINH =====\n" +
+        activeHtmlExercises.map(function (ex) {
+          return "- [" + (ex.topic || "Toán 9") + " | " + (ex.lesson || "") + "] " + ex.title;
+        }).join("\n") +
+        "\n(Lưu ý: Nếu học sinh hỏi đúng chủ đề trên, cô hãy nhắc nhẹ em bấm vào thẻ Bài tập tương tác bên dưới tin nhắn để làm bài trực tiếp và lưu điểm nhé!)\n";
+    }
     var suppSection = "";
 
     if (activeDocs.length > 0) {
@@ -3983,6 +4771,7 @@
     return state.rawTc +
       "\n\n===== HẾT PHẦN TÍNH CÁCH — BẮT ĐẦU PHẦN KIẾN THỨC (kt.md) =====\n\n" +
       state.rawKt +
+      htmlCatalogSection +
       suppSection +
       "\n\n===== HẾT TÀI LIỆU. QUY TRÌNH SƯ PHẠM 3 BƯỚC BẮT BUỘC CỦA GIÁO VIÊN TOÁN:\n" +
       "1) LÀM THEO ĐÚNG YÊU CẦU: Trả lời trọn vẹn, đủ ý, cung cấp đủ số lượng bài tập theo yêu cầu (từ Bài 1 đến Bài 10), tuyệt đối không cụt ý.\n" +
@@ -4087,7 +4876,8 @@
           botText = "Cô chưa nhận được câu trả lời đầy đủ. Em thử gửi lại câu hỏi nhé!";
         }
 
-        addMessage("bot", botText);
+        var botBubble = addMessage("bot", botText);
+        attachMatchingExercisesToBubble(botBubble, text + " " + botText);
         state.history.push({
           role: "model",
           parts: [{ text: botText }]
@@ -4163,20 +4953,44 @@
     setTimeout(hideStatus, 2000);
   });
 
-  // Quiz Modal
+  // Quiz Modal (Yêu cầu Họ tên & Lớp + Bắt đầu tính thời gian làm bài ôn tập)
   els.btnOpenQuiz.addEventListener("click", function () {
+    var sess = getStudentSession();
+    var qClass = document.getElementById("quiz-student-class");
+    var qName = document.getElementById("quiz-student-name");
+    if (sess) {
+      qClass.value = sess.studentClass || "9C2";
+      qName.value = sess.studentName || "";
+    }
+    populateStudentDatalist(qClass.value);
     els.overlayQuiz.className = "modal-overlay show";
+  });
+  document.getElementById("quiz-student-class").addEventListener("change", function () {
+    populateStudentDatalist(this.value);
   });
   els.btnQuizCancel.addEventListener("click", function () {
     els.overlayQuiz.className = "modal-overlay";
   });
   els.btnQuizCreate.addEventListener("click", function () {
+    var sClass = document.getElementById("quiz-student-class").value;
+    var sName = document.getElementById("quiz-student-name").value.trim();
+    if (!sName || !sClass) {
+      alert("Vui lòng nhập đầy đủ Họ tên và chọn Lớp học trước khi bắt đầu đề ôn tập!");
+      document.getElementById("quiz-student-name").focus();
+      return;
+    }
+    setStudentSession(sName, sClass);
+
     var topic = els.quizTopic.value;
+    var lesson = (document.getElementById("quiz-lesson").value || "").trim();
     var level = els.quizLevel.value;
     var count = els.quizCount.value;
     els.overlayQuiz.className = "modal-overlay";
 
-    var prompt = "Cô soạn giúp em một đề luyện tập gồm " + count + " bài tập về chủ đề '" + topic + "' ở mức độ '" + level + "'. Yêu cầu kèm theo gợi ý phương pháp giải từng bước để em tự làm trên giấy nháp trước khi xem hướng dẫn chi tiết.";
+    startAiReviewSession(sName, sClass, topic, lesson, level, count);
+
+    var lessonPart = lesson ? (" (trọng tâm: " + lesson + ")") : "";
+    var prompt = "Em tên là " + sName + " (lớp " + sClass + "). Cô soạn giúp em một đề ôn tập gồm " + count + " bài tập về chủ đề '" + topic + "'" + lessonPart + " ở mức độ '" + level + "'. Yêu cầu trình bày rõ từng bài để em tự làm và bấm Nộp bài chấm điểm nhé!";
     sendMessage(prompt);
   });
 
@@ -4188,12 +5002,868 @@
     });
   });
 
-  // ================= 9. KHỞI CHẠY HỆ THỐNG =================
+  // ================= 9. HỌC SINH ĐIỂM DANH (SESSION-ONLY), BÀI TẬP HTML TƯƠNG TÁC & THỐNG KÊ =================
+  var currentPendingAction = null;
+  var activePlayerContext = null;
+  var playerTimerInterval = null;
+  var playerElapsedSec = 0;
+  var playerCapturedResult = null;
+
+  var activeAiReview = null;
+  var aiReviewTimerInterval = null;
+  var pendingSubmitContext = null;
+
+  function formatDurationMMSS(sec) {
+    var s = Math.max(0, parseInt(sec, 10) || 0);
+    var m = Math.floor(s / 60);
+    var rem = s % 60;
+    return (m < 10 ? "0" + m : "" + m) + ":" + (rem < 10 ? "0" + rem : "" + rem);
+  }
+
+  function formatDurationReadable(sec) {
+    var s = Math.max(0, parseInt(sec, 10) || 0);
+    var m = Math.floor(s / 60);
+    var rem = s % 60;
+    if (m === 0) return rem + " giây";
+    return m + " phút " + (rem < 10 ? "0" + rem : rem) + " giây";
+  }
+
+  function classifyPerformance(score, completionPct) {
+    if (score >= 9.0 && completionPct >= 80) return { label: "Xuất sắc", tag: "tag-purple" };
+    if (score >= 8.0) return { label: "Giỏi", tag: "tag-green" };
+    if (score >= 6.5) return { label: "Khá", tag: "tag-blue" };
+    if (score >= 5.0) return { label: "Đạt", tag: "tag-yellow" };
+    return { label: "Cần cố gắng", tag: "tag-red" };
+  }
+
+  function getStudentSession() {
+    try {
+      var raw = sessionStorage.getItem("gsToan9_student_session");
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      return (parsed && parsed.studentName && parsed.studentClass) ? parsed : null;
+    } catch (e) { return null; }
+  }
+
+  function setStudentSession(name, lop) {
+    var info = { studentName: name.trim(), studentClass: lop.trim() };
+    sessionStorage.setItem("gsToan9_student_session", JSON.stringify(info));
+    updateStudentSessionUI();
+  }
+
+  function updateStudentSessionUI() {
+    var sess = getStudentSession();
+    var pill = document.getElementById("student-session-pill");
+    var label = document.getElementById("student-session-label");
+    var exBadge = document.getElementById("ex-view-student-badge");
+    if (sess) {
+      pill.classList.remove("pending");
+      label.textContent = sess.studentName + " (" + sess.studentClass + ")";
+      if (exBadge) exBadge.textContent = "HS: " + sess.studentName + " • " + sess.studentClass;
+    } else {
+      pill.classList.add("pending");
+      label.textContent = "Khai báo HS";
+      if (exBadge) exBadge.textContent = "Chưa khai báo Họ tên / Lớp";
+    }
+  }
+
+  function populateStudentDatalist(lopFilter) {
+    var dl = document.getElementById("students-datalist");
+    var sel = document.getElementById("checkin-student-select");
+    var list = STUDENTS_DATA.filter(function (s) {
+      return !lopFilter || lopFilter === "Khác" || lopFilter === "all" || s.lop === lopFilter;
+    });
+    if (dl) {
+      dl.innerHTML = list.map(function (s) {
+        return '<option value="' + escapeHtml(s.ho_ten) + '">Lớp ' + escapeHtml(s.lop) + ' - ' + escapeHtml(s.ma_hs) + '</option>';
+      }).join("");
+    }
+    if (sel) {
+      sel.innerHTML = '<option value="">-- Chọn tên em trong danh sách (' + list.length + ' HS) --</option>' +
+        list.map(function (s) {
+          return '<option value="' + escapeHtml(s.ho_ten) + '">' + escapeHtml(s.ho_ten) + ' (' + escapeHtml(s.lop) + ')</option>';
+        }).join("");
+    }
+  }
+
+  var overlayCheckin = document.getElementById("overlay-student-checkin");
+  var checkinClassEl = document.getElementById("checkin-class");
+  var checkinSelectEl = document.getElementById("checkin-student-select");
+  var checkinNameEl = document.getElementById("checkin-name");
+  var checkinErrorEl = document.getElementById("checkin-error");
+
+  function openStudentCheckin(pendingCallback) {
+    currentPendingAction = pendingCallback || null;
+    var sess = getStudentSession();
+    checkinClassEl.value = (sess && sess.studentClass) || "9C2";
+    populateStudentDatalist(checkinClassEl.value);
+    checkinNameEl.value = (sess && sess.studentName) || "";
+    checkinSelectEl.value = "";
+    checkinErrorEl.style.display = "none";
+    document.getElementById("btn-checkin-confirm").textContent = pendingCallback ? "Xác nhận & Bắt đầu làm bài ➔" : "Lưu thông tin học sinh";
+    overlayCheckin.className = "modal-overlay show";
+    checkinNameEl.focus();
+  }
+
+  function ensureStudentDeclared(onReady) {
+    var sess = getStudentSession();
+    if (sess) {
+      onReady(sess);
+    } else {
+      openStudentCheckin(onReady);
+    }
+  }
+
+  document.getElementById("student-session-pill").addEventListener("click", function () {
+    openStudentCheckin(null);
+  });
+  document.getElementById("btn-exercises-checkin").addEventListener("click", function () {
+    openStudentCheckin(null);
+  });
+  checkinClassEl.addEventListener("change", function () {
+    populateStudentDatalist(this.value);
+  });
+  checkinSelectEl.addEventListener("change", function () {
+    if (this.value) checkinNameEl.value = this.value;
+  });
+  document.getElementById("btn-checkin-cancel").addEventListener("click", function () {
+    currentPendingAction = null;
+    overlayCheckin.className = "modal-overlay";
+  });
+
+  document.getElementById("student-checkin-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var lop = checkinClassEl.value.trim();
+    var name = checkinNameEl.value.trim();
+    if (!name || name.length < 2) {
+      checkinErrorEl.textContent = "Vui lòng nhập đầy đủ Họ và tên học sinh.";
+      checkinErrorEl.style.display = "block";
+      return;
+    }
+    setStudentSession(name, lop);
+    overlayCheckin.className = "modal-overlay";
+    showStatus("Xin chào em " + name + " (" + lop + ")!", "ok");
+    setTimeout(hideStatus, 2200);
+    if (typeof currentPendingAction === "function") {
+      var cb = currentPendingAction;
+      currentPendingAction = null;
+      cb(getStudentSession());
+    }
+  });
+
+  // ----- Pre-seeded Sample Interactive HTML Exercises (first run only) -----
+  var SAMPLE_EXERCISES = [
+    {
+      id: "sample_html_ch1_hept",
+      title: "Luyện tập: Giải hệ hai phương trình bậc nhất hai ẩn",
+      name: "Bai_tap_He_Phuong_Trinh_Toan9.html",
+      type: "html",
+      topic: "Chương I: Hệ hai phương trình bậc nhất hai ẩn",
+      lesson: "Bài 2: Giải hệ hai phương trình bậc nhất hai ẩn",
+      active: true,
+      summary: "Bài tập tương tác gồm 5 câu trắc nghiệm có chấm điểm tự động",
+      content: '<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+        '<title>Giải hệ hai phương trình bậc nhất hai ẩn</title>' +
+        '<style>body{font-family:system-ui,-apple-system,sans-serif;background:#f8fafc;color:#1e293b;margin:0;padding:18px;line-height:1.5}' +
+        '.box{max-width:760px;margin:0 auto;background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 18px rgba(15,23,42,.06);border:1px solid #e2e8f0}' +
+        'h1{font-size:19px;color:#0e2a58;margin:0 0 6px}p.sub{font-size:13px;color:#64748b;margin:0 0 16px}' +
+        '.q{padding:14px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px;background:#fcfdff}' +
+        '.q-title{font-weight:700;font-size:14px;margin-bottom:8px;color:#0f2b59}' +
+        '.opt{display:block;padding:8px 10px;border-radius:7px;border:1px solid #e2e8f0;margin-bottom:6px;cursor:pointer;font-size:13.5px;background:#fff}' +
+        '.opt:hover{background:#eff6ff;border-color:#93c5fd}' +
+        '.btn{background:#1877f2;color:#fff;border:none;padding:11px 22px;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;width:100%}' +
+        '.btn:hover{background:#0d5cb6}#res{display:none;margin-top:14px;padding:14px;border-radius:10px;background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;font-weight:600}</style>' +
+        '</head><body><div class="box"><h1>📐 Bài tập Chương I: Hệ hai phương trình bậc nhất hai ẩn</h1>' +
+        '<p class="sub">Chọn đáp án đúng nhất cho 5 câu hỏi dưới đây rồi bấm Nộp bài chấm điểm.</p>' +
+        '<div id="quiz"></div><button class="btn" onclick="grade()">✅ Chấm điểm bài làm</button><div id="res"></div></div>' +
+        '<scr' + 'ipt>' +
+        'var qs=[' +
+        '{t:"Câu 1: Nghiệm của hệ phương trình x + y = 5 và x - y = 1 là:",o:["(3; 2)","(2; 3)","(4; 1)","(1; 4)"],a:0},' +
+        '{t:"Câu 2: Cặp số (1; -2) là nghiệm của hệ phương trình nào?",o:["2x + y = 0 và x - y = 3","x + y = 1 và 2x - y = 4","x - 2y = 3 và x + y = 1","2x + y = 4 và x - y = 3"],a:0},' +
+        '{t:"Câu 3: Hệ phương trình 2x - y = 3 và 4x - 2y = 6 có bao nhiêu nghiệm?",o:["Vô nghiệm","Vô số nghiệm","1 nghiệm duy nhất","2 nghiệm"],a:1},' +
+        '{t:"Câu 4: Giải hệ 2x + 3y = 7 và x - 3y = -1 bằng phương pháp cộng đại số, cộng vế theo vế ta được:",o:["3x = 6","x = 6","3x = 8","x + 6y = 6"],a:0},' +
+        '{t:"Câu 5: Giá trị của m để đường thẳng y = mx + 2 đi qua nghiệm của hệ x + y = 3 và x - y = 1 là:",o:["m = -0.5","m = 1","m = 0","m = 2"],a:0}' +
+        '];' +
+        'document.getElementById("quiz").innerHTML=qs.map(function(q,i){return "<div class=\\"q\\"><div class=\\"q-title\\">"+q.t+"</div>"+q.o.map(function(op,j){return "<label class=\\"opt\\"><input type=\\"radio\\" name=\\"q"+i+"\\" value=\\""+j+"\\"> "+op+"</label>";}).join("")+"</div>";}).join("");' +
+        'function grade(){var c=0,done=0;qs.forEach(function(q,i){var el=document.querySelector("input[name=\\"q"+i+"\\"]:checked");if(el){done++;if(parseInt(el.value,10)===q.a)c++;}});' +
+        'var score=Math.round((c/qs.length)*100)/10;var pct=Math.round((done/qs.length)*100);' +
+        'var r=document.getElementById("res");r.style.display="block";r.innerHTML="🎉 Kết quả: Đúng "+c+"/"+qs.length+" câu • Điểm: "+score+"/10 • Hoàn thành: "+pct+"%";' +
+        'window.parent.postMessage({type:"QUIZ_RESULT",score:score,maxScore:10,completionPct:pct,correctCount:c,totalCount:qs.length},"*");}' +
+        '</scr' + 'ipt></body></html>'
+    },
+    {
+      id: "sample_html_ch5_duongtron",
+      title: "Trắc nghiệm nhanh: Góc ở tâm & Góc nội tiếp",
+      name: "Trac_nghiem_Goc_Duong_Tron.html",
+      type: "html",
+      topic: "Chương V: Đường tròn và góc với đường tròn",
+      lesson: "Bài 1: Đường tròn, Góc ở tâm và Góc nội tiếp",
+      active: true,
+      summary: "4 câu trắc nghiệm hình học trực quan về góc nội tiếp và cung tròn",
+      content: '<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+        '<title>Góc ở tâm và Góc nội tiếp</title>' +
+        '<style>body{font-family:system-ui,sans-serif;background:#f8fafc;color:#1e293b;margin:0;padding:18px;line-height:1.5}' +
+        '.box{max-width:760px;margin:0 auto;background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0}' +
+        'h1{font-size:19px;color:#0e2a58;margin:0 0 8px}.svg-wrap{text-align:center;margin:10px 0 14px;background:#f1f5f9;padding:10px;border-radius:10px}' +
+        '.q{padding:12px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:10px}' +
+        '.opt{display:block;padding:7px 10px;margin-top:4px;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer}' +
+        '.btn{background:#7e22ce;color:#fff;border:none;padding:11px;border-radius:9px;font-weight:700;width:100%;cursor:pointer;font-size:14px}' +
+        '#res{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#faf5ff;border:1px solid #d8b4fe;color:#581c87;font-weight:700}</style>' +
+        '</head><body><div class="box"><h1>⭕ Chương V: Góc ở tâm và Góc nội tiếp</h1>' +
+        '<div class="svg-wrap"><svg width="160" height="140" viewBox="0 0 160 140"><circle cx="80" cy="70" r="52" fill="none" stroke="#1877f2" stroke-width="2.5"/>' +
+        '<circle cx="80" cy="70" r="3" fill="#0e2a58"/><polygon points="80,70 42,105 118,105" fill="rgba(24,119,242,0.12)" stroke="#0e2a58" stroke-width="1.8"/>' +
+        '<polyline points="42,105 80,18 118,105" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4 3"/>' +
+        '<text x="84" y="68" font-size="11" fill="#0e2a58">O</text><text x="76" y="14" font-size="11" fill="#dc2626">C</text>' +
+        '<text x="32" y="114" font-size="11">A</text><text x="122" y="114" font-size="11">B</text></svg>' +
+        '<div style="font-size:12px;color:#475569;">Minh hoạ góc nội tiếp ACB và góc ở tâm AOB cùng chắn cung nhỏ AB</div></div>' +
+        '<div id="quiz"></div><button class="btn" onclick="grade()">✅ Chấm điểm bài làm</button><div id="res"></div></div>' +
+        '<scr' + 'ipt>' +
+        'var qs=[' +
+        '{t:"Câu 1: Cho góc ở tâm AOB = 100° chắn cung nhỏ AB. Số đo góc nội tiếp ACB cùng chắn cung nhỏ AB là:",o:["50°","100°","200°","25°"],a:0},' +
+        '{t:"Câu 2: Số đo cung nhỏ AB là 70°. Vậy số đo cung lớn AB là:",o:["290°","110°","280°","300°"],a:0},' +
+        '{t:"Câu 3: Góc nội tiếp chắn nửa đường tròn có số đo bằng:",o:["90°","180°","45°","60°"],a:0},' +
+        '{t:"Câu 4: Nếu góc nội tiếp ABC = 35° thì số đo cung bị chắn AC bằng:",o:["70°","35°","17,5°","105°"],a:0}' +
+        '];' +
+        'document.getElementById("quiz").innerHTML=qs.map(function(q,i){return "<div class=\\"q\\"><strong>"+q.t+"</strong>"+q.o.map(function(op,j){return "<label class=\\"opt\\"><input type=\\"radio\\" name=\\"q"+i+"\\" value=\\""+j+"\\"> "+op+"</label>";}).join("")+"</div>";}).join("");' +
+        'function grade(){var c=0,done=0;qs.forEach(function(q,i){var el=document.querySelector("input[name=\\"q"+i+"\\"]:checked");if(el){done++;if(parseInt(el.value,10)===q.a)c++;}});' +
+        'var score=Math.round((c/qs.length)*100)/10;var pct=Math.round((done/qs.length)*100);' +
+        'var r=document.getElementById("res");r.style.display="block";r.innerHTML="🎉 Kết quả: Đúng "+c+"/"+qs.length+" câu • Điểm: "+score+"/10 • Hoàn thành: "+pct+"%";' +
+        'window.parent.postMessage({type:"QUIZ_RESULT",score:score,maxScore:10,completionPct:pct,correctCount:c,totalCount:qs.length},"*");}' +
+        '</scr' + 'ipt></body></html>'
+    }
+  ];
+
+  function seedSampleExercisesIfNeeded() {
+    if (localStorage.getItem("gsToan9_v3_samples_seeded") === "1") return Promise.resolve();
+    return DocDB.getAll().then(function (docs) {
+      var hasHtml = docs.some(function (d) { return d.type === "html"; });
+      if (hasHtml) {
+        localStorage.setItem("gsToan9_v3_samples_seeded", "1");
+        return;
+      }
+      var nowText = new Date().toLocaleDateString("vi-VN") + " " + new Date().toLocaleTimeString("vi-VN", {hour:"2-digit", minute:"2-digit"});
+      var promises = SAMPLE_EXERCISES.map(function (sample, idx) {
+        var bytes = new Blob([sample.content]).size;
+        return DocDB.save({
+          id: sample.id,
+          title: sample.title,
+          name: sample.name,
+          type: "html",
+          topic: sample.topic,
+          lesson: sample.lesson,
+          size: bytes,
+          sizeFormatted: formatBytes(bytes),
+          content: sample.content,
+          summary: sample.summary,
+          active: true,
+          time: nowText,
+          timestamp: Date.now() - idx * 1000
+        });
+      });
+      return Promise.all(promises).then(function () {
+        localStorage.setItem("gsToan9_v3_samples_seeded", "1");
+      });
+    });
+  }
+
+  // ----- Render Kho Bài Tập Tương tác HTML (#tab-exercises & #overlay-ai-exercises) -----
+  var exFilterTopic = document.getElementById("ex-filter-topic");
+  var exFilterLesson = document.getElementById("ex-filter-lesson");
+  var exSearchInput = document.getElementById("ex-search-input");
+
+  function renderInteractiveExercisesView() {
+    Promise.all([DocDB.getAll(), DocDB.getAllResults()]).then(function (arr) {
+      var docs = arr[0] || [];
+      var results = arr[1] || [];
+      var htmlDocs = docs.filter(function (d) { return d.type === "html" && d.active !== false; });
+
+      var countPill = document.getElementById("nav-ex-count-pill");
+      if (countPill) countPill.textContent = htmlDocs.length + " bài";
+
+      // Update dynamic Topic & Lesson dropdowns
+      var topics = Array.from(new Set(htmlDocs.map(function (d) { return d.topic || "Tài liệu chuyên đề khác"; })));
+      var prevTopic = exFilterTopic.value;
+      exFilterTopic.innerHTML = '<option value="all">Chủ đề: Tất cả (' + htmlDocs.length + ' bài)</option>' +
+        topics.map(function (t) { return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join("");
+      if (topics.indexOf(prevTopic) !== -1) exFilterTopic.value = prevTopic;
+
+      var selectedTopic = exFilterTopic.value;
+      var topicFiltered = htmlDocs.filter(function (d) { return selectedTopic === "all" || (d.topic || "Tài liệu chuyên đề khác") === selectedTopic; });
+      var lessons = Array.from(new Set(topicFiltered.map(function (d) { return d.lesson || "Bài học tổng hợp"; })));
+      var prevLesson = exFilterLesson.value;
+      exFilterLesson.innerHTML = '<option value="all">Bài học: Tất cả</option>' +
+        lessons.map(function (l) { return '<option value="' + escapeHtml(l) + '">' + escapeHtml(l) + '</option>'; }).join("");
+      if (lessons.indexOf(prevLesson) !== -1) exFilterLesson.value = prevLesson;
+
+      var selectedLesson = exFilterLesson.value;
+      var qNorm = removeAccents((exSearchInput.value || "").trim());
+
+      var filtered = topicFiltered.filter(function (d) {
+        var matchLesson = (selectedLesson === "all" || (d.lesson || "Bài học tổng hợp") === selectedLesson);
+        if (!matchLesson) return false;
+        if (!qNorm) return true;
+        var hay = removeAccents((d.title || "") + " " + (d.topic || "") + " " + (d.lesson || "") + " " + (d.summary || ""));
+        return hay.includes(qNorm);
+      });
+
+      var sess = getStudentSession();
+      var grid = document.getElementById("exercises-grid");
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1; background:#fff; border:1px dashed #cbd5e1; border-radius:12px; padding:28px; text-align:center; color:#64748b;">Chưa có bài tập HTML nào khớp với bộ lọc. Giáo viên có thể tải thêm bài tập ở mục <strong>🔒 Quản trị viên</strong>.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(function (d) {
+        var lastRes = null;
+        if (sess) {
+          lastRes = results.find(function (r) {
+            return r.exerciseId === d.id &&
+              removeAccents(r.studentName) === removeAccents(sess.studentName) &&
+              r.studentClass === sess.studentClass;
+          });
+        }
+        return '<div class="exercise-card">' +
+          '<div>' +
+            '<div class="exercise-card-badges">' +
+              '<span class="file-badge-html">HTML TƯƠNG TÁC</span>' +
+              '<span class="topic-chip">' + escapeHtml(d.topic || "Toán 9") + '</span>' +
+            '</div>' +
+            '<div class="exercise-card-title">' + escapeHtml(d.title) + '</div>' +
+            '<div style="margin-bottom:8px;"><span class="lesson-chip">📘 ' + escapeHtml(d.lesson || "Bài học tổng hợp") + '</span></div>' +
+            '<div class="exercise-card-meta">' + escapeHtml(d.summary || "Bài tập tương tác trực tiếp trên trình duyệt") + ' &bull; ' + d.sizeFormatted + '</div>' +
+            (lastRes ? '<div class="exercise-last-score">✅ Đã nộp: ' + lastRes.score + '/10 (' + lastRes.completionPct + '% • ' + formatDurationMMSS(lastRes.durationSec) + ')</div>' : '') +
+          '</div>' +
+          '<button type="button" class="btn-play-exercise" onclick="launchHtmlExercise(\'' + d.id + '\')">' +
+            '<span>▶️</span><span>' + (lastRes ? 'Làm lại bài tập' : 'Làm bài tập ngay') + '</span>' +
+          '</button>' +
+        '</div>';
+      }).join("");
+    });
+  }
+
+  exFilterTopic.addEventListener("change", renderInteractiveExercisesView);
+  exFilterLesson.addEventListener("change", renderInteractiveExercisesView);
+  exSearchInput.addEventListener("input", renderInteractiveExercisesView);
+
+  // ----- Chatbot Inline Exercises Drawer (#overlay-ai-exercises) & Chat Suggestion Cards -----
+  var overlayAiExercises = document.getElementById("overlay-ai-exercises");
+  var aiExTopicSel = document.getElementById("ai-ex-filter-topic");
+  var aiExSearch = document.getElementById("ai-ex-search");
+
+  function renderAiExercisesDrawer() {
+    DocDB.getAll().then(function (docs) {
+      var htmlDocs = docs.filter(function (d) { return d.type === "html" && d.active !== false; });
+      var topics = Array.from(new Set(htmlDocs.map(function (d) { return d.topic || "Tài liệu chuyên đề khác"; })));
+      var prev = aiExTopicSel.value;
+      aiExTopicSel.innerHTML = '<option value="all">Chủ đề: Tất cả (' + htmlDocs.length + ' bài)</option>' +
+        topics.map(function (t) { return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join("");
+      if (topics.indexOf(prev) !== -1) aiExTopicSel.value = prev;
+
+      var qNorm = removeAccents((aiExSearch.value || "").trim());
+      var selTopic = aiExTopicSel.value;
+      var filtered = htmlDocs.filter(function (d) {
+        if (selTopic !== "all" && (d.topic || "Tài liệu chuyên đề khác") !== selTopic) return false;
+        if (!qNorm) return true;
+        return removeAccents((d.title || "") + " " + (d.topic || "") + " " + (d.lesson || "")).includes(qNorm);
+      });
+
+      var listEl = document.getElementById("ai-exercises-list");
+      if (filtered.length === 0) {
+        listEl.innerHTML = '<div style="text-align:center; padding:24px; color:#64748b; font-size:13px;">Không tìm thấy bài tập HTML tương tác phù hợp.</div>';
+        return;
+      }
+      listEl.innerHTML = filtered.map(function (d) {
+        return '<div class="supp-item">' +
+          '<div style="flex:1; min-width:0;">' +
+            '<div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">' +
+              '<span class="topic-chip">' + escapeHtml(d.topic || "Toán 9") + '</span>' +
+              '<span class="lesson-chip">' + escapeHtml(d.lesson || "") + '</span>' +
+            '</div>' +
+            '<div class="supp-title">' + escapeHtml(d.title) + '</div>' +
+          '</div>' +
+          '<button type="button" class="btn-chat-play-ex" onclick="launchHtmlExercise(\'' + d.id + '\')">▶️ Làm bài</button>' +
+        '</div>';
+      }).join("");
+    });
+  }
+
+  document.getElementById("btn-ai-exercises").addEventListener("click", function () {
+    renderAiExercisesDrawer();
+    overlayAiExercises.className = "modal-overlay show";
+  });
+  document.getElementById("btn-close-ai-exercises").addEventListener("click", function () {
+    overlayAiExercises.className = "modal-overlay";
+  });
+  aiExTopicSel.addEventListener("change", renderAiExercisesDrawer);
+  aiExSearch.addEventListener("input", renderAiExercisesDrawer);
+
+  function attachMatchingExercisesToBubble(botBubble, combinedText) {
+    if (!botBubble) return;
+    DocDB.getAll().then(function (docs) {
+      var htmlDocs = docs.filter(function (d) { return d.type === "html" && d.active !== false; });
+      if (htmlDocs.length === 0) return;
+
+      var textNorm = removeAccents(combinedText || "");
+      var matched = htmlDocs.map(function (d) {
+        var metaWords = removeAccents((d.topic || "") + " " + (d.lesson || "") + " " + (d.title || ""))
+          .split(/\s+/)
+          .filter(function (w) { return w.length > 3 && ["chuong", "toan", "bai", "tap", "luyen", "khac"].indexOf(w) === -1; });
+        var hits = 0;
+        metaWords.forEach(function (w) { if (textNorm.includes(w)) hits++; });
+        return { doc: d, hits: hits };
+      }).filter(function (item) { return item.hits >= 2; })
+        .sort(function (a, b) { return b.hits - a.hits; })
+        .slice(0, 2);
+
+      if (matched.length === 0) return;
+
+      var wrap = document.createElement("div");
+      wrap.className = "chat-exercise-suggestions";
+      wrap.innerHTML = '<div class="chat-ex-suggest-title">🧩 Bài tập tương tác HTML phù hợp để em luyện ngay:</div>' +
+        matched.map(function (item) {
+          var d = item.doc;
+          return '<div class="chat-exercise-card">' +
+            '<div class="chat-exercise-card-info">' +
+              '<strong>' + escapeHtml(d.title) + '</strong>' +
+              '<span>' + escapeHtml(d.topic || "") + (d.lesson ? " • " + escapeHtml(d.lesson) : "") + '</span>' +
+            '</div>' +
+            '<button type="button" class="btn-chat-play-ex" onclick="launchHtmlExercise(\'' + d.id + '\')">Làm bài ➔</button>' +
+          '</div>';
+        }).join("");
+
+      botBubble.appendChild(wrap);
+      els.chat.scrollTop = els.chat.scrollHeight;
+    });
+  }
+
+  // ----- HTML Exercise Player + Timer + postMessage & DOM Score Extraction -----
+  var overlayPlayer = document.getElementById("overlay-exercise-player");
+  var exerciseIframe = document.getElementById("exercise-iframe");
+  var playerTimerChip = document.getElementById("player-timer-chip");
+  var playerCapturedBanner = document.getElementById("player-captured-banner");
+  var playerCapturedText = document.getElementById("player-captured-text");
+
+  function stopPlayerTimer() {
+    if (playerTimerInterval) {
+      clearInterval(playerTimerInterval);
+      playerTimerInterval = null;
+    }
+  }
+
+  window.launchHtmlExercise = function (docId) {
+    ensureStudentDeclared(function (sess) {
+      DocDB.getAll().then(function (docs) {
+        var doc = docs.find(function (d) { return d.id === docId; });
+        if (!doc) {
+          alert("Không tìm thấy bài tập này!");
+          return;
+        }
+        if (overlayAiExercises.classList.contains("show")) {
+          overlayAiExercises.className = "modal-overlay";
+        }
+
+        activePlayerContext = {
+          doc: doc,
+          studentName: sess.studentName,
+          studentClass: sess.studentClass,
+          startedAt: Date.now()
+        };
+        playerElapsedSec = 0;
+        playerCapturedResult = null;
+        playerCapturedBanner.classList.remove("show");
+
+        document.getElementById("player-ex-title").textContent = doc.title;
+        document.getElementById("player-ex-sub").textContent = "👨‍🎓 " + sess.studentName + " (" + sess.studentClass + ") • " + (doc.topic || "Toán 9") + (doc.lesson ? " • " + doc.lesson : "");
+        playerTimerChip.textContent = "⏱️ 00:00";
+
+        exerciseIframe.srcdoc = doc.content;
+        overlayPlayer.className = "modal-overlay show";
+
+        stopPlayerTimer();
+        playerTimerInterval = setInterval(function () {
+          playerElapsedSec++;
+          playerTimerChip.textContent = "⏱️ " + formatDurationMMSS(playerElapsedSec);
+        }, 1000);
+      });
+    });
+  };
+
+  function normalizeCapturedScore(rawScore, maxScore) {
+    var s = parseFloat(String(rawScore).replace(",", "."));
+    var m = parseFloat(String(maxScore || 10).replace(",", ".")) || 10;
+    if (isNaN(s) || s < 0) return null;
+    if (m <= 0) m = 10;
+    var scaled = (m === 10) ? s : ((s / m) * 10);
+    return Math.min(10, Math.round(scaled * 10) / 10);
+  }
+
+  function scanIframeForScore() {
+    try {
+      var doc = exerciseIframe.contentDocument || (exerciseIframe.contentWindow && exerciseIframe.contentWindow.document);
+      if (!doc || !doc.body) return null;
+      var txt = doc.body.innerText || "";
+      var score = null;
+      var pct = null;
+
+      var mSlash = /(?:Điểm|Score|Kết quả|Đạt)[:\s]*([0-9]+(?:[.,][0-9]+)?)\s*\/\s*([0-9]+(?:[.,][0-9]+)?)/i.exec(txt);
+      if (mSlash) {
+        score = normalizeCapturedScore(mSlash[1], mSlash[2]);
+      } else {
+        var mCorrect = /(?:Đúng|Trả lời đúng)[:\s]*([0-9]+)\s*\/\s*([0-9]+)/i.exec(txt);
+        if (mCorrect) score = normalizeCapturedScore(mCorrect[1], mCorrect[2]);
+      }
+      var mPct = /(?:Hoàn thành|Mức độ|Tỷ lệ)[:\s]*([0-9]{1,3})\s*%/i.exec(txt);
+      if (mPct) pct = Math.min(100, parseInt(mPct[1], 10));
+
+      if (score !== null || pct !== null) {
+        return { score: score, completionPct: pct };
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!activePlayerContext || !event.data || typeof event.data !== "object") return;
+    var data = event.data;
+    if (data.type === "QUIZ_RESULT" || data.type === "EXERCISE_RESULT" || data.type === "SCORE") {
+      var s10 = normalizeCapturedScore(data.score !== undefined ? data.score : data.points, data.maxScore || data.totalScore || 10);
+      var pct = data.completionPct !== undefined ? parseInt(data.completionPct, 10) : (data.correctCount !== undefined && data.totalCount ? 100 : 100);
+      if (isNaN(pct)) pct = 100;
+      pct = Math.max(0, Math.min(100, pct));
+
+      playerCapturedResult = {
+        score: s10 !== null ? s10 : 8,
+        completionPct: pct,
+        notes: (data.correctCount !== undefined && data.totalCount) ? ("Đúng " + data.correctCount + "/" + data.totalCount + " câu (tự động ghi nhận)") : "Đã chấm điểm tự động từ bài tập HTML"
+      };
+      playerCapturedText.textContent = "🎉 Bài làm đã chấm tự động: " + playerCapturedResult.score + "/10 điểm • Hoàn thành " + playerCapturedResult.completionPct + "%!";
+      playerCapturedBanner.classList.add("show");
+    }
+  });
+
+  function openSubmitModalFromPlayer() {
+    if (!activePlayerContext) return;
+    stopPlayerTimer();
+
+    var detected = playerCapturedResult || scanIframeForScore() || {};
+    var scoreVal = (detected.score !== undefined && detected.score !== null) ? detected.score : 8;
+    var pctVal = (detected.completionPct !== undefined && detected.completionPct !== null) ? detected.completionPct : 100;
+
+    pendingSubmitContext = {
+      mode: "html",
+      exerciseId: activePlayerContext.doc.id,
+      exerciseTitle: activePlayerContext.doc.title,
+      topic: activePlayerContext.doc.topic || "Tài liệu chuyên đề khác",
+      lesson: activePlayerContext.doc.lesson || "Bài học tổng hợp",
+      studentName: activePlayerContext.studentName,
+      studentClass: activePlayerContext.studentClass,
+      durationSec: playerElapsedSec,
+      notes: detected.notes || ""
+    };
+
+    document.getElementById("sub-res-student").textContent = pendingSubmitContext.studentName;
+    document.getElementById("sub-res-class").textContent = pendingSubmitContext.studentClass;
+    document.getElementById("sub-res-title").textContent = pendingSubmitContext.exerciseTitle;
+    document.getElementById("sub-res-duration").textContent = formatDurationReadable(pendingSubmitContext.durationSec);
+    document.getElementById("sub-res-score").value = scoreVal;
+    document.getElementById("sub-res-completion").value = pctVal;
+    document.getElementById("sub-res-notes").value = pendingSubmitContext.notes;
+
+    document.getElementById("overlay-submit-result").className = "modal-overlay show";
+  }
+
+  document.getElementById("btn-player-submit").addEventListener("click", openSubmitModalFromPlayer);
+  document.getElementById("btn-player-confirm-captured").addEventListener("click", openSubmitModalFromPlayer);
+
+  document.getElementById("btn-player-close").addEventListener("click", function () {
+    if (playerElapsedSec >= 5 && !playerCapturedResult) {
+      if (!confirm("Em chưa lưu kết quả bài tập. Em vẫn muốn đóng cửa sổ làm bài chứ?")) return;
+    }
+    stopPlayerTimer();
+    activePlayerContext = null;
+    exerciseIframe.srcdoc = "";
+    overlayPlayer.className = "modal-overlay";
+  });
+
+  // ----- AI Review Session Timer (#ai-review-timer-bar) -----
+  var aiReviewTimerBar = document.getElementById("ai-review-timer-bar");
+  var aiTimerClock = document.getElementById("ai-timer-clock");
+
+  function stopAiReviewTimer() {
+    if (aiReviewTimerInterval) {
+      clearInterval(aiReviewTimerInterval);
+      aiReviewTimerInterval = null;
+    }
+  }
+
+  function startAiReviewSession(studentName, studentClass, topic, lesson, level, count) {
+    stopAiReviewTimer();
+    activeAiReview = {
+      studentName: studentName,
+      studentClass: studentClass,
+      topic: topic,
+      lesson: lesson || ("Ôn tập " + level + " (" + count + " bài)"),
+      level: level,
+      count: count,
+      elapsedSec: 0
+    };
+    document.getElementById("ai-timer-student").textContent = studentName + " (" + studentClass + ")";
+    document.getElementById("ai-timer-topic").textContent = topic + (lesson ? " • " + lesson : "");
+    aiTimerClock.textContent = "⏱️ 00:00";
+    aiReviewTimerBar.classList.add("show");
+
+    aiReviewTimerInterval = setInterval(function () {
+      if (!activeAiReview) return;
+      activeAiReview.elapsedSec++;
+      aiTimerClock.textContent = "⏱️ " + formatDurationMMSS(activeAiReview.elapsedSec);
+    }, 1000);
+  }
+
+  document.getElementById("btn-ai-submit-review").addEventListener("click", function () {
+    if (!activeAiReview) return;
+    stopAiReviewTimer();
+    pendingSubmitContext = {
+      mode: "ai_review",
+      exerciseId: "ai_" + Date.now(),
+      exerciseTitle: "Đề ôn tập AI (" + activeAiReview.count + " bài — " + activeAiReview.level + ")",
+      topic: activeAiReview.topic,
+      lesson: activeAiReview.lesson,
+      studentName: activeAiReview.studentName,
+      studentClass: activeAiReview.studentClass,
+      durationSec: activeAiReview.elapsedSec,
+      notes: ""
+    };
+
+    document.getElementById("sub-res-student").textContent = pendingSubmitContext.studentName;
+    document.getElementById("sub-res-class").textContent = pendingSubmitContext.studentClass;
+    document.getElementById("sub-res-title").textContent = pendingSubmitContext.exerciseTitle;
+    document.getElementById("sub-res-duration").textContent = formatDurationReadable(pendingSubmitContext.durationSec);
+    document.getElementById("sub-res-score").value = 8;
+    document.getElementById("sub-res-completion").value = 100;
+    document.getElementById("sub-res-notes").value = "";
+    document.getElementById("overlay-submit-result").className = "modal-overlay show";
+  });
+
+  document.getElementById("btn-ai-cancel-review").addEventListener("click", function () {
+    stopAiReviewTimer();
+    activeAiReview = null;
+    aiReviewTimerBar.classList.remove("show");
+  });
+
+  // ----- Submit Result Modal (#overlay-submit-result) -----
+  document.getElementById("btn-sub-res-cancel").addEventListener("click", function () {
+    document.getElementById("overlay-submit-result").className = "modal-overlay";
+    if (pendingSubmitContext && pendingSubmitContext.mode === "html" && activePlayerContext) {
+      playerTimerInterval = setInterval(function () {
+        playerElapsedSec++;
+        playerTimerChip.textContent = "⏱️ " + formatDurationMMSS(playerElapsedSec);
+      }, 1000);
+    } else if (pendingSubmitContext && pendingSubmitContext.mode === "ai_review" && activeAiReview) {
+      aiReviewTimerInterval = setInterval(function () {
+        activeAiReview.elapsedSec++;
+        aiTimerClock.textContent = "⏱️ " + formatDurationMMSS(activeAiReview.elapsedSec);
+      }, 1000);
+    }
+    pendingSubmitContext = null;
+  });
+
+  document.getElementById("btn-sub-res-save").addEventListener("click", function () {
+    if (!pendingSubmitContext) return;
+    var score = Math.max(0, Math.min(10, parseFloat(document.getElementById("sub-res-score").value) || 0));
+    score = Math.round(score * 100) / 100;
+    var pct = Math.max(0, Math.min(100, parseInt(document.getElementById("sub-res-completion").value, 10) || 0));
+    var notes = document.getElementById("sub-res-notes").value.trim();
+    var perf = classifyPerformance(score, pct);
+
+    var record = {
+      id: "res_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+      studentName: pendingSubmitContext.studentName,
+      studentClass: pendingSubmitContext.studentClass,
+      exerciseId: pendingSubmitContext.exerciseId,
+      exerciseTitle: pendingSubmitContext.exerciseTitle,
+      topic: pendingSubmitContext.topic,
+      lesson: pendingSubmitContext.lesson,
+      mode: pendingSubmitContext.mode,
+      score: score,
+      completionPct: pct,
+      levelLabel: perf.label,
+      levelTag: perf.tag,
+      durationSec: pendingSubmitContext.durationSec,
+      durationText: formatDurationMMSS(pendingSubmitContext.durationSec),
+      notes: notes,
+      timeText: new Date().toLocaleDateString("vi-VN") + " " + new Date().toLocaleTimeString("vi-VN", {hour:"2-digit", minute:"2-digit"}),
+      timestamp: Date.now()
+    };
+
+    DocDB.saveResult(record).then(function () {
+      document.getElementById("overlay-submit-result").className = "modal-overlay";
+      if (pendingSubmitContext.mode === "html") {
+        stopPlayerTimer();
+        activePlayerContext = null;
+        exerciseIframe.srcdoc = "";
+        overlayPlayer.className = "modal-overlay";
+      } else {
+        stopAiReviewTimer();
+        activeAiReview = null;
+        aiReviewTimerBar.classList.remove("show");
+      }
+      pendingSubmitContext = null;
+      renderInteractiveExercisesView();
+      renderAnalyticsResults();
+      showStatus("Đã lưu kết quả của em " + record.studentName + " (" + record.score + "/10 • " + record.completionPct + "%) vào Thống kê!", "ok");
+      setTimeout(hideStatus, 3200);
+    });
+  });
+
+  // ----- Analytics Dashboard Renderer & CSV Export (#tab-analytics) -----
+  var currentStatClass = "all";
+  var statFilterMode = document.getElementById("stat-filter-mode");
+  var statFilterTopic = document.getElementById("stat-filter-topic");
+  var statSearchInput = document.getElementById("stat-search-input");
+
+  function renderAnalyticsResults() {
+    DocDB.getAllResults().then(function (allResults) {
+      var topics = Array.from(new Set(allResults.map(function (r) { return r.topic || "Khác"; })));
+      var prevT = statFilterTopic.value;
+      statFilterTopic.innerHTML = '<option value="all">Chủ đề: Tất cả</option>' +
+        topics.map(function (t) { return '<option value="' + escapeHtml(t) + '">' + escapeHtml(t) + '</option>'; }).join("");
+      if (topics.indexOf(prevT) !== -1) statFilterTopic.value = prevT;
+
+      var modeVal = statFilterMode.value;
+      var topicVal = statFilterTopic.value;
+      var qNorm = removeAccents((statSearchInput.value || "").trim());
+
+      var filtered = allResults.filter(function (r) {
+        if (currentStatClass !== "all" && r.studentClass !== currentStatClass) return false;
+        if (modeVal !== "all" && r.mode !== modeVal) return false;
+        if (topicVal !== "all" && (r.topic || "Khác") !== topicVal) return false;
+        if (qNorm) {
+          var hay = removeAccents((r.studentName || "") + " " + (r.exerciseTitle || "") + " " + (r.topic || "") + " " + (r.lesson || ""));
+          if (!hay.includes(qNorm)) return false;
+        }
+        return true;
+      });
+
+      var total = filtered.length;
+      var sumScore = 0, sumPct = 0, sumSec = 0;
+      filtered.forEach(function (r) {
+        sumScore += (parseFloat(r.score) || 0);
+        sumPct += (parseFloat(r.completionPct) || 0);
+        sumSec += (parseInt(r.durationSec, 10) || 0);
+      });
+
+      document.getElementById("stat-total-attempts").textContent = total + " lượt";
+      document.getElementById("stat-avg-score").textContent = (total ? (sumScore / total).toFixed(1) : "0.0") + " / 10";
+      document.getElementById("stat-avg-completion").textContent = (total ? Math.round(sumPct / total) : 0) + "%";
+      document.getElementById("stat-avg-duration").textContent = total ? formatDurationMMSS(Math.round(sumSec / total)) : "00:00";
+
+      var tbody = document.getElementById("analytics-results-body");
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:24px; color:#64748b; font-style:italic;">Chưa có dữ liệu nộp bài nào phù hợp với bộ lọc. Học sinh hãy chọn tab <strong>🧩 Bài tập tương tác</strong> hoặc <strong>🤖 Hỗ trợ AI ➔ Tạo đề ôn tập</strong> để làm bài!</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(function (r, idx) {
+        var classTag = r.studentClass === "9C2" ? "tag-blue" : (r.studentClass === "9C3" ? "tag-green" : "tag-yellow");
+        var modeBadge = r.mode === "html"
+          ? '<span class="file-badge-html">HTML Tương tác</span>'
+          : '<span class="badge-tag tag-blue">Ôn tập AI</span>';
+        var perf = classifyPerformance(r.score, r.completionPct);
+
+        return '<tr>' +
+          '<td style="text-align:center; font-weight:600; color:#64748b;">' + (idx + 1) + '</td>' +
+          '<td><strong style="color:#0f2b59;">' + escapeHtml(r.studentName) + '</strong></td>' +
+          '<td><span class="badge-tag ' + classTag + '">' + escapeHtml(r.studentClass) + '</span></td>' +
+          '<td>' +
+            '<div style="font-weight:600; color:#1e293b;">' + escapeHtml(r.exerciseTitle) + '</div>' +
+            '<div style="font-size:11.5px; color:#64748b;">' + escapeHtml(r.topic || "") + (r.lesson ? ' &bull; ' + escapeHtml(r.lesson) : '') + '</div>' +
+            (r.notes ? '<div style="font-size:11px; color:#475569; font-style:italic;">Ghi chú: ' + escapeHtml(r.notes) + '</div>' : '') +
+          '</td>' +
+          '<td>' + modeBadge + '</td>' +
+          '<td><strong style="font-size:14px; color:#0d5cb6;">' + r.score + '/10</strong></td>' +
+          '<td>' +
+            '<div class="progress-wrap">' +
+              '<div class="progress-bar-bg"><div class="progress-bar-fill" style="width:' + r.completionPct + '%;"></div></div>' +
+              '<strong style="font-size:12px;">' + r.completionPct + '%</strong>' +
+            '</div>' +
+            '<span class="badge-tag ' + (r.levelTag || perf.tag) + '" style="margin-top:4px;">' + escapeHtml(r.levelLabel || perf.label) + '</span>' +
+          '</td>' +
+          '<td style="font-variant-numeric:tabular-nums; font-weight:600;">⏱️ ' + formatDurationMMSS(r.durationSec) + '</td>' +
+          '<td style="font-size:12px; color:#64748b;">' + escapeHtml(r.timeText || "") + '</td>' +
+        '</tr>';
+      }).join("");
+    });
+  }
+
+  document.querySelectorAll("[data-stat-class]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll("[data-stat-class]").forEach(function (b) { b.classList.remove("active"); });
+      this.classList.add("active");
+      currentStatClass = this.getAttribute("data-stat-class");
+      renderAnalyticsResults();
+    });
+  });
+  statFilterMode.addEventListener("change", renderAnalyticsResults);
+  statFilterTopic.addEventListener("change", renderAnalyticsResults);
+  statSearchInput.addEventListener("input", renderAnalyticsResults);
+
+  document.getElementById("btn-export-results-csv").addEventListener("click", function () {
+    DocDB.getAllResults().then(function (allResults) {
+      if (!allResults.length) {
+        alert("Chưa có dữ liệu kết quả làm bài để xuất CSV!");
+        return;
+      }
+      var headers = ["STT", "Họ tên học sinh", "Lớp", "Chủ đề", "Bài học", "Tên bài tập", "Hình thức", "Điểm số (/10)", "Mức độ hoàn thành (%)", "Xếp loại", "Thời gian (giây)", "Thời gian (MM:SS)", "Thời điểm nộp", "Ghi chú"];
+      var rows = allResults.map(function (r, i) {
+        return [
+          i + 1, r.studentName, r.studentClass, r.topic || "", r.lesson || "", r.exerciseTitle,
+          r.mode === "html" ? "HTML tương tác" : "Ôn tập AI",
+          r.score, r.completionPct, r.levelLabel || "", r.durationSec, formatDurationMMSS(r.durationSec), r.timeText || "", r.notes || ""
+        ].map(function (val) {
+          return '"' + String(val).replace(/"/g, '""') + '"';
+        }).join(",");
+      });
+      var csvContent = "\uFEFF" + headers.join(",") + "\n" + rows.join("\n");
+      var blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "Thong_ke_lam_bai_Toan9_" + new Date().toISOString().slice(0, 10) + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  });
+
+  document.getElementById("btn-clear-results-admin").addEventListener("click", function () {
+    if (!isAdminSessionActive()) {
+      alert("Chỉ Quản trị viên (Giáo viên) mới có quyền xoá lịch sử thống kê. Vui lòng đăng nhập tại nút 🔒 Quản trị viên.");
+      openAdminModal();
+      return;
+    }
+    if (confirm("Cô có chắc chắn muốn xoá toàn bộ dữ liệu thống kê kết quả làm bài trên thiết bị này?")) {
+      DocDB.clearResults().then(function () {
+        renderInteractiveExercisesView();
+        renderAnalyticsResults();
+        showStatus("Đã xoá toàn bộ dữ liệu thống kê kết quả.", "ok");
+        setTimeout(hideStatus, 2500);
+      });
+    }
+  });
+
+  // ================= 10. KHỞI CHẠY HỆ THỐNG =================
   loadKnowledgeFiles().then(function () {
     addMessage("bot",
       "Chào em! Cô là **Cô Trợ Giảng Toán 9** của **Trường THCS Phước Giang (Phân hiệu 2)** &mdash; đồng hành cùng học sinh hai lớp **9C2 &amp; 9C3** của cô giáo **Huỳnh Thị Ngọc Châu** theo đúng **Bộ sách giáo khoa Thống Nhất**.\n\n" +
-      "Em đang gặp khó khăn ở bài tập nào? Em có thể **chọn các chủ đề gợi ý**, **gõ câu hỏi** hoặc **bấm nút máy ảnh 📷** để gửi ảnh đề bài cho cô nhé!"
+      "Em đang gặp khó khăn ở bài tập nào? Em có thể **bấm 🧩 Bài tập tương tác** để làm bài HTML có chấm điểm tự động, **📝 Tạo đề ôn tập** (có khai báo Họ tên/Lớp &amp; bấm giờ), **gõ câu hỏi** hoặc **bấm nút máy ảnh 📷** để gửi ảnh đề bài cho cô nhé!"
     );
+  });
+
+  seedSampleExercisesIfNeeded().then(function () {
+    updateStudentSessionUI();
+    renderInteractiveExercisesView();
+    renderAnalyticsResults();
   });
 
   // Render initial tables
