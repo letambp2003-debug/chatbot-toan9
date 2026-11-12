@@ -197,6 +197,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-height: 0;
+    min-width: 0;
     overflow: hidden;
     position: relative;
     background: var(--bg-page);
@@ -293,12 +295,42 @@
   .view-container {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    min-width: 0;
     position: relative;
     display: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #f1f5f9;
   }
   .view-container.active-view {
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  /* Custom visible scrollbars for main view and scrollable data tables */
+  .view-container::-webkit-scrollbar,
+  .table-scroll-container::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .view-container::-webkit-scrollbar-track,
+  .table-scroll-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 6px;
+  }
+  .view-container::-webkit-scrollbar-thumb,
+  .table-scroll-container::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 6px;
+    border: 2px solid #f1f5f9;
+  }
+  .view-container::-webkit-scrollbar-thumb:hover,
+  .table-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #475569;
   }
 
   /* ===================== VIEW 1: TRANG CHỦ ===================== */
@@ -606,6 +638,64 @@
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  /* Dedicated Scroll Container for viewing large data tables (58+ students) */
+  .table-scroll-container {
+    max-height: calc(100vh - 275px);
+    min-height: 380px;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(15, 43, 89, 0.05);
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #f1f5f9;
+    scroll-behavior: smooth;
+  }
+
+  .table-scroll-container .data-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8fafc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .btn-scroll-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 11px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e40af;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .btn-scroll-nav:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(30, 64, 175, 0.15);
+  }
+  .btn-scroll-nav:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .table-scroll-container {
+      max-height: calc(100vh - 310px);
+      min-height: 280px;
+    }
   }
 
   .data-table {
@@ -2002,6 +2092,15 @@
         </div>
 
         <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <div style="display: inline-flex; gap: 6px;">
+            <button type="button" class="btn-scroll-nav" id="btn-scroll-bottom-student" title="Cuộn nhanh xuống cuối danh sách (HS #58)">
+              <span>⬇️</span> Xuống cuối
+            </button>
+            <button type="button" class="btn-scroll-nav" id="btn-scroll-top-student" title="Cuộn nhanh lên đầu danh sách (HS #1)">
+              <span>⬆️</span> Lên đầu
+            </button>
+          </div>
+
           <select id="student-filter-gender" class="filter-dropdown-select" title="Lọc theo giới tính">
             <option value="all">Giới tính: Tất cả</option>
             <option value="Nam">Nam</option>
@@ -2023,7 +2122,7 @@
         </div>
       </div>
 
-      <div class="table-card">
+      <div class="table-card table-scroll-container" id="student-table-card">
         <table class="data-table">
           <thead>
             <tr>
@@ -2040,6 +2139,13 @@
           <tbody id="student-table-body">
             <!-- Dynamic rows populated from STUDENTS_DATA -->
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 11px; background: #f8fafc; color: #64748b; font-size: 12px; font-weight: 500; border-top: 1px solid var(--border);">
+                🏁 Đã hiển thị toàn bộ danh sách học sinh &bull; <a href="javascript:void(0)" onclick="var c=document.getElementById('student-table-card'); if(c) c.scrollTo({top:0, behavior:'smooth'});" style="color: #1877f2; text-decoration: none; font-weight: 600;">⬆️ Cuộn lên đầu trang</a>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -2077,13 +2183,23 @@
           <button class="filter-tab-btn" data-grade-class="9C2">Lớp 9C2 (29 học sinh)</button>
           <button class="filter-tab-btn" data-grade-class="9C3">Lớp 9C3 (29 học sinh)</button>
         </div>
-        <div class="search-box-wrap" style="min-width: 220px;">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="grade-search-input" placeholder="Tìm theo tên hoặc mã HS..." />
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <div style="display: inline-flex; gap: 6px;">
+            <button type="button" class="btn-scroll-nav" id="btn-scroll-bottom-grade" title="Cuộn nhanh xuống cuối sổ điểm (HS #58)">
+              <span>⬇️</span> Xuống cuối
+            </button>
+            <button type="button" class="btn-scroll-nav" id="btn-scroll-top-grade" title="Cuộn nhanh lên đầu sổ điểm (HS #1)">
+              <span>⬆️</span> Lên đầu
+            </button>
+          </div>
+          <div class="search-box-wrap" style="min-width: 220px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="grade-search-input" placeholder="Tìm theo tên hoặc mã HS..." />
+          </div>
         </div>
       </div>
 
-      <div class="table-card">
+      <div class="table-card table-scroll-container" id="grade-table-card">
         <table class="data-table">
           <thead>
             <tr>
@@ -2103,6 +2219,13 @@
           <tbody id="grade-table-body">
             <!-- Dynamic rows populated from STUDENTS_DATA -->
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="11" style="text-align: center; padding: 11px; background: #f8fafc; color: #64748b; font-size: 12px; font-weight: 500; border-top: 1px solid var(--border);">
+                🏁 Đã hiển thị toàn bộ sổ điểm học sinh &bull; <a href="javascript:void(0)" onclick="var c=document.getElementById('grade-table-card'); if(c) c.scrollTo({top:0, behavior:'smooth'});" style="color: #1877f2; text-decoration: none; font-weight: 600;">⬆️ Cuộn lên đầu sổ điểm</a>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -2196,7 +2319,7 @@
       </div>
 
       <!-- Detailed Student Results Table -->
-      <div class="table-card" style="margin-bottom: 22px;">
+      <div class="table-card table-scroll-container" id="analytics-table-card" style="margin-bottom: 22px; max-height: 420px;">
         <table class="data-table">
           <thead>
             <tr>
@@ -2259,7 +2382,7 @@
         </div>
       </div>
 
-      <div class="table-card">
+      <div class="table-card table-scroll-container" id="error-bank-table-card" style="max-height: 520px;">
         <table class="data-table">
           <thead>
             <tr>
@@ -6262,6 +6385,28 @@
   if (errorFilterGroup) errorFilterGroup.addEventListener("change", renderErrorBankTable);
   if (errorFilterSeverity) errorFilterSeverity.addEventListener("change", renderErrorBankTable);
   if (errorSearchInput) errorSearchInput.addEventListener("input", renderErrorBankTable);
+
+  // ================= 9B. THANH CUỘN & ĐIỀU HƯỚNG DANH SÁCH HỌC SINH (58 HỌC SINH) =================
+  function setupTableScroller(cardId, btnBottomId, btnTopId) {
+    var card = document.getElementById(cardId);
+    var btnBottom = document.getElementById(btnBottomId);
+    var btnTop = document.getElementById(btnTopId);
+
+    if (card && btnBottom) {
+      btnBottom.addEventListener("click", function () {
+        card.scrollTo({ top: card.scrollHeight, behavior: "smooth" });
+      });
+    }
+
+    if (card && btnTop) {
+      btnTop.addEventListener("click", function () {
+        card.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  }
+
+  setupTableScroller("student-table-card", "btn-scroll-bottom-student", "btn-scroll-top-student");
+  setupTableScroller("grade-table-card", "btn-scroll-bottom-grade", "btn-scroll-top-grade");
 
   // ================= 10. KHỞI CHẠY HỆ THỐNG =================
   loadKnowledgeFiles().then(function () {
