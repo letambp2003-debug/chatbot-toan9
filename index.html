@@ -2611,19 +2611,23 @@
     <p class="hint">Khai báo Họ tên &amp; Lớp để hệ thống bắt đầu tính thời gian làm bài và thống kê kết quả ôn tập.</p>
 
     <div style="background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:10px;">
-      <div style="display:grid; grid-template-columns: 110px 1fr; gap:8px;">
+      <div style="display:grid; grid-template-columns: 130px 1fr; gap:8px;">
         <div>
           <label for="quiz-student-class" style="margin-top:0; font-size:12px;">Lớp học (*):</label>
           <select id="quiz-student-class" style="padding:7px 8px; font-size:13px;">
-            <option value="9C2">9C2</option>
-            <option value="9C3">9C3</option>
-            <option value="Khác">Khác</option>
+            <option value="9C2">Lớp 9C2</option>
+            <option value="9C3">Lớp 9C3</option>
+            <option value="Khác">Lớp khác / Tự do</option>
           </select>
         </div>
         <div>
           <label for="quiz-student-name" style="margin-top:0; font-size:12px;">Họ và tên học sinh (*):</label>
-          <input type="text" id="quiz-student-name" list="students-datalist" placeholder="Chọn hoặc nhập họ tên..." autocomplete="off" style="padding:7px 10px; font-size:13px;" />
+          <input type="text" id="quiz-student-name" list="students-datalist" placeholder="Nhập đầy đủ Họ và tên..." autocomplete="off" style="padding:7px 10px; font-size:13px;" />
         </div>
+      </div>
+      <div id="quiz-custom-class-wrap" style="display:none; margin-top:8px;">
+        <label for="quiz-custom-class" style="margin-top:0; font-size:12px;">Nhập tên lớp cụ thể của em (*):</label>
+        <input type="text" id="quiz-custom-class" placeholder="Ví dụ: 9A1, 9C1, THCS Chu Văn An..." autocomplete="off" style="padding:7px 10px; font-size:13px;" />
       </div>
     </div>
 
@@ -2679,13 +2683,20 @@
         <option value="Khác">Lớp khác / Tự do</option>
       </select>
 
-      <label for="checkin-student-select">Chọn nhanh từ danh sách lớp:</label>
-      <select id="checkin-student-select">
-        <option value="">-- Chọn tên em trong danh sách (hoặc nhập ở ô dưới) --</option>
-      </select>
+      <div id="checkin-quick-select-wrap">
+        <label for="checkin-student-select">Chọn nhanh từ danh sách lớp:</label>
+        <select id="checkin-student-select">
+          <option value="">-- Để trống để tự nhập (hoặc chọn tên em trong danh sách) --</option>
+        </select>
+      </div>
+
+      <div id="checkin-custom-class-wrap" style="display:none;">
+        <label for="checkin-custom-class">Nhập tên lớp của em (*):</label>
+        <input type="text" id="checkin-custom-class" placeholder="Ví dụ: 9A1, 9C1, THCS Chu Văn An..." autocomplete="off" />
+      </div>
 
       <label for="checkin-name">Họ và tên học sinh (*):</label>
-      <input type="text" id="checkin-name" list="students-datalist" placeholder="Nhập đầy đủ Họ và tên..." autocomplete="off" required />
+      <input type="text" id="checkin-name" list="students-datalist" placeholder="Nhập đầy đủ Họ và tên học sinh..." autocomplete="off" required />
       <datalist id="students-datalist"></datalist>
 
       <div id="checkin-error" style="display:none; color:#dc2626; font-size:12px; margin-top:8px; font-weight:600;"></div>
@@ -5053,29 +5064,74 @@
   });
 
   // Quiz Modal (Yêu cầu Họ tên & Lớp + Bắt đầu tính thời gian làm bài ôn tập)
+  var quizClassEl = document.getElementById("quiz-student-class");
+  var quizCustomClassWrap = document.getElementById("quiz-custom-class-wrap");
+  var quizCustomClassEl = document.getElementById("quiz-custom-class");
+  var quizNameEl = document.getElementById("quiz-student-name");
+
+  quizClassEl.addEventListener("change", function () {
+    if (this.value === "Khác") {
+      quizCustomClassWrap.style.display = "block";
+      quizCustomClassEl.value = "";
+      quizNameEl.value = "";
+      populateStudentDatalist("Khác");
+      quizCustomClassEl.focus();
+    } else {
+      quizCustomClassWrap.style.display = "none";
+      quizCustomClassEl.value = "";
+      quizNameEl.value = "";
+      populateStudentDatalist(this.value);
+      quizNameEl.focus();
+    }
+  });
+
   els.btnOpenQuiz.addEventListener("click", function () {
     var sess = getStudentSession();
-    var qClass = document.getElementById("quiz-student-class");
-    var qName = document.getElementById("quiz-student-name");
-    if (sess) {
-      qClass.value = sess.studentClass || "9C2";
-      qName.value = sess.studentName || "";
+    if (sess && sess.studentClass) {
+      if (sess.studentClass === "9C2" || sess.studentClass === "9C3") {
+        quizClassEl.value = sess.studentClass;
+        quizCustomClassWrap.style.display = "none";
+        quizCustomClassEl.value = "";
+      } else {
+        quizClassEl.value = "Khác";
+        quizCustomClassWrap.style.display = "block";
+        quizCustomClassEl.value = (sess.studentClass !== "Khác") ? sess.studentClass : "";
+      }
+      quizNameEl.value = sess.studentName || "";
+    } else {
+      quizClassEl.value = "9C2";
+      quizCustomClassWrap.style.display = "none";
+      quizCustomClassEl.value = "";
+      quizNameEl.value = "";
     }
-    populateStudentDatalist(qClass.value);
+    populateStudentDatalist(quizClassEl.value);
     els.overlayQuiz.className = "modal-overlay show";
+    if (quizClassEl.value === "Khác" && !quizCustomClassEl.value) {
+      quizCustomClassEl.focus();
+    } else if (!quizNameEl.value) {
+      quizNameEl.focus();
+    }
   });
-  document.getElementById("quiz-student-class").addEventListener("change", function () {
-    populateStudentDatalist(this.value);
-  });
+
   els.btnQuizCancel.addEventListener("click", function () {
     els.overlayQuiz.className = "modal-overlay";
   });
+
   els.btnQuizCreate.addEventListener("click", function () {
-    var sClass = document.getElementById("quiz-student-class").value;
-    var sName = document.getElementById("quiz-student-name").value.trim();
-    if (!sName || !sClass) {
-      alert("Vui lòng nhập đầy đủ Họ tên và chọn Lớp học trước khi bắt đầu đề ôn tập!");
-      document.getElementById("quiz-student-name").focus();
+    var sClass = quizClassEl.value;
+    if (sClass === "Khác") {
+      var customClass = (quizCustomClassEl.value || "").trim();
+      if (!customClass) {
+        alert("Vui lòng nhập tên lớp của em (ví dụ: 9A1, 9C1, Tự do...)!");
+        quizCustomClassEl.focus();
+        return;
+      }
+      sClass = customClass;
+    }
+    var sName = quizNameEl.value.trim();
+    if (!sName || sName.length < 2) {
+      alert("Vui lòng nhập đầy đủ Họ và tên học sinh trước khi bắt đầu đề ôn tập!");
+      quizNameEl.focus();
       return;
     }
     setStudentSession(sName, sClass);
@@ -5169,39 +5225,81 @@
   function populateStudentDatalist(lopFilter) {
     var dl = document.getElementById("students-datalist");
     var sel = document.getElementById("checkin-student-select");
-    var list = STUDENTS_DATA.filter(function (s) {
-      return !lopFilter || lopFilter === "Khác" || lopFilter === "all" || s.lop === lopFilter;
+    var isKhac = (lopFilter === "Khác" || lopFilter === "Lớp khác / Tự do");
+    var list = isKhac ? [] : STUDENTS_DATA.filter(function (s) {
+      return !lopFilter || lopFilter === "all" || s.lop === lopFilter;
     });
+
     if (dl) {
       dl.innerHTML = list.map(function (s) {
         return '<option value="' + escapeHtml(s.ho_ten) + '">Lớp ' + escapeHtml(s.lop) + ' - ' + escapeHtml(s.ma_hs) + '</option>';
       }).join("");
     }
+
     if (sel) {
-      sel.innerHTML = '<option value="">-- Chọn tên em trong danh sách (' + list.length + ' HS) --</option>' +
-        list.map(function (s) {
-          return '<option value="' + escapeHtml(s.ho_ten) + '">' + escapeHtml(s.ho_ten) + ' (' + escapeHtml(s.lop) + ')</option>';
-        }).join("");
+      if (isKhac) {
+        sel.innerHTML = '<option value="">-- Để trống: Lớp tự do (tự điền tên và lớp ở 2 ô dưới) --</option>';
+        sel.value = "";
+        sel.disabled = true;
+      } else {
+        sel.disabled = false;
+        sel.innerHTML = '<option value="">-- Để trống để tự nhập (hoặc chọn tên em trong danh sách ' + list.length + ' HS) --</option>' +
+          list.map(function (s) {
+            return '<option value="' + escapeHtml(s.ho_ten) + '">' + escapeHtml(s.ho_ten) + ' (' + escapeHtml(s.lop) + ')</option>';
+          }).join("");
+        sel.value = "";
+      }
     }
   }
 
   var overlayCheckin = document.getElementById("overlay-student-checkin");
   var checkinClassEl = document.getElementById("checkin-class");
+  var checkinQuickSelectWrap = document.getElementById("checkin-quick-select-wrap");
   var checkinSelectEl = document.getElementById("checkin-student-select");
+  var checkinCustomClassWrap = document.getElementById("checkin-custom-class-wrap");
+  var checkinCustomClassEl = document.getElementById("checkin-custom-class");
   var checkinNameEl = document.getElementById("checkin-name");
   var checkinErrorEl = document.getElementById("checkin-error");
 
   function openStudentCheckin(pendingCallback) {
     currentPendingAction = pendingCallback || null;
     var sess = getStudentSession();
-    checkinClassEl.value = (sess && sess.studentClass) || "9C2";
-    populateStudentDatalist(checkinClassEl.value);
-    checkinNameEl.value = (sess && sess.studentName) || "";
-    checkinSelectEl.value = "";
     checkinErrorEl.style.display = "none";
+
+    if (sess && sess.studentClass) {
+      if (sess.studentClass === "9C2" || sess.studentClass === "9C3") {
+        checkinClassEl.value = sess.studentClass;
+        if (checkinCustomClassWrap) checkinCustomClassWrap.style.display = "none";
+        if (checkinCustomClassEl) checkinCustomClassEl.value = "";
+        populateStudentDatalist(sess.studentClass);
+        checkinSelectEl.value = sess.studentName || "";
+        checkinNameEl.value = sess.studentName || "";
+      } else {
+        checkinClassEl.value = "Khác";
+        if (checkinCustomClassWrap) checkinCustomClassWrap.style.display = "block";
+        if (checkinCustomClassEl) checkinCustomClassEl.value = (sess.studentClass !== "Khác") ? sess.studentClass : "";
+        populateStudentDatalist("Khác");
+        checkinSelectEl.value = "";
+        checkinNameEl.value = sess.studentName || "";
+      }
+    } else {
+      // Khởi tạo mới: để trống toàn bộ, không lấy tên mặc định của bất kỳ học sinh nào
+      checkinClassEl.value = "9C2";
+      if (checkinCustomClassWrap) checkinCustomClassWrap.style.display = "none";
+      if (checkinCustomClassEl) checkinCustomClassEl.value = "";
+      populateStudentDatalist("9C2");
+      checkinSelectEl.value = "";
+      checkinNameEl.value = "";
+    }
+
     document.getElementById("btn-checkin-confirm").textContent = pendingCallback ? "Xác nhận & Bắt đầu làm bài ➔" : "Lưu thông tin học sinh";
     overlayCheckin.className = "modal-overlay show";
-    checkinNameEl.focus();
+
+    if (checkinClassEl.value === "Khác" && checkinCustomClassEl && !checkinCustomClassEl.value) {
+      checkinCustomClassEl.focus();
+    } else if (!checkinNameEl.value) {
+      checkinNameEl.focus();
+    }
   }
 
   function ensureStudentDeclared(onReady) {
@@ -5219,12 +5317,36 @@
   document.getElementById("btn-exercises-checkin").addEventListener("click", function () {
     openStudentCheckin(null);
   });
+
   checkinClassEl.addEventListener("change", function () {
-    populateStudentDatalist(this.value);
+    var isKhac = (this.value === "Khác");
+    if (isKhac) {
+      if (checkinCustomClassWrap) checkinCustomClassWrap.style.display = "block";
+      if (checkinCustomClassEl) checkinCustomClassEl.value = "";
+      populateStudentDatalist("Khác");
+      checkinSelectEl.value = "";
+      checkinNameEl.value = "";
+      checkinNameEl.placeholder = "Nhập đầy đủ Họ và tên học sinh...";
+      if (checkinCustomClassEl) checkinCustomClassEl.focus();
+    } else {
+      if (checkinCustomClassWrap) checkinCustomClassWrap.style.display = "none";
+      if (checkinCustomClassEl) checkinCustomClassEl.value = "";
+      populateStudentDatalist(this.value);
+      checkinSelectEl.value = "";
+      checkinNameEl.value = "";
+      checkinNameEl.placeholder = "Nhập đầy đủ Họ và tên (hoặc chọn nhanh ở trên)...";
+      checkinSelectEl.focus();
+    }
   });
+
   checkinSelectEl.addEventListener("change", function () {
-    if (this.value) checkinNameEl.value = this.value;
+    if (this.value) {
+      checkinNameEl.value = this.value;
+    } else {
+      checkinNameEl.value = "";
+    }
   });
+
   document.getElementById("btn-checkin-cancel").addEventListener("click", function () {
     currentPendingAction = null;
     overlayCheckin.className = "modal-overlay";
@@ -5232,13 +5354,27 @@
 
   document.getElementById("student-checkin-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    var lop = checkinClassEl.value.trim();
+    var rawClass = checkinClassEl.value.trim();
+    var lop = rawClass;
+    if (rawClass === "Khác") {
+      var customClass = checkinCustomClassEl ? checkinCustomClassEl.value.trim() : "";
+      if (!customClass) {
+        checkinErrorEl.textContent = "Vui lòng nhập tên lớp của em ở ô trên (ví dụ: 9A1, 9C1, Lớp Tự do...).";
+        checkinErrorEl.style.display = "block";
+        if (checkinCustomClassEl) checkinCustomClassEl.focus();
+        return;
+      }
+      lop = customClass;
+    }
+
     var name = checkinNameEl.value.trim();
     if (!name || name.length < 2) {
       checkinErrorEl.textContent = "Vui lòng nhập đầy đủ Họ và tên học sinh.";
       checkinErrorEl.style.display = "block";
+      checkinNameEl.focus();
       return;
     }
+
     setStudentSession(name, lop);
     overlayCheckin.className = "modal-overlay";
     showStatus("Xin chào em " + name + " (" + lop + ")!", "ok");
